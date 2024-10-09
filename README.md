@@ -6,5 +6,5 @@ BlueTicket es una plataforma de transacciones entre proveedores de eventos y cli
 
 ## Autores
 
-Caro Ruiz Fabian Mauricio [GitHub](https://github.com/Fabian-Caro)
+Caro Ruiz Fabian Mauricio [GitHub](https://github.com/Fabian-Caro)  
 Donghee Jo [GitHub](https://github.com/DongheeJ)
