@@ -9,40 +9,48 @@
 </head>
 
 <body>
+
     <?php include 'navbar.php' ?>
 
     <div class="container mt-4">
-        <ul class="list-unstyled text-center">
-            <li>capacidad: xxxx</li>
-            <li class="d-flex justify-content-center align-items-center">
-            <span>Cantidad de entradas: </span>
-            <div class="d-flex align-items-center">
-                <input type="number" id="contador" value="0" class="form-control me-2" style="width: 80px;" readonly>
-                <button class="btn btn-danger" onclick="disminuir()">-</button>
-                <button class="btn btn-success ms-2" onclick="aumentar()">+</button>
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="list-unstyled text-center">
+                    <li>Capacidad: xxxx</li>
+                    <li class="d-flex justify-content-center align-items-center">
+                        <span>Cantidad de entradas: </span>
+                        <div class="d-flex align-items-center">
+                            <input type="number" id="contador" value="0" class="form-control me-2" style="width: 80px;" min="0">
+                        </div>
+                    </li>
+                    <li>Valor subtotal: $xxxx.xx</li>
+                </ul>
+                <div class="d-flex justify-content-center mt-3">
+                    <button class="btn btn-primary" onclick="location.href='pago.php'">Pagar</button>
+                </div>
             </div>
-        </li>
-            <li>Valor subtotal: $xxxx.xx</li>
-        </ul>
-    </div>
 
-    <div class="container mt-4">
-        <!-- Primera Vista -->
-        <div id="vista1">
-            <h2>Selecciona una opción</h2>
-            <button class="btn btn-primary" onclick="irAVista2()">Opción 1</button>
-            <button class="btn btn-secondary" onclick="irAVista2()">Opción 2</button>
-        </div>
-
-        <!-- Segunda Vista -->
-        <div id="vista2" style="display: none;">
-            <h2>Vista 2</h2>
-            <p>Contenido adicional para la opción seleccionada.</p>
-            <button class="btn btn-secondary" onclick="volverAVista1()">Volver</button>
+            <div class="col-md-4">
+                <div class="row align-items-center">
+                    <div class="col-md-4 mb-4">
+                        <img src="https://via.placeholder.com/100" alt="Descripción de la imagen" class="img-fluid" style="max-width: 100px; height: auto;">
+                    </div>
+                    <div class="col-md-8 mb-4">
+                        <h2>Evento</h2>
+                        <p>
+                        <ul>
+                            <li>Nombre evento</li>
+                            <li>Lugar, fecha, hora, </li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <?php include 'footer.php' ?>
+
 </body>
 
 </html>
