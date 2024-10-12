@@ -1,71 +1,64 @@
-<!doctype html>
-<html lang="en">
+<?php
+require_once(__DIR__ . '/../logica/Lugar.php');
+require_once(__DIR__ . '/../logica/Evento.php');
+require_once(__DIR__ . '/../logica/DetallesEvento.php');
+
+$idEvento = isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0;
+
+$evento = new Evento();
+$eventoData = $evento->consultarIdEvento($idEvento);
+$detallesEvento = new DetallesEvento();
+$detallesData = $detallesEvento->consultarDetallesEvento($idEvento);
+
+if (!$eventoData) {
+    echo "Evento no encontrado";
+    exit;
+}
+
+?>
+
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Blue Ticket</title>
+    <title><?php echo $eventoData->getNombre(); ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
 <body>
+
     <?php include 'navbar.php' ?>
 
     <div class="container mt-4">
-        <div class="row align-items-center">
-            <div class="col-md-4 mb-4">
-                <img src="https://via.placeholder.com/100" alt="Descripción de la imagen" class="img-fluid" style="max-width: 100px; height: auto;">
+        <?php
+        foreach ($detallesData as $detalle) {
+        ?>
+            <div class="row align-items-center mb-4">
+                <div class="col-md-4">
+                    <img src="https://via.placeholder.com/100" alt="Descripción de la imagen" class="img-fluid" style="max-width: 100px; height: auto;">
+                </div>
+                <div class="col-md-8">
+                    <?php
+                    echo "<h2>" . $eventoData->getNombre() . "</h2>";
+                    echo "<p>";
+                    echo    "<ul>";
+                    echo            "<li>" . $eventoData->getArtista()->getNombre() . "</li>";
+                    #echo            "<li>"  . $detalle->getIdLugarEvento()->getNombreLugar() . "</li>";
+                    echo            "<li>"  . $detalle->getFechaEvento() . "</li>";
+                    echo            "<li>"  . $detalle->getHoraInicioEvento() . "</li>";
+                    echo    "</ul>";
+                    echo "</p>";
+                    echo "<button class='btn btn-primary' onclick=\"location.href='compra.php'\">Ver entradas</button>";
+                    ?>
+                </div>
             </div>
-            <div class="col-md-8 mb-4">
-                <h2>Evento</h2>
-                <p>
-                    <ul>
-                        <li>Nombre evento</li>
-                        <li>Lugar, fecha, hora, </li>
-                    </ul>
-                </p>
-                <button class="btn btn-primary" onclick="location.href='compra.php'">ver entradas</button>
-            </div>
-        </div>
-    </div>
+        <?php
+        }
+        ?>
 
-    <div class="container mt-4">
-        <div class="row align-items-center">
-            <div class="col-md-4 mb-4">
-                <img src="https://via.placeholder.com/100" alt="Descripción de la imagen" class="img-fluid" style="max-width: 100px; height: auto;">
-            </div>
-            <div class="col-md-8 mb-4">
-                <h2>Evento</h2>
-                <p>
-                    <ul>
-                        <li>Nombre evento</li>
-                        <li>Lugar, fecha, hora, </li>
-                    </ul>
-                </p>
-                <button class="btn btn-primary" onclick="location.href='compra.php'">ver entradas</button>
-            </div>
-        </div>
-    </div>
+        <?php include 'footer.php' ?>
 
-    <div class="container mt-4">
-        <div class="row align-items-center">
-            <div class="col-md-4 mb-4">
-                <img src="https://via.placeholder.com/100" alt="Descripción de la imagen" class="img-fluid" style="max-width: 100px; height: auto;">
-            </div>
-            <div class="col-md-8 mb-4">
-                <h2>Evento</h2>
-                <p>
-                    <ul>
-                        <li>Nombre evento</li>
-                        <li>Lugar, fecha, hora, </li>
-                    </ul>
-                </p>
-                <button class="btn btn-primary" onclick="location.href='compra.php'">ver entradas</button>
-            </div>
-        </div>
-    </div>
-
-    <?php include 'footer.php' ?>
 </body>
 
 </html>

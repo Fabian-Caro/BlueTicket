@@ -1,8 +1,8 @@
 <?php
-require_once ("./persistencia/Conexion.php");
-require ("./persistencia/EventoDAO.php");
-require_once("./logica/Categoria.php");
-require_once("./logica/Artista.php");
+require_once (__DIR__ . '/../persistencia/Conexion.php');
+require (__DIR__ . '/../persistencia/EventoDAO.php');
+require_once(__DIR__ . '/../logica/Categoria.php');
+require_once(__DIR__ . '/../logica/Artista.php');
 class Evento{
     private $idEvento;
     private $nombre;
@@ -63,14 +63,11 @@ class Evento{
         return $this->artista;
     }
 
-    public function setArtista($artista)
-    {
+    public function setArtista($artista) {
         $this->artista = $artista;
-
-        return $this;
     }
 
-    public function __construct($idEvento=0, $nombre="", $categoria=null, $artista=null){
+    public function __construct($idEvento=0, $nombre="", $categoria=null, $artista=null) {
         $this -> idEvento = $idEvento;
         $this -> nombre = $nombre;
         $this -> categoria = $categoria;
@@ -106,6 +103,39 @@ class Evento{
         }
         $conexion -> cerrarConexion();
         return $eventos;        
+    }
+
+    public function consultarIdEvento($idEvento) {
+        $conexion = new Conexion();
+        $conexion->abrirConexion();
+        $eventoDAO = new EventoDAO();
+        
+        $conexion->ejecutarConsulta($eventoDAO->consultarIdEvento($idEvento));
+        
+        $registro = $conexion->siguienteRegistro();
+        if (!$registro) {
+            return null;
+        }
+
+        $categoria = new Categoria($registro[3]);
+        $categoria->consultar();
+        $artista = new Artista($registro[4]);
+        $artista->consultar();
+    
+        $evento = new Evento($registro[0], $registro[1], $categoria, $artista);
+        
+        $conexion->cerrarConexion();
+        return $evento;
+    }
+
+    public function consultar(){
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $eventoDAO = new EventoDAO($this->idEvento);
+        $conexion->ejecutarConsulta($eventoDAO->consultar());
+        $registro = $conexion->siguienteRegistro();
+        $this->nombre = $registro[0];
+        $conexion -> cerrarConexion();
     }
 }
 ?>

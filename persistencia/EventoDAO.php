@@ -9,8 +9,16 @@ class EventoDAO{
     }
     
     public function consultarTodos(){
-        return "select idEvento, nombre, idCategoria, idArtista 
-                from Evento";
+        return "SELECT idEvento, nombre, idCategoria, idArtista 
+                FROM evento";
+    }
+
+    public function consultarIdEvento($idEvento) {
+        return "SELECT idEvento, nombre, idProveedor, idCategoria, idArtista FROM evento WHERE idEvento = $idEvento";
+    }
+
+    public function consultar() {
+        return "SELECT nombre FROM evento WHERE idEvento ='" . $this->idEvento . "'";
     }
     
     // public function insert($id=0, $nombre="", $cantidad=0, $precioCompra=0, $precioVenta=0, $idMarca=0, $idCategoria=0, $idAdministrador=0) {

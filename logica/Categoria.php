@@ -1,6 +1,6 @@
 <?php
-require_once ("./persistencia/Conexion.php");
-require ("./persistencia/CategoriaDAO.php");
+require_once (__DIR__ . '/../persistencia/Conexion.php');
+require (__DIR__ . '/../persistencia/CategoriaDAO.php');
 
 class Categoria{
     private $idCategoria;
