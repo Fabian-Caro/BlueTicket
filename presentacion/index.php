@@ -1,5 +1,10 @@
-<!doctype html>
-<html lang="en">
+<?php
+
+require_once(__DIR__ . '/../logica/Evento.php');
+
+?>
+
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
@@ -9,8 +14,10 @@
 </head>
 
 <body>
-    <?php include 'navbar.php' ?>
-
+    <?php 
+    $paginaAnterior = basename(isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'index.php');
+    include 'navbar.php';
+    ?>
     <div class="container mt-4">
         <div class="justify-content-center">
             <a href="evento.php" class="d-block">
@@ -18,23 +25,42 @@
             </a>
         </div>
     </div>
+
     <div class="container mt-4">
         <div class="row justify-content-center">
-            <div class="col-md-4 mb-4">
-                <a href="evento.php">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcsamIIWIUgcWw2ixCCJckQWeQCh8v9okslw&s" class="img-fluid" style="height: 300px">
-                </a>
-            </div>
-            <div class="col-md-4 mb-4">
-                <a href="evento.php">
-                    <img src="https://wallpapers.com/images/hd/naruto-symbol-spiral-47j8agm8t758a4qo.jpg" class="img-fluid" style="height: 300px">
-                </a>
-            </div>
-            <div class="col-md-4 mb-4">
-                <a href="evento.php">
-                    <img src="https://w0.peakpx.com/wallpaper/431/713/HD-wallpaper-naruto-logo-anime-8k-naruto-anime-logo-thumbnail.jpg" class="img-fluid" style="height: 300px">
-                </a>
-            </div>
+            <?php
+            $i = 0;
+            $evento = new Evento();
+            $eventos = $evento->consultarTodos();
+            foreach ($eventos as $temp) {
+                if ($i % 4 == 0) {
+                    echo "<div class='row mb-3 justify-content-center'>";
+                }
+
+                $paddingClass = ($i % 4 == 1) ? 'px-2' : 'p-0';
+
+                echo "<div class='col-md-4 mb-4 $paddingClass'>";
+                echo "<div class='card' style='width: 100%; background-color: #0033cc;'>";
+                echo "<a href='evento.php?idEvento=" . $temp->getIdEvento() . "' style='text-decoration: none; color: inherit;'>";
+                echo "<img src='imagenes/evento_categoria_concierto.jpeg' class='card-img-top' style='height: 300px;'>";
+                echo "<div class='card-body'>";
+                echo "<h5 class='card-title' style='color: white;'>" . $temp->getNombre() . "</h5>";
+                echo "<p class='card-text' style='color: white;'>Categoria: " . $temp->getCategoria()->getNombre() . "</p>";
+                echo "<p class='card-text' style='color: white;'>Artista: " . $temp->getArtista()->getNombre() . "</p>";
+                echo "</div>";
+                echo "</a>";
+                echo "</div>";
+                echo "</div>";
+
+                if ($i % 4 == 3) {
+                    echo "</div>";  // Cierra la fila cada cuatro columnas
+                }
+                $i++;
+            }
+            if ($i % 4 != 0) {
+                echo "</div>";  // Cierra la fila si no es múltiplo de 4
+            }
+            ?>
         </div>
     </div>
 
