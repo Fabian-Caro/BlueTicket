@@ -36,7 +36,7 @@ if (!$eventoData) {
         ?>
             <div class="row align-items-center mb-4">
                 <div class="col-md-4">
-                    <img src="https://via.placeholder.com/100" alt="Descripción de la imagen" class="img-fluid" style="max-width: 100px; height: auto;">
+                    <img src="imagenes/100.png" alt="Descripción de la imagen" class="img-fluid" style="max-width: 100px; height: auto;">
                 </div>
                 <div class="col-md-8">
                     <?php

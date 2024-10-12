@@ -14,9 +14,10 @@ require_once(__DIR__ . '/../logica/Evento.php');
 </head>
 
 <body>
-
-    <?php include 'navbar.php' ?>
-
+    <?php 
+    $paginaAnterior = basename(isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'index.php');
+    include 'navbar.php';
+    ?>
     <div class="container mt-4">
         <div class="justify-content-center">
             <a href="evento.php" class="d-block">
@@ -60,21 +61,6 @@ require_once(__DIR__ . '/../logica/Evento.php');
                 echo "</div>";  // Cierra la fila si no es múltiplo de 4
             }
             ?>
-            <div class="col-md-4 mb-4">
-                <a href="evento.php">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcsamIIWIUgcWw2ixCCJckQWeQCh8v9okslw&s" class="img-fluid" style="height: 300px">
-                </a>
-            </div>
-            <div class="col-md-4 mb-4">
-                <a href="evento.php">
-                    <img src="https://wallpapers.com/images/hd/naruto-symbol-spiral-47j8agm8t758a4qo.jpg" class="img-fluid" style="height: 300px">
-                </a>
-            </div>
-            <div class="col-md-4 mb-4">
-                <a href="eventos.php">
-                    <img src="https://w0.peakpx.com/wallpaper/431/713/HD-wallpaper-naruto-logo-anime-8k-naruto-anime-logo-thumbnail.jpg" class="img-fluid" style="height: 300px">
-                </a>
-            </div>
         </div>
     </div>
 
