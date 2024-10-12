@@ -1,18 +1,20 @@
 <?php
-
 require ("logica/Evento.php");
+require_once("./logica/Evento.php");
 
 ?>
 <html>
 <head>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blue Ticket</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-	<?php include 'presentacion/navbar.php' ?>
+	<?php 
+    $paginaAnterior = basename(isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'prueba_index.php');
+    include 'navbar.php' 
+    ?>
 	<div class="container">
 		<div class="row mb-3">
 			<div class="col">
@@ -51,6 +53,6 @@ require ("logica/Evento.php");
 				</div>
 			</div>
 		</div>
-	<?php include 'presentacion/footer.php' ?>
+	<?php include 'footer.php' ?>
 </body>
 </html>

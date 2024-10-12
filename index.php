@@ -9,8 +9,10 @@
 </head>
 
 <body>
-    <?php include 'navbar.php' ?>
-
+    <?php 
+    $paginaAnterior = basename(isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'index.php');
+    include 'navbar.php';
+    ?>
     <div class="container mt-4">
         <div class="justify-content-center">
             <a href="evento.php" class="d-block">
