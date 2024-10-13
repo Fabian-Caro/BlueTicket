@@ -60,7 +60,7 @@ class Lugar {
         while($registro = $conexion->siguienteRegistro()) {
             $ciudad = null;
             if(array_key_exists($registro[3], $ciudades)){
-                $ciudad = $ciudad[$registro[3]];
+                $ciudad = $ciudades[$registro[3]];
             }
             else {
                 $ciudad = new Ciudad($registro[3]);

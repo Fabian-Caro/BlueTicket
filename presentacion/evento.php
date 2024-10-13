@@ -2,7 +2,6 @@
 require_once(__DIR__ . '/../logica/Lugar.php');
 require_once(__DIR__ . '/../logica/Evento.php');
 require_once(__DIR__ . '/../logica/DetallesEvento.php');
-
 $idEvento = isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0;
 
 $evento = new Evento();
@@ -27,8 +26,9 @@ if (!$eventoData) {
 </head>
 
 <body>
-
-    <?php include 'navbar.php' ?>
+    <?php 
+    include 'navbar.php' 
+    ?>
 
     <div class="container mt-4">
         <?php
@@ -44,7 +44,7 @@ if (!$eventoData) {
                     echo "<p>";
                     echo    "<ul>";
                     echo            "<li>" . $eventoData->getArtista()->getNombre() . "</li>";
-                    #echo            "<li>"  . $detalle->getIdLugarEvento()->getNombreLugar() . "</li>";
+                    // echo            "<li>"  . $detalle->getIdLugarEvento()->getNombreLugar() . "</li>";
                     echo            "<li>"  . $detalle->getFechaEvento() . "</li>";
                     echo            "<li>"  . $detalle->getHoraInicioEvento() . "</li>";
                     echo    "</ul>";

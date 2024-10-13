@@ -15,7 +15,6 @@ require_once(__DIR__ . '/../logica/Evento.php');
 
 <body>
     <?php 
-    $paginaAnterior = basename(isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'index.php');
     include 'navbar.php';
     ?>
     <div class="container mt-4">

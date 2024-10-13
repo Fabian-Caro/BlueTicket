@@ -1,8 +1,13 @@
 <?php 
+$paginaAnterior = basename($_SERVER['PHP_SELF']);
+echo $paginaAnterior;
 session_start();
+if($paginaAnterior=="evento.php"){
+    $_SESSION["idEvento"] = $idEvento;
+}
 if(isset($_GET["cerrarSesion"])){
     session_destroy();
-    header("Location: $paginaAnterior"); 
+    header("Location: index.php");
 }
 require_once(__DIR__ . '/../logica/Cliente.php');
 ?>

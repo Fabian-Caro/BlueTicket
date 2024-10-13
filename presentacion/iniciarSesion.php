@@ -1,11 +1,16 @@
 <?php
 session_start();
+
 require_once(__DIR__ . '/../logica/Cliente.php');
 $error = false;
-
+$paginaAnterior = "presentacion/".isset($_GET['paginaAnterior']) ? $_GET['paginaAnterior'] : 'index.php';
+echo $paginaAnterior;
+if($paginaAnterior=="evento.php"){
+	$paginaAnterior .= "?idEvento=" . urlencode($_SESSION["idEvento"]);
+}
 if(isset($_POST["autenticar"])){
     $cliente = new Cliente(null, null, null, $_POST["correo"],$_POST["clave"]);
-	$paginaAnterior = basename(isset($_GET['paginaAnterior']) ? $_GET['paginaAnterior'] : 'index.php');
+	
     if($cliente -> autenticar()){
         $_SESSION["id"] = $cliente -> getIdCliente();
         header("Location: $paginaAnterior"); 
@@ -32,7 +37,8 @@ if(isset($_POST["autenticar"])){
 						<h4>Iniciar Sesion</h4>
 					</div>
 					<div class="card-body">
-					<?php $paginaAnterior = basename(isset($_GET['paginaAnterior']) ? $_GET['paginaAnterior'] : 'index.php');?>
+					<?php $paginaAnterior = isset($_GET['paginaAnterior']) ? $_GET['paginaAnterior'] : 'index.php';
+					?>
 						<form method="post" action="iniciarSesion.php?paginaAnterior=<?php echo urlencode($paginaAnterior); ?>" >
 							<div class="mb-3">
 								<input type="email" name="correo" class="form-control" placeholder="Correo" >
