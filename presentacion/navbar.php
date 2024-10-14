@@ -1,6 +1,6 @@
 <?php 
 $paginaAnterior = basename($_SERVER['PHP_SELF']);
-echo $paginaAnterior;
+## echo $paginaAnterior;
 session_start();
 if($paginaAnterior=="evento.php"){
     $_SESSION["idEvento"] = $idEvento;

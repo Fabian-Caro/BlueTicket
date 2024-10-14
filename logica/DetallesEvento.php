@@ -170,6 +170,31 @@ class DetallesEvento {
         $conexion->cerrarConexion();
         return $detallesEventos;
     }
+
+    public function consultarIdDetalles($idDetalle) {
+        $conexion = new Conexion();
+        $conexion->abrirConexion();
+        $detallesEventoDAO = new DetallesEventoDAO();
+
+        echo "en DTO" . $idDetalle;
+        
+        $conexion->ejecutarConsulta($detallesEventoDAO->consultarIdDetallesEvento($idDetalle));
+        
+        $registro = $conexion->siguienteRegistro();
+        if (!$registro) {
+            return null;
+        }
+
+        $lugar = new Lugar($registro[6]);
+        $lugar->consultar();
+        $idEvento = new Evento($registro[7]);
+        $idEvento->consultar();
+    
+        $detalles = new DetallesEvento($registro[0], $registro[1], $registro[2], $registro[3], $registro[4], $registro[5], $lugar, $idEvento);
+        
+        $conexion->cerrarConexion();
+        return $detalles;
+    }
 }
 
 ?>

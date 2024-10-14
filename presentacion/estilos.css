@@ -25,3 +25,8 @@ footer {
     transition: 0.5s;
     color: #3F51B5
 }
+
+ul {
+    list-style-type: none; /* Elimina los puntos de la lista */
+    padding-left: 0; /* Opcional: elimina el espacio de sangría predeterminado */
+}
