@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . '/../logica/Lugar.php');
+require_once(__DIR__ . '/../logica/Ciudad.php');
 require_once(__DIR__ . '/../logica/Evento.php');
 require_once(__DIR__ . '/../logica/DetallesEvento.php');
 $idEvento = isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0;
@@ -28,14 +29,13 @@ if (!$eventoData) {
 </head>
 
 <body>
-    <?php
-    include 'navbar.php'
-    ?>
+
+    <?php include 'navbar.php' ?>
 
     <div class="container mt-4">
-        <?php
-        foreach ($detallesData as $detalle) {
-        ?>
+
+        <?php foreach ($detallesData as $detalle) { ?>
+
             <div class="row align-items-center mb-4">
                 <div class="col-md-4">
                     <img src="imagenes/100.png" alt="Descripción de la imagen" class="img-fluid" style="max-width: 100px; height: auto;">
@@ -46,7 +46,9 @@ if (!$eventoData) {
                     echo "<h2>" . $eventoData->getArtista()->getNombre() . "</h2>";
                     echo "<p>";
                     echo    "<ul>";
-                    echo            "<li>" . $eventoData->getNombre() . "</li>";
+                    echo            "<li>" . $eventoData->getNombreEvento() . "</li>";
+                    // echo            "<li>" . $detalle->getLugarEvento()->getNombreLugar() . "</li>";
+                    //echo            "<li>" . $detalle->getLugarEvento()->getNombreCiudad() . "</li>";
                     //echo            "<li>" . $detallesData->getIdLugarEvento()->getNombreLugar() . "</li>";
                     $fecha = $detalle->getFechaEvento();
 

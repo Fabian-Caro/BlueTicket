@@ -12,8 +12,8 @@ class DetallesEvento {
     private $horaFinEvento;
     private $costoEvento;
     private $aforoEvento;
-    private $idLugarEvento;
-    private $idEvento;
+    private $lugarEvento;
+    private $evento;
 
     public function getIdDetallesEvento() {
         return $this->idDetallesEvento;
@@ -63,32 +63,32 @@ class DetallesEvento {
         $this->aforoEvento = $aforoEvento;
     }
 
-    public function getIdLugarEvento() {
-        return $this->idLugarEvento;
+    public function getLugarEvento() {
+        return $this->lugarEvento;
     }
 
-    public function setIdLugarEvento($idLugarEvento) {
-        $this->idLugarEvento = $idLugarEvento;
+    public function setLugarEvento($lugarEvento) {
+        $this->lugarEvento = $lugarEvento;
     }
 
-    public function getIdEvento() {
-        return $this->idEvento;
+    public function getEvento() {
+        return $this->evento;
     }
 
-    public function setIdEvento($idEvento) {
-        $this->idEvento = $idEvento;
+    public function setEvento($evento) {
+        $this->evento = $evento;
     }
 
 
-    public function __construct($idDetallesEvento=0, $fechaEvento="", $horaInicioEvento="", $horaFinEvento="", $costoEvento=0, $aforoEvento=0, $idLugarEvento=null, $idEvento=null) {
+    public function __construct($idDetallesEvento=0, $fechaEvento="", $horaInicioEvento="", $horaFinEvento="", $costoEvento=0, $aforoEvento=0, $lugarEvento=null, $evento=null) {
         $this->idDetallesEvento = $idDetallesEvento;
         $this->fechaEvento = $fechaEvento;
         $this->horaInicioEvento = $horaInicioEvento;
         $this->horaFinEvento = $horaFinEvento;
         $this->costoEvento = $costoEvento;
         $this->aforoEvento = $aforoEvento;
-        $this->idLugarEvento = $idLugarEvento;
-        $this->idEvento = $idEvento;        
+        $this->lugarEvento = $lugarEvento;
+        $this->evento = $evento;        
     }
 
     public function consultarTodos() {

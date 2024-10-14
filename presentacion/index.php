@@ -44,7 +44,7 @@ require_once(__DIR__ . '/../logica/Evento.php');
                 echo "<a href='evento.php?idEvento=" . $temp->getIdEvento() . "' style='text-decoration: none; color: inherit;'>";
                 echo "<img src='imagenes/evento_categoria_concierto.jpeg' class='card-img-top' style='height: 300px;'>";
                 echo "<div class='card-body'>";
-                echo "<h5 class='card-title' style='color: white;'>" . $temp->getNombre() . "</h5>";
+                echo "<h5 class='card-title' style='color: white;'>" . $temp->getNombreEvento() . "</h5>";
                 echo "<p class='card-text' style='color: white;'>Categoria: " . $temp->getCategoria()->getNombre() . "</p>";
                 echo "<p class='card-text' style='color: white;'>Artista: " . $temp->getArtista()->getNombre() . "</p>";
                 echo "</div>";
