@@ -1,37 +1,32 @@
-<?php
 
-require_once(__DIR__ . '/../logica/Evento.php');
-
-?>
-
-<html lang="es">
-
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Blue Ticket</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="estilos.css" rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-
 <body>
-    <?php 
-    include 'navbar.php';
-    ?>
-    <div class="container mt-4">
-        <div class="justify-content-center">
-            <a href="evento.php" class="d-block">
-                <img src="https://images3.alphacoders.com/134/1342988.png" alt="Descripción de la imagen" class="img-fluid" style="width: 100%; height: auto; max-height: 200px;">
-            </a>
-        </div>
-    </div>
+
+	<?php include 'navProveedor.php';?>
 
     <div class="container mt-4">
         <div class="row justify-content-center">
+			<div class="col">
+				<div class="card border-primary">
+					<div class="card-header text-bg-info">
+						<h4>Sesion proveedor</h4>
+					</div>
+					<div class="card-body">
+						<p>Bienvenido proveedor <?php echo $proveedor -> getNombre() . " " . $proveedor -> getApellido() ?></p>
+					
+					</div>
+				</div>
+			</div>
             <?php
             $i = 0;
-            $evento = new Evento();
-            $eventos = $evento->consultarTodos();
+            $eventos = $proveedor->consultarEventos();
             foreach ($eventos as $temp) {
                 if ($i % 4 == 0) {
                     echo "<div class='row mb-3 justify-content-center'>";
@@ -41,10 +36,10 @@ require_once(__DIR__ . '/../logica/Evento.php');
 
                 echo "<div class='col-md-4 mb-4 $paddingClass'>";
                 echo "<div class='card' style='width: 100%; background-color: #0033cc;'>";
-                echo "<a href='evento.php?idEvento=" . $temp->getIdEvento() . "' style='text-decoration: none; color: inherit;'>";
+                echo "<a href='mantenimientoEvento.php?idEvento=" . $temp->getIdEvento() . "' style='text-decoration: none; color: inherit;'>";
                 echo "<img src='imagenes/evento_categoria_concierto.jpeg' class='card-img-top' style='height: 300px;'>";
                 echo "<div class='card-body'>";
-                echo "<h5 class='card-title' style='color: white;'>" . $temp->getNombreEvento() . "</h5>";
+                echo "<h5 class='card-title' style='color: white;'>" . $temp->getNombre() . "</h5>";
                 echo "<p class='card-text' style='color: white;'>Categoria: " . $temp->getCategoria()->getNombre() . "</p>";
                 echo "<p class='card-text' style='color: white;'>Artista: " . $temp->getArtista()->getNombre() . "</p>";
                 echo "</div>";
@@ -63,8 +58,5 @@ require_once(__DIR__ . '/../logica/Evento.php');
             ?>
         </div>
     </div>
-
-    <?php include 'footer.php' ?>
 </body>
-
 </html>

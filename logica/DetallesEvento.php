@@ -12,8 +12,8 @@ class DetallesEvento {
     private $horaFinEvento;
     private $costoEvento;
     private $aforoEvento;
-    private $idLugarEvento;
-    private $idEvento;
+    private $lugar;
+    private $evento;
 
     public function getIdDetallesEvento() {
         return $this->idDetallesEvento;
@@ -63,32 +63,32 @@ class DetallesEvento {
         $this->aforoEvento = $aforoEvento;
     }
 
-    public function getIdLugarEvento() {
-        return $this->idLugarEvento;
+    public function getLugar() {
+        return $this->lugar;
     }
 
-    public function setIdLugarEvento($idLugarEvento) {
-        $this->idLugarEvento = $idLugarEvento;
+    public function setLugar($lugar) {
+        $this->lugar = $lugar;
     }
 
-    public function getIdEvento() {
-        return $this->idEvento;
+    public function getEvento() {
+        return $this->evento;
     }
 
-    public function setIdEvento($idEvento) {
-        $this->idEvento = $idEvento;
+    public function setEvento($evento) {
+        $this->evento = $evento;
     }
 
 
-    public function __construct($idDetallesEvento=0, $fechaEvento="", $horaInicioEvento="", $horaFinEvento="", $costoEvento=0, $aforoEvento=0, $idLugarEvento=null, $idEvento=null) {
+    public function __construct($idDetallesEvento=0, $fechaEvento="", $horaInicioEvento="", $horaFinEvento="", $costoEvento=0, $aforoEvento=0, $lugar=null, $evento=null) {
         $this->idDetallesEvento = $idDetallesEvento;
         $this->fechaEvento = $fechaEvento;
         $this->horaInicioEvento = $horaInicioEvento;
         $this->horaFinEvento = $horaFinEvento;
         $this->costoEvento = $costoEvento;
         $this->aforoEvento = $aforoEvento;
-        $this->idLugarEvento = $idLugarEvento;
-        $this->idEvento = $idEvento;        
+        $this->lugar = $lugar;
+        $this->evento = $evento;        
     }
 
     public function consultarTodos() {
@@ -100,11 +100,9 @@ class DetallesEvento {
         $conexion->abrirConexion();
         $detallesEventoDAO = new DetallesEventoDAO();
         $conexion->ejecutarConsulta($detallesEventoDAO->consultarTodos());
-
         while($registro = $conexion->siguienteRegistro()) {
             $lugarEvento = null;
             $evento = null;
-
             if(array_key_exists($registro[6], $lugaresEvento)) {
                 $lugarEvento = $lugaresEvento[$registro[6]];
             }
@@ -123,7 +121,7 @@ class DetallesEvento {
                 $eventos[$registro[7]] = $evento;
             }
 
-            $detallesEvento = new DetallesEvento($registro[0], $registro[1], $registro[2], $registro[3], $registro[4], $registro[5], $lugaresEvento, $eventos);
+            $detallesEvento = new DetallesEvento($registro[0], $registro[1], $registro[2], $registro[3], $registro[4], $registro[5], $lugarEvento, $evento);
             array_push($detallesEventos, $detallesEvento);
         }
 
@@ -163,7 +161,7 @@ class DetallesEvento {
                 $eventos[$registro[7]] = $evento;
             }
 
-            $detallesEvento = new DetallesEvento($registro[0], $registro[1], $registro[2], $registro[3], $registro[4], $registro[5], $lugaresEvento, $eventos);
+            $detallesEvento = new DetallesEvento($registro[0], $registro[1], $registro[2], $registro[3], $registro[4], $registro[5], $lugarEvento, $evento);
             array_push($detallesEventos, $detallesEvento);
         }
 
@@ -194,6 +192,22 @@ class DetallesEvento {
         
         $conexion->cerrarConexion();
         return $detalles;
+    }
+
+    public function insertar($fecha="",$horaInicio="",$horaFinal="",$costo=0,$aforo=0,$idLugar=0,$idEvento=0){
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $detalleEventoDAO = new DetallesEventoDAO();
+        
+        try {
+            $query = $detalleEventoDAO->insert($fecha,$horaInicio,$horaFinal,$costo,$aforo,$idLugar,$idEvento);
+            $conexion->ejecutarConsulta($query);
+            echo "Consulta ejecutada correctamente.";
+        } catch (Exception $e) {
+            echo "Error al ejecutar la consulta: " . $e->getMessage();
+        }
+        
+        $conexion -> cerrarConexion();
     }
 }
 

@@ -5,7 +5,7 @@ require_once(__DIR__ . '/../logica/Categoria.php');
 require_once(__DIR__ . '/../logica/Artista.php');
 class Evento{
     private $idEvento;
-    private $nombre;
+    private $nombreEvento;
     private $proveedor;
     private $categoria;
     private $artista;
@@ -22,14 +22,14 @@ class Evento{
         return $this;
     }
 
-    public function getNombre()
+    public function getNombreEvento()
     {
-        return $this->nombre;
+        return $this->nombreEvento;
     }
 
-    public function setNombre($nombre)
+    public function setNombreEvento($nombreEvento)
     {
-        $this->nombre = $nombre;
+        $this->nombreEvento = $nombreEvento;
 
         return $this;
     }
@@ -67,9 +67,9 @@ class Evento{
         $this->artista = $artista;
     }
 
-    public function __construct($idEvento=0, $nombre="", $categoria=null, $artista=null) {
+    public function __construct($idEvento=0, $nombreEvento="", $categoria=null, $artista=null) {
         $this -> idEvento = $idEvento;
-        $this -> nombre = $nombre;
+        $this -> nombreEvento = $nombreEvento;
         $this -> categoria = $categoria;
         $this -> artista = $artista;
     }
@@ -104,7 +104,6 @@ class Evento{
         $conexion -> cerrarConexion();
         return $eventos;        
     }
-
     public function consultarIdEvento($idEvento) {
         $conexion = new Conexion();
         $conexion->abrirConexion();
@@ -134,7 +133,22 @@ class Evento{
         $eventoDAO = new EventoDAO($this->idEvento);
         $conexion->ejecutarConsulta($eventoDAO->consultar());
         $registro = $conexion->siguienteRegistro();
-        $this->nombre = $registro[0];
+        $this->nombreEvento = $registro[0];
+        $conexion -> cerrarConexion();
+    }
+    public function insertar($nombre="",$idProveedor=0,$idCategoria=0,$idArtista=0){
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $eventoDAO = new EventoDAO();
+        
+        try {
+            $query = $eventoDAO->insert($nombre, $idProveedor,$idCategoria,$idArtista);
+            $conexion->ejecutarConsulta($query);
+            echo "Consulta ejecutada correctamente.";
+        } catch (Exception $e) {
+            echo "Error al ejecutar la consulta: " . $e->getMessage();
+        }
+        
         $conexion -> cerrarConexion();
     }
 }

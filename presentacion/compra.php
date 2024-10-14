@@ -12,6 +12,7 @@ $evento = new Evento();
 $eventoData = $evento->consultarIdEvento($idEvento);
 $detallesEvento = new DetallesEvento();
 $detallesData = $detallesEvento->consultarIdDetalles($idDetalle);
+echo $detallesData->getLugar()->getCiudad()->getNombreCiudad();
 
 if (!$eventoData) {
     echo "Evento no encontrado";
@@ -26,7 +27,7 @@ if (!$eventoData) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php echo $eventoData->getNombre(); ?></title>
+    <title><?php echo $eventoData->getNombreEvento(); ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-o0WbElgKgIqQjG1AZGn7wZhzC5TAPdF1pgh4FJvW5tcB3TQF3R7myPau+d3IoDyE" crossorigin="anonymous"></script>
     <link href="estilos.css" rel="stylesheet">
@@ -46,19 +47,20 @@ if (!$eventoData) {
                     ?>
                 </ul>
                 <div class="d-flex justify-content-center mt-3">
-                    <form action="pago.php" method="GET" class="text-center"> <!-- Añadir text-center al form -->
+                    <form action="pago.php" method="GET" class="text-center">
                         <input type="hidden" name="idEvento" value="<?php echo $eventoData->getIdEvento(); ?>">
                         <input type="hidden" name="idDetalle" value="<?php echo $detallesData->getIdDetallesEvento(); ?>">
-                        <div class="d-flex justify-content-center align-items-center mb-3"> <!-- Modificar para asegurar centrar -->
+                        <div class="d-flex justify-content-center align-items-center mb-3">
                             <span>Cantidad de entradas: </span>
                             <div class="d-flex align-items-center ms-2">
                                 <input type="number" name="cantidad" id="contador" class="form-control me-2" value="0" min="1" max="<?php echo $detallesData->getAforoEvento(); ?>" style="width: 80px;" required>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-center"> <!-- Centrar el botón -->
-                            <button type="submit" class="btn btn-primary">Ver evento</button>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary">Continuar</button>
                         </div>
                     </form>
+
                 </div>
 
                 <?php
@@ -70,8 +72,6 @@ if (!$eventoData) {
                         </div>';
                 }
                 ?>
-
-
             </div>
             <div class="col-md-4">
                 <div class="row align-items-center">
@@ -83,9 +83,11 @@ if (!$eventoData) {
                         <div class="grisfondo" style="margin:5px auto 10px auto"><img src="images/spacer.gif" height="1" width="100%" /></div>
                         <div style="margin:10px 0px 0px 0px; padding:0px 0px 10px 0px" class="font14" align="center">
                             <?php
-                            echo "<div class='fs-2'>" . $eventoData->getNombre() . "</div>";
-                            echo "<div class='fs-6'>" . $detallesData->getIdLugarEvento()->getNombreLugar() . "</div>";
-                            //echo "<div class='fs-6'>" . $detallesData->getIdLugarEvento()->getIdCiudad() . "</div>";
+                            echo "<div class='fs-1'>" . $eventoData->getArtista()->getNombre() . "</div>";
+                            echo "<div clas='fs-6'> presenta: </div>";
+                            echo "<div class='fs-4'>" . $eventoData->getNombreEvento() . " - " . $detallesData->getLugar()->getCiudad()->getNombreCiudad() . "</div>";
+                            echo "<div class='fs-6'>" . $detallesData->getLugar()->getNombreLugar() . "</div>";
+                            echo "<div class='fs-6'>" . $detallesData->getLugar()->getCiudad()->getNombreCiudad() . "</div>";
                             $fecha = $detallesData->getFechaEvento();
 
                             if ($fecha) {
@@ -100,7 +102,7 @@ if (!$eventoData) {
 
                                 $fechaFormateada = "{$diaNombre}, {$dia} de {$mesNombre} de {$anio}";
 
-                                echo "<div class='fs-6'>" . $fechaFormateada . "</div>"; // Muestra la fecha en español
+                                echo "<div class='fs-6'>" . $fechaFormateada . "<br><strong>" . $detallesData->getHoraInicioEvento() . " </strong></div>"; // Muestra la fecha en español
                             } else {
                                 echo "Fecha no disponible.";
                             }

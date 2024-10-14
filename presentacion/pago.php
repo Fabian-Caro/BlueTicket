@@ -59,7 +59,37 @@ if (isset($_GET['cantidad'])) {
 </head>
 
 <body>
+
     <?php include 'navbar.php' ?>
+
+    <div class="container mt-4">
+        <?php
+        echo "<div class='fs-1'>"
+            . $eventoData->getArtista()->getNombre() . ": "
+            . $eventoData->getNombreEvento() . " - " . $detallesData->getLugar()->getCiudad()->getNombreCiudad()
+            . "</div>";
+        $fecha = $detallesData->getFechaEvento();
+
+        if ($fecha) {
+            $date = new DateTime($fecha);
+            $dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+            $meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+            $diaNombre = $dias[$date->format('w')]; // Día de la semana
+            $dia = $date->format('d'); // Día del mes
+            $mesNombre = $meses[$date->format('n') - 1]; // Nombre del mes
+            $anio = $date->format('Y'); // Año
+
+            $fechaFormateada = "{$diaNombre}, {$dia} de {$mesNombre} de {$anio}";
+
+            echo "<div class='fs-6'>" . $fechaFormateada . "</div>"; // Muestra la fecha en español
+        } else {
+            echo "Fecha no disponible.";
+        }
+        echo "<div class='fs-6'>" . $detallesData->getLugar()->getNombreLugar() . "</div>";
+        echo "<div class='fs-6'>" . $detallesData->getLugar()->getCiudad()->getNombreCiudad() . "</div>";
+        ?>
+    </div>
 
     <?php
     echo '<form class="container mt-4">';
@@ -86,22 +116,22 @@ if (isset($_GET['cantidad'])) {
             <div class="col-md-8">
                 <div class="card p-3">
                     <h6 class="text-uppercase">Detalles del pago</h6>
-                    <div class="inputbox mt-3"> <input type="text" name="name" class="form-control" placeholder="Nombre del titular" required="required">
+                    <div class="inputbox mt-3"> <input type="text" name="name" class="form-control" placeholder="Nombre del titular" required="required" disabled>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="inputbox mt-3 mr-2">
-                                <input type="text" name="name" class="form-control" placeholder="Numero de la tarjeta" required="required">
+                                <input type="text" name="name" class="form-control" placeholder="Numero de la tarjeta" required="required" disabled>
                                 <i class="fa fa-credit-card"></i>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="d-flex flex-row">
                                 <div class="inputbox mt-3 mr-2">
-                                    <input type="text" name="name" class="form-control" placeholder="Expiración" required="required">
+                                    <input type="text" name="name" class="form-control" placeholder="Expiración" required="required" disabled>
                                 </div>
                                 <div class="inputbox mt-3 mr-2">
-                                    <input type="text" name="name" class="form-control" placeholder="CVC" required="required">
+                                    <input type="text" name="name" class="form-control" placeholder="CVC" required="required" disabled>
                                 </div>
                             </div>
                         </div>
@@ -125,13 +155,13 @@ if (isset($_GET['cantidad'])) {
                     <div class="d-flex justify-content-center"> <!-- Div para centrar la imagen -->
                         <img src="imagenes/100.png" alt="Descripción de la imagen" class="img-fluid" style="max-width: 100px; height: auto;">
                     </div>
-                    <h2><?php echo $eventoData->getNombre(); ?></h2>
+                    <h2><?php echo "<div class='fs-5'>" . $eventoData->getNombreEvento() . " - " . $detallesData->getLugar()->getCiudad()->getNombreCiudad() . "</div>"; ?></h2>
 
                     <div class="d-flex flex-row justify-content-center align-items-end mb-3">
                         <h4 class='mb-0 yellow'><?php echo number_format($costoTotal, 2); ?></h4>
                     </div>
                     <?php
-                    echo "<div class='fs-6'>" . $detallesData->getIdLugarEvento()->getNombreLugar() . "</div>";
+                    echo "<div class='fs-6'>" . $detallesData->getLugar()->getNombreLugar() . "</div>";
                     $fecha = $detallesData->getFechaEvento();
 
                     if ($fecha) {
@@ -150,7 +180,7 @@ if (isset($_GET['cantidad'])) {
                     } else {
                         echo "Fecha no disponible.";
                     }
-                    echo "<div class='font14'>BOGOTÁ</div>"; // Hay que mostrar la ciudad
+                    echo "<div class='font14'>" . $detallesData->getLugar()->getCiudad()->getNombreCiudad() . "</div>"; // Hay que mostrar la ciudad
                     ?>
                 </div>
             </div>

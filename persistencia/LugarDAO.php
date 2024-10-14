@@ -11,11 +11,11 @@ class LugarDAO {
     }
 
     public function consultarTodos() {
-        return "SELECT idLugar, nombre, direccion, idCiudad FROM lugar";
+        return "SELECT idLugar, nombre, direccion, idCiudad FROM Lugar";
     }
 
     public function consultar() {
-        return "SELECT nombre FROM lugar WHERE idLugar ='" . $this->idLugar . "'";
+        return "SELECT nombre,direccion,idCiudad FROM lugar WHERE idLugar ='" . $this->idLugar . "'";
     }
 }
 

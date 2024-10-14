@@ -21,11 +21,10 @@ class EventoDAO{
         return "SELECT nombre FROM evento WHERE idEvento ='" . $this->idEvento . "'";
     }
     
-    // public function insert($id=0, $nombre="", $cantidad=0, $precioCompra=0, $precioVenta=0, $idMarca=0, $idCategoria=0, $idAdministrador=0) {
-    //     return "INSERT INTO Producto (idProducto, nombre, cantidad, precioCompra, precioVenta, Marca_idMarca, Categoria_idCategoria, Administrador_idAdministrador) 
-    //     VALUES ($id, $nombre, $cantidad, $precioCompra, $precioVenta, $idMarca, $idCategoria, $idAdministrador)";
-
-    // }
+    public function insert($nombre="",$idProveedor=0,$idCategoria=0,$idArtista=0) {
+        return "INSERT INTO Evento (nombre,idProveedor,idCategoria,idArtista) 
+        VALUES ($nombre, $idProveedor,$idCategoria,$idArtista)";
+    }
     
 }
 

@@ -2,6 +2,7 @@
 $paginaAnterior = basename($_SERVER['PHP_SELF']);
 echo $paginaAnterior;
 session_start();
+
 if ($paginaAnterior == "evento.php") {
     $_SESSION["idEvento"] = $idEvento;
 } else if ($paginaAnterior == 'compra.php') {
@@ -10,8 +11,9 @@ if ($paginaAnterior == "evento.php") {
 } else if ($paginaAnterior == 'pago.php') {
     $_SESSION["idEvento"] = $idEvento;
     $_SESSION["idDetalle"] = $idDetalle;
-    $_SESSION["cantidad"] = $cantidad;
+    $_SESSION["cantidad"] = isset($_GET['cantidad']) ? intval($_GET['cantidad']) : 0; // Definir cantidad
 }
+
 
 if (isset($_GET["cerrarSesion"])) {
     session_destroy();
@@ -42,39 +44,42 @@ require_once(__DIR__ . '/../logica/Cliente.php');
             </form>
         </div>
         <div class="ml-auto">
-            <?php
-            if (!isset($_SESSION["id"])) {
-            ?>
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a href="iniciarSesion.php?paginaAnterior=<?php echo urlencode($paginaAnterior); ?>" class="nav-link">Iniciar Sesion</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Registrarse</a>
-                    </li>
-                </ul>
-            <?php
+        <?php 
+            if (!isset($_SESSION["idCliente"])) {
+        ?>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="iniciarSesion.php?paginaAnterior=<?php echo urlencode($paginaAnterior); ?>" class="nav-link">Iniciar Sesión Cliente</a>
+                </li>
+                <li class="nav-item">
+                    <a href="iniciarSesion.php?paginaAnterior=sesionProveedor.php" class="nav-link">Iniciar Sesión Proveedor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Registrarse</a>
+                </li>
+            </ul>
+        <?php 
             } else {
-                $id = $_SESSION["id"];
-                $cliente = new Cliente($id);
-                $cliente->consultar();
-            ?>
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle"
-                            href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <?php echo $cliente->getNombre() . " " . $cliente->getApellido(); ?>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class='dropdown-item' href='index.php?cerrarSesion=true&paginaAnterior=<?php echo urlencode($paginaAnterior); ?>'>Cerrar Sesion</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            <?php
-            }
-            ?>
+                $idCliente = $_SESSION["idCliente"];
+                echo "idCliente: " . $idCliente;
+                $cliente = new Cliente($idCliente);
+                $cliente -> consultar();
+        ?>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle"
+                    href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <?php echo $cliente->getNombre() . " " . $cliente->getApellido(); ?>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class='dropdown-item' href='index.php?cerrarSesion=true'>Cerrar Sesion</a></li>
+                    </ul>
+                </li>
+            </ul>
+        <?php 
+            } 
+        ?>
         </div>
-
     </div>
 </nav>
