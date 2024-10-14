@@ -8,6 +8,7 @@ $evento = new Evento();
 $eventoData = $evento->consultarIdEvento($idEvento);
 $detallesEvento = new DetallesEvento();
 $detallesData = $detallesEvento->consultarDetallesEvento($idEvento);
+echo $idEvento;
 
 if (!$eventoData) {
     echo "Evento no encontrado";
@@ -21,13 +22,14 @@ if (!$eventoData) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php echo $eventoData->getNombre(); ?></title>
+    <title><?php echo $eventoData->getArtista()->getNombre(); ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="estilos.css" rel="stylesheet">
 </head>
 
 <body>
-    <?php 
-    include 'navbar.php' 
+    <?php
+    include 'navbar.php'
     ?>
 
     <div class="container mt-4">
@@ -40,16 +42,34 @@ if (!$eventoData) {
                 </div>
                 <div class="col-md-8">
                     <?php
-                    echo "<h2>" . $eventoData->getNombre() . "</h2>";
+                    echo "<h1>" . $detalle->getIdDetallesEvento() . "</h1>";
+                    echo "<h2>" . $eventoData->getArtista()->getNombre() . "</h2>";
                     echo "<p>";
                     echo    "<ul>";
-                    echo            "<li>" . $eventoData->getArtista()->getNombre() . "</li>";
-                    // echo            "<li>"  . $detalle->getIdLugarEvento()->getNombreLugar() . "</li>";
-                    echo            "<li>"  . $detalle->getFechaEvento() . "</li>";
-                    echo            "<li>"  . $detalle->getHoraInicioEvento() . "</li>";
+                    echo            "<li>" . $eventoData->getNombre() . "</li>";
+                    //echo            "<li>" . $detallesData->getIdLugarEvento()->getNombreLugar() . "</li>";
+                    $fecha = $detalle->getFechaEvento();
+
+                    if ($fecha) {
+                        $date = new DateTime($fecha);
+                        $dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+                        $meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+                        $diaNombre = $dias[$date->format('w')]; // Día de la semana
+                        $dia = $date->format('d'); // Día del mes
+                        $mesNombre = $meses[$date->format('n') - 1]; // Nombre del mes
+                        $anio = $date->format('Y'); // Año
+
+                        $fechaFormateada = "{$diaNombre}, {$dia} de {$mesNombre} de {$anio}";
+
+                        echo "<div class='fs-6'>" . $fechaFormateada . "</div>"; // Muestra la fecha en español
+                    } else {
+                        echo "Fecha no disponible.";
+                    }
+                    echo            "<li>" . $detalle->getHoraInicioEvento() . "</li>";
                     echo    "</ul>";
                     echo "</p>";
-                    echo "<button class='btn btn-primary' onclick=\"location.href='compra.php'\">Ver entradas</button>";
+                    echo "<button class='btn btn-primary' onclick=\"location.href='compra.php?idEvento=" . $eventoData->getIdEvento() . "&idDetalle=" . $detalle->getIdDetallesEvento() . "'\">Ver evento</button>";
                     ?>
                 </div>
             </div>

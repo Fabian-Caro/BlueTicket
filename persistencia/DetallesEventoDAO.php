@@ -29,6 +29,10 @@ class DetallesEventoDAO {
     public function consultarDetallesEvento($idEvento) {
         return "SELECT idDetalle, fecha, hora_inicio, hora_final, costo, aforo, idLugar, idEvento FROM detalle_evento WHERE idEvento = $idEvento ORDER BY fecha ASC";
     }
+
+    public function consultarIdDetallesEvento($idDetalle) {
+        return "SELECT idDetalle, fecha, hora_inicio, hora_final, costo, aforo, idLugar, idEvento FROM detalle_evento WHERE idDetalle = ". intval($idDetalle);
+    }
 }
 
 ?>

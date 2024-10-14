@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
@@ -86,7 +86,7 @@
 
             <div class="col-md-4">
                 <div class="card card-blue p-3 text-black mb-3">
-                <img src="https://via.placeholder.com/100" alt="Descripción de la imagen" class="img-fluid" style="max-width: 100px; height: auto;">
+                <img src="imagenes/100.png" alt="Descripción de la imagen" class="img-fluid" style="max-width: 100px; height: auto;">
                     <span>Evento</span>
                     <div class="d-flex flex-row align-items-end mb-3">
                         <h1 class="mb-0 yellow">$549</h1> <span>.99</span>
