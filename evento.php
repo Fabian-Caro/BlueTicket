@@ -1,9 +1,9 @@
 <?php
-require_once(__DIR__ . '/../logica/Lugar.php');
-require_once(__DIR__ . '/../logica/Ciudad.php');
-require_once(__DIR__ . '/../logica/Evento.php');
-require_once(__DIR__ . '/../logica/DetallesEvento.php');
-$idEvento = isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0;
+require_once('./logica/Lugar.php');
+require_once('./logica/Ciudad.php');
+require_once('./logica/Evento.php');
+require_once('./logica/DetallesEvento.php');
+$idEvento = 1;
 
 $evento = new Evento();
 $eventoData = $evento->consultarIdEvento($idEvento);
@@ -27,9 +27,6 @@ if (!$eventoData) {
 </head>
 
 <body>
-    <?php 
-    include 'navbar.php' 
-    ?>
 
     <div class="container mt-4">
         <?php

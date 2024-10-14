@@ -100,6 +100,7 @@ class Cliente{
         $conexion -> abrirConexion();
         $clienteDAO = new ClienteDAO($this -> idCliente);
         $conexion -> ejecutarConsulta($clienteDAO -> consultar());
+        echo $clienteDAO -> consultar();
         $registro = $conexion -> siguienteRegistro();
         $this -> nombre = $registro[0];
         $this -> apellido = $registro[1];

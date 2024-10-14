@@ -2,6 +2,8 @@
 $paginaAnterior = basename($_SERVER['PHP_SELF']);
 echo $paginaAnterior;
 session_start();
+echo $_SESSION["id"];
+
 if($paginaAnterior=="evento.php"){
     $_SESSION["idEvento"] = $idEvento;
 }
@@ -38,7 +40,10 @@ require_once(__DIR__ . '/../logica/Cliente.php');
         ?>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a href="iniciarSesion.php?paginaAnterior=<?php echo urlencode($paginaAnterior); ?>" class="nav-link">Iniciar Sesion</a>
+                    <a href="iniciarSesion.php?paginaAnterior=<?php echo urlencode($paginaAnterior); ?>" class="nav-link">Iniciar Sesión Cliente</a>
+                </li>
+                <li class="nav-item">
+                    <a href="iniciarSesion.php?paginaAnterior=sesionProveedor.php" class="nav-link">Iniciar Sesión Proveedor</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">Registrarse</a>
