@@ -2,22 +2,8 @@
 
 require_once(__DIR__ . '/../logica/Lugar.php');
 require_once(__DIR__ . '/../logica/DetallesEvento.php');
-
-
 $idEvento = isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0;
 echo "idEvento: ". $idEvento;
-
-if(isset($_POST["submit"])){
-    $fecha = "'" . $_POST['fecha'] . "'";
-    $horaInicio = "'" . $_POST['horaInicio'] . "'";
-    $horaFinal = "'" . $_POST['horaFinal'] . "'";
-    $costo = $_POST["costo"];
-    $aforo = $_POST["aforo"];
-    $idLugar = $_POST["idLugar"];
-
-    $detallesEvento = new DetallesEvento();
-    $detallesEvento -> insertar($fecha,$horaInicio,$horaFinal,$costo,$aforo,$idLugar,$idEvento);
-}
 ?>
 
 <html>
@@ -29,7 +15,19 @@ if(isset($_POST["submit"])){
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <?php include 'navProveedor.php';?>
+    <?php include 'navProveedor.php';
+    if(isset($_POST["submit"])){
+        $fecha = "'" . $_POST['fecha'] . "'";
+        $horaInicio = "'" . $_POST['horaInicio'] . "'";
+        $horaFinal = "'" . $_POST['horaFinal'] . "'";
+        $costo = $_POST["costo"];
+        $aforo = $_POST["aforo"];
+        $idLugar = $_POST["idLugar"];
+    
+        $detallesEvento = new DetallesEvento();
+        $detallesEvento -> insertar($fecha,$horaInicio,$horaFinal,$costo,$aforo,$idLugar,$idEvento);
+    }
+    ?>
 
     <form action="detalleEvento.php?idEvento=<?php echo isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0; ?>" method="POST">
         <label for="fecha">fecha: </label>

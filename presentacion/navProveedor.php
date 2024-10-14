@@ -4,6 +4,7 @@ if(!isset($_SESSION["idProveedor"])){
     header("Location: index.php");
 }
 $idProveedor = $_SESSION["idProveedor"];
+echo "idProveedor : " . $idProveedor;
 require_once(__DIR__ . '/../logica/Proveedor.php');
 $proveedor = new Proveedor($idProveedor);
 $proveedor -> consultar();
@@ -22,7 +23,7 @@ $proveedor -> consultar();
 				<ul class="navbar-nav me-auto">
 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
 						href="#" role="button" data-bs-toggle="dropdown"
-						aria-expanded="false">Producto</a>
+						aria-expanded="false">Evento</a>
 						<ul class="dropdown-menu">
                             <li><a class='dropdown-item' href='newEvento.php'>Nuevo Evento</a></li>
 						</ul>

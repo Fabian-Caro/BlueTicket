@@ -60,9 +60,7 @@ if (!$eventoData) {
     <?php
     }
     ?>
-    
-    <!-- Botón fuera del foreach -->
-    <div class="row">
+        <div class="row">
         <div class="col-md-12 text-center">
             <button class='btn btn-primary' onclick="location.href='detalleEvento.php?idEvento=<?php echo $idEvento; ?>'">Detalle Evento</button>
         </div>

@@ -2,16 +2,6 @@
 require_once(__DIR__ . '/../logica/Evento.php');
 require_once(__DIR__ . '/../logica/Artista.php');
 require_once(__DIR__ . '/../logica/Categoria.php');
-
-if(isset($_POST["submit"])){
-    $nombre = "'" . $_POST['nombre'] . "'";
-    $idCategoria = $_POST['idCategoria'];
-    $idArtista = $_POST['idArtista'];
-    $idProveedor = $_SESSION["idProveedor"];
-
-    $evento = new Evento();
-    $evento -> insertar($nombre,$idProveedor,$idCategoria,$idArtista);
-}
 ?>
 
 <html>
@@ -23,11 +13,21 @@ if(isset($_POST["submit"])){
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <?php include 'navProveedor.php';?>
+    <?php include 'navProveedor.php';
+    if(isset($_POST["submit"])){
+        $nombre = "'" . $_POST['nombre'] . "'";
+        $idCategoria = $_POST['idCategoria'];
+        $idArtista = $_POST['idArtista'];
+        $idProveedor = $_SESSION["idProveedor"];
+    
+        $evento = new Evento();
+        $evento -> insertar($nombre,$idProveedor,$idCategoria,$idArtista);
+    }
+    ?>
 
 <form action="newEvento.php" method="POST">
-    <label for="nombre">Nombre del Producto:</label>
-    <input type="text" value="nombre" name="nombre" required><br><br>
+    <label for="nombre">Nombre del Evento:</label>
+    <input type="text" value="" name="nombre" required><br><br>
 
     <label for="idCategoria">Categoría:</label><br>
     <?php

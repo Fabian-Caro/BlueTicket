@@ -51,6 +51,7 @@ require_once(__DIR__ . '/../logica/Cliente.php');
         <?php 
             } else {
                 $idCliente = $_SESSION["idCliente"];
+                echo "idCliente: " . $idCliente;
                 $cliente = new Cliente($idCliente);
                 $cliente -> consultar();
         ?>
