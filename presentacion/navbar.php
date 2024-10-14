@@ -1,23 +1,32 @@
-<?php 
+<?php
 $paginaAnterior = basename($_SERVER['PHP_SELF']);
 echo $paginaAnterior;
 session_start();
 
-if($paginaAnterior=="evento.php"){
+if ($paginaAnterior == "evento.php") {
     $_SESSION["idEvento"] = $idEvento;
+} else if ($paginaAnterior == 'compra.php') {
+    $_SESSION["idEvento"] = $idEvento;
+    $_SESSION["idDetalle"] = $idDetalle;
+} else if ($paginaAnterior == 'pago.php') {
+    $_SESSION["idEvento"] = $idEvento;
+    $_SESSION["idDetalle"] = $idDetalle;
+    $_SESSION["cantidad"] = $cantidad;
 }
-if(isset($_GET["cerrarSesion"])){
+
+if (isset($_GET["cerrarSesion"])) {
     session_destroy();
     header("Location: index.php");
 }
 require_once(__DIR__ . '/../logica/Cliente.php');
 ?>
+
 <head>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
@@ -71,6 +80,5 @@ require_once(__DIR__ . '/../logica/Cliente.php');
             } 
         ?>
         </div>
-
     </div>
 </nav>
