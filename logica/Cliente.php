@@ -83,7 +83,6 @@ class Cliente{
         $conexion -> abrirConexion();
         $clienteDAO = new ClienteDAO(null, null, null, $this -> correo, $this -> clave);
         $conexion -> ejecutarConsulta($clienteDAO -> autenticar());
-        echo $clienteDAO -> autenticar();
         if($conexion -> numeroFilas() == 0){
             $conexion -> cerrarConexion();
             return false;
@@ -100,7 +99,6 @@ class Cliente{
         $conexion -> abrirConexion();
         $clienteDAO = new ClienteDAO($this -> idCliente);
         $conexion -> ejecutarConsulta($clienteDAO -> consultar());
-        echo $clienteDAO -> consultar();
         $registro = $conexion -> siguienteRegistro();
         $this -> nombre = $registro[0];
         $this -> apellido = $registro[1];

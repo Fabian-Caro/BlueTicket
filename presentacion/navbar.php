@@ -2,7 +2,6 @@
 $paginaAnterior = basename($_SERVER['PHP_SELF']);
 echo $paginaAnterior;
 session_start();
-echo $_SESSION["id"];
 
 if($paginaAnterior=="evento.php"){
     $_SESSION["idEvento"] = $idEvento;
@@ -36,7 +35,7 @@ require_once(__DIR__ . '/../logica/Cliente.php');
         </div>
         <div class="ml-auto">
         <?php 
-            if (!isset($_SESSION["id"])) {
+            if (!isset($_SESSION["idCliente"])) {
         ?>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
@@ -51,9 +50,9 @@ require_once(__DIR__ . '/../logica/Cliente.php');
             </ul>
         <?php 
             } else {
-                $id = $_SESSION["id"];
-                $cliente = new Cliente($id);
-                $cliente->consultar();
+                $idCliente = $_SESSION["idCliente"];
+                $cliente = new Cliente($idCliente);
+                $cliente -> consultar();
         ?>
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">

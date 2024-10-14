@@ -15,7 +15,7 @@ if(isset($_POST["autenticar"])){
 	if($paginaAnterior!='sesionProveedor.php'){
 		$cliente = new Cliente(null, null, null, $_POST["correo"],$_POST["clave"]);
 		if($cliente->autenticar()){
-			$_SESSION["id"] = $cliente->getIdCliente();
+			$_SESSION["idCliente"] = $cliente -> getIdCliente();
 			header("Location: $paginaAnterior"); 
 		}else{
 			$error = true;

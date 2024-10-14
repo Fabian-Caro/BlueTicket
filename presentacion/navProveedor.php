@@ -3,9 +3,9 @@ session_start();
 if(!isset($_SESSION["idProveedor"])){
     header("Location: index.php");
 }
-$id = $_SESSION["idProveedor"];
+$idProveedor = $_SESSION["idProveedor"];
 require_once(__DIR__ . '/../logica/Proveedor.php');
-$proveedor = new Proveedor($id);
+$proveedor = new Proveedor($idProveedor);
 $proveedor -> consultar();
 ?>
 
