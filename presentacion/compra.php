@@ -70,8 +70,6 @@ if (!$eventoData) {
                         </div>';
                 }
                 ?>
-
-
             </div>
             <div class="col-md-4">
                 <div class="row align-items-center">
