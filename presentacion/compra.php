@@ -28,6 +28,7 @@ if (!$eventoData) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo $eventoData->getNombre(); ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-o0WbElgKgIqQjG1AZGn7wZhzC5TAPdF1pgh4FJvW5tcB3TQF3R7myPau+d3IoDyE" crossorigin="anonymous"></script>
     <link href="estilos.css" rel="stylesheet">
 </head>
 
@@ -41,20 +42,36 @@ if (!$eventoData) {
                 <ul class="list-unstyled text-center">
                     <?php
                     echo "<li>Capacidad: " . $detallesData->getAforoEvento() . "</li>";
-                    ?>
-                    <li class="d-flex justify-content-center align-items-center">
-                        <span>Cantidad de entradas: </span>
-                        <div class="d-flex align-items-center">
-                            <input type="number" name="cantidad" id="contador" value="0" class="form-control me-2" style="width: 80px;" min="0" max="<?php echo $detallesData->getAforoEvento(); ?>">
-                        </div>
-                    </li>
-                    <?php
                     echo "<li>Valor por entrada: $" . $detallesData->getCostoEvento() . "</li>";
                     ?>
                 </ul>
                 <div class="d-flex justify-content-center mt-3">
-                    <button class="btn btn-primary" onclick="location.href='pago.php'">Pagar</button>
+                    <form action="pago.php" method="GET" class="text-center"> <!-- Añadir text-center al form -->
+                        <input type="hidden" name="idEvento" value="<?php echo $eventoData->getIdEvento(); ?>">
+                        <input type="hidden" name="idDetalle" value="<?php echo $detallesData->getIdDetallesEvento(); ?>">
+                        <div class="d-flex justify-content-center align-items-center mb-3"> <!-- Modificar para asegurar centrar -->
+                            <span>Cantidad de entradas: </span>
+                            <div class="d-flex align-items-center ms-2">
+                                <input type="number" name="cantidad" id="contador" class="form-control me-2" value="0" min="1" max="<?php echo $detallesData->getAforoEvento(); ?>" style="width: 80px;" required>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center"> <!-- Centrar el botón -->
+                            <button type="submit" class="btn btn-primary">Ver evento</button>
+                        </div>
+                    </form>
                 </div>
+
+                <?php
+                // Si hay un error, mostrar el mensaje de advertencia
+                if (isset($_GET['error']) && $_GET['error'] == 'sin_entradas') {
+                    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            No has seleccionado ninguna entrada. Por favor, selecciona al menos una.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
+                }
+                ?>
+
+
             </div>
             <div class="col-md-4">
                 <div class="row align-items-center">
@@ -68,6 +85,7 @@ if (!$eventoData) {
                             <?php
                             echo "<div class='fs-2'>" . $eventoData->getNombre() . "</div>";
                             echo "<div class='fs-6'>" . $detallesData->getIdLugarEvento()->getNombreLugar() . "</div>";
+                            //echo "<div class='fs-6'>" . $detallesData->getIdLugarEvento()->getIdCiudad() . "</div>";
                             $fecha = $detallesData->getFechaEvento();
 
                             if ($fecha) {
@@ -86,7 +104,7 @@ if (!$eventoData) {
                             } else {
                                 echo "Fecha no disponible.";
                             }
-                            echo "<div class='font14'>BOGOTÁ</div>"; // Hay que mostrar la ciudad
+                            //echo "<div class='font14'>BOGOTÁ</div>"; // Hay que mostrar la ciudad
                             ?>
 
                         </div>

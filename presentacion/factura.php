@@ -1,5 +1,35 @@
+<?php
+require_once(__DIR__ . '/../logica/Lugar.php');
+require_once(__DIR__ . '/../logica/Evento.php');
+require_once(__DIR__ . '/../logica/DetallesEvento.php');
+$idEvento = isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0;
+$idDetalle = isset($_GET['idDetalle']) ? intval($_GET['idDetalle']) : 0;
+$cantidadEntradas = isset($_GET['cantidad']) ? intval($_GET['cantidad']) : 0;
+
+echo "Cantidad de entradas: " . $cantidadEntradas; // Verifica si llega el valor correcto
+
+
+
+echo $idEvento;
+echo $idDetalle;
+
+$evento = new Evento();
+$eventoData = $evento->consultarIdEvento($idEvento);
+$detallesEvento = new DetallesEvento();
+$detallesData = $detallesEvento->consultarIdDetalles($idDetalle);
+$valorPorEntrada = $detallesData->getCostoEvento();
+$costoTotal = $cantidadEntradas * $valorPorEntrada;
+
+if (!$eventoData) {
+    echo "Evento no encontrado";
+    exit;
+}
+// Obtener fecha actual para la factura
+$fechaFactura = date("Y-m-d");
+?>
+
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
@@ -9,13 +39,13 @@
 </head>
 
 <body>
-    <?php include 'navbar.php' ?>
+    <?php include 'navbar.php'; ?>
 
     <div class="container mt-5">
         <div class="invoice-header">
             <h1>Factura</h1>
-            <p>Fecha: <strong id="invoice-date">2024-10-11</strong></p>
-            <p>Nombre del Comprador: <strong id="buyer-name">Juan Pérez</strong></p>
+            <p>Fecha: <strong id="invoice-date"><?php echo $fechaFactura; ?></strong></p>
+            <p>Nombre del Comprador: <strong id="buyer-name"><?php echo $cliente->getNombre() . " " . $cliente->getApellido(); ?></strong></p>
         </div>
 
         <div class="invoice-details">
@@ -30,43 +60,27 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Producto A</td>
-                        <td>2</td>
-                        <td>$50.00</td>
-                        <td>$100.00</td>
-                    </tr>
-                    <tr>
-                        <td>Producto B</td>
-                        <td>1</td>
-                        <td>$30.00</td>
-                        <td>$30.00</td>
-                    </tr>
-                    <tr>
-                        <td>Producto C</td>
-                        <td>3</td>
-                        <td>$20.00</td>
-                        <td>$60.00</td>
+                        <td><?php echo $eventoData->getNombre() ?></td>
+                        <td><?php echo $cantidadEntradas ?></td>
+                        <td>$<?php echo $detallesData->getCostoEvento() ?></td>
+                        <td>$<?php echo $costoTotal ?></td>
                     </tr>
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="3" class="text-right">Subtotal:</td>
-                        <td>$190.00</td>
-                    </tr>
-                    <tr>
                         <td colspan="3" class="text-right">IVA (19%):</td>
-                        <td>$36.10</td>
+                        <td>$<?php echo $ivaAgregado = $costoTotal*0.19 ?></td>
                     </tr>
                     <tr class="total">
                         <td colspan="3" class="text-right">Total:</td>
-                        <td>$226.10</td>
+                        <td>$<?php echo $costoTotal+$ivaAgregado ?></td>
                     </tr>
                 </tfoot>
             </table>
         </div>
     </div>
 
-    <?php include 'footer.php' ?>
+    <?php include 'footer.php'; ?>
 
 </body>
 
