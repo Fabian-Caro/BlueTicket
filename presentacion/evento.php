@@ -38,18 +38,14 @@ if (!$eventoData) {
 
             <div class="row align-items-center mb-4">
                 <div class="col-md-4">
+                    <?php echo "<h1>" . $eventoData->getArtista()->getNombre() . "</h1>"; ?>
                     <img src="imagenes/100.png" alt="Descripción de la imagen" class="img-fluid" style="max-width: 100px; height: auto;">
                 </div>
                 <div class="col-md-8">
                     <?php
-                    echo "<h1>" . $detalle->getIdDetallesEvento() . "</h1>";
-                    echo "<h2>" . $eventoData->getArtista()->getNombre() . "</h2>";
+                    echo "<h2>" . $detalle->getLugar()->getNombreLugar()  . "</h2>";
                     echo "<p>";
-                    echo    "<ul>";
-                    echo            "<li>" . $eventoData->getNombreEvento() . "</li>";
-                    // echo            "<li>" . $detalle->getLugarEvento()->getNombreLugar() . "</li>";
-                    //echo            "<li>" . $detalle->getLugarEvento()->getNombreCiudad() . "</li>";
-                    //echo            "<li>" . $detallesData->getIdLugarEvento()->getNombreLugar() . "</li>";
+                    echo    "<div class='fs-6'>" . $eventoData->getNombreEvento() . " - " . $detalle->getLugar()->getCiudad()->getNombreCiudad() . "</div>";
                     $fecha = $detalle->getFechaEvento();
 
                     if ($fecha) {
@@ -68,8 +64,7 @@ if (!$eventoData) {
                     } else {
                         echo "Fecha no disponible.";
                     }
-                    echo            "<li>" . $detalle->getHoraInicioEvento() . "</li>";
-                    echo    "</ul>";
+                    echo    "<div class='fs-6'>"  . $detalle->getHoraInicioEvento() . "</div>";
                     echo "</p>";
                     echo "<button class='btn btn-primary' onclick=\"location.href='compra.php?idEvento=" . $eventoData->getIdEvento() . "&idDetalle=" . $detalle->getIdDetallesEvento() . "'\">Ver evento</button>";
                     ?>

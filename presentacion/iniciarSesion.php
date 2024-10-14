@@ -2,9 +2,12 @@
 session_start();
 
 require_once(__DIR__ . '/../logica/Cliente.php');
+require_once(__DIR__ . '/../logica/Proveedor.php');
+
 $error = false;
-$paginaAnterior = "presentacion/".isset($_GET['paginaAnterior']) ? $_GET['paginaAnterior'] : 'index.php';
+$paginaAnterior = isset($_GET['paginaAnterior']) ? $_GET['paginaAnterior'] : 'index.php';
 echo $paginaAnterior;
+
 if($paginaAnterior=="evento.php"){
 	$paginaAnterior .= "?idEvento=" . urlencode($_SESSION["idEvento"]);
 } else if ($paginaAnterior == 'compra.php') {
@@ -14,14 +17,24 @@ if($paginaAnterior=="evento.php"){
 
 }
 if(isset($_POST["autenticar"])){
-    $cliente = new Cliente(null, null, null, $_POST["correo"],$_POST["clave"]);
-	
-    if($cliente -> autenticar()){
-        $_SESSION["id"] = $cliente -> getIdCliente();
-        header("Location: $paginaAnterior"); 
-    }else{
-        $error = true;
-    }    
+	if($paginaAnterior!='sesionProveedor.php'){
+		$cliente = new Cliente(null, null, null, $_POST["correo"],$_POST["clave"]);
+		if($cliente->autenticar()){
+			$_SESSION["idCliente"] = $cliente -> getIdCliente();
+			header("Location: $paginaAnterior"); 
+		}else{
+			$error = true;
+		}
+	}
+	else{
+		$proveedor = new Proveedor(null, null, null, $_POST["correo"],$_POST["clave"]);
+		if($proveedor->autenticar()){
+			$_SESSION["idProveedor"] = $proveedor->getIdProveedor();
+			header("Location: $paginaAnterior"); 
+		}else{
+			$error = true;
+		}
+	}
 }
 ?>
 <html>

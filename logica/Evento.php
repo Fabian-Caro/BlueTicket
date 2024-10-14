@@ -104,7 +104,6 @@ class Evento{
         $conexion -> cerrarConexion();
         return $eventos;        
     }
-
     public function consultarIdEvento($idEvento) {
         $conexion = new Conexion();
         $conexion->abrirConexion();
@@ -135,6 +134,21 @@ class Evento{
         $conexion->ejecutarConsulta($eventoDAO->consultar());
         $registro = $conexion->siguienteRegistro();
         $this->nombreEvento = $registro[0];
+        $conexion -> cerrarConexion();
+    }
+    public function insertar($nombre="",$idProveedor=0,$idCategoria=0,$idArtista=0){
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $eventoDAO = new EventoDAO();
+        
+        try {
+            $query = $eventoDAO->insert($nombre, $idProveedor,$idCategoria,$idArtista);
+            $conexion->ejecutarConsulta($query);
+            echo "Consulta ejecutada correctamente.";
+        } catch (Exception $e) {
+            echo "Error al ejecutar la consulta: " . $e->getMessage();
+        }
+        
         $conexion -> cerrarConexion();
     }
 }

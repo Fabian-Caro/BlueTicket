@@ -11,7 +11,7 @@ class LugarDAO {
     }
 
     public function consultarTodos() {
-        return "SELECT idLugar, nombre, direccion, idCiudad FROM lugar";
+        return "SELECT idLugar, nombre, direccion, idCiudad FROM Lugar";
     }
 
     public function consultar() {

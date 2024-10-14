@@ -60,7 +60,7 @@ $fechaFactura = date("Y-m-d");
                 </thead>
                 <tbody>
                     <tr>
-                        <td><?php echo $eventoData->getNombre() ?></td>
+                        <td><?php echo $eventoData->getNombreEvento() ?></td>
                         <td><?php echo $cantidadEntradas ?></td>
                         <td>$<?php echo $detallesData->getCostoEvento() ?></td>
                         <td>$<?php echo $costoTotal ?></td>
