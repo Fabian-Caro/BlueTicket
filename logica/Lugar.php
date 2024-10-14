@@ -7,7 +7,7 @@ class Lugar {
     private $idLugar;
     private $nombreLugar;
     private $direccionLugar;
-    private $idCiudad;
+    private $ciudad;
 
     public function getIdLugar() {
         return $this->idLugar;
@@ -33,19 +33,19 @@ class Lugar {
         $this->direccionLugar = $direccionLugar;
     }
 
-    public function getIdCiudad() {
-        return $this->idCiudad;
+    public function getCiudad() {
+        return $this->ciudad;
     }
 
-    public function setIdCiudad($idCiudad) {
-        $this->idCiudad = $idCiudad;
+    public function setCiudad($ciudad) {
+        $this->ciudad = $ciudad;
     }
 
-    public function __construct($idLugar = 0, $nombreLugar = "", $direccionLugar = "", $idCiudad = null) {
+    public function __construct($idLugar = 0, $nombreLugar = "", $direccionLugar = "", $ciudad = null) {
         $this->idLugar = $idLugar;
         $this->nombreLugar = $nombreLugar;
         $this->direccionLugar = $direccionLugar;
-        $this->idCiudad = $idCiudad;
+        $this->ciudad = $ciudad;
     }
 
     public function consultarTodos() {
@@ -83,6 +83,10 @@ class Lugar {
         $conexion->ejecutarConsulta($lugarDAO->consultar());
         $registro = $conexion->siguienteRegistro();
         $this->nombreLugar = $registro[0];
+        $this->direccionLugar = $registro[1];
+        $ciudad = new Ciudad($registro[2]);
+        $ciudad->consultar();
+        $this->ciudad = $ciudad;
         $conexion -> cerrarConexion();
     } 
 }

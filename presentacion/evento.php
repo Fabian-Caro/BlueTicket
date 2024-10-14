@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . '/../logica/Lugar.php');
+require_once(__DIR__ . '/../logica/Ciudad.php');
 require_once(__DIR__ . '/../logica/Evento.php');
 require_once(__DIR__ . '/../logica/DetallesEvento.php');
 $idEvento = isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0;
@@ -46,8 +47,10 @@ if (!$eventoData) {
                     echo "<h2>" . $eventoData->getArtista()->getNombre() . "</h2>";
                     echo "<p>";
                     echo    "<ul>";
-                    echo            "<li>" . $eventoData->getNombre() . "</li>";
-                    //echo            "<li>" . $detallesData->getIdLugarEvento()->getNombreLugar() . "</li>";
+                    echo            "<li>" . $eventoData->getArtista()->getNombre() . "</li>";
+                    echo            "<li>"  . $detalle->getLugar()->getNombreLugar() . "</li>";
+                    echo            "<li>"  . $detalle->getLugar()->getCiudad()->getNombreCiudad() . "</li>";
+                    echo            "<li>"  . $detalle->getFechaEvento() . "</li>";
                     $fecha = $detalle->getFechaEvento();
 
                     if ($fecha) {
@@ -66,7 +69,7 @@ if (!$eventoData) {
                     } else {
                         echo "Fecha no disponible.";
                     }
-                    echo            "<li>" . $detalle->getHoraInicioEvento() . "</li>";
+                    echo            "<li>"  . $detalle->getHoraInicioEvento() . "</li>";
                     echo    "</ul>";
                     echo "</p>";
                     echo "<button class='btn btn-primary' onclick=\"location.href='compra.php?idEvento=" . $eventoData->getIdEvento() . "&idDetalle=" . $detalle->getIdDetallesEvento() . "'\">Ver evento</button>";
