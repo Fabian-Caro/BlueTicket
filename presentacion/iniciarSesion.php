@@ -7,6 +7,11 @@ $paginaAnterior = "presentacion/".isset($_GET['paginaAnterior']) ? $_GET['pagina
 echo $paginaAnterior;
 if($paginaAnterior=="evento.php"){
 	$paginaAnterior .= "?idEvento=" . urlencode($_SESSION["idEvento"]);
+} else if ($paginaAnterior == 'compra.php') {
+	$paginaAnterior .= "?idEvento=" . urlencode($_SESSION["idEvento"]) . "&idDetalle=" . urlencode($_SESSION["idDetalle"]);
+} else if ($paginaAnterior == 'pago.php') {
+	$paginaAnterior .= "?idEvento=" . urlencode($_SESSION["idEvento"]) . "&idDetalle=" . urlencode($_SESSION["idDetalle"]) . "&cantidad=" . urlencode($_SESSION["cantidad"]);
+
 }
 if(isset($_POST["autenticar"])){
     $cliente = new Cliente(null, null, null, $_POST["correo"],$_POST["clave"]);
