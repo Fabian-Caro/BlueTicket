@@ -50,6 +50,7 @@ if (!$eventoData) {
                     <form action="pago.php" method="GET" class="text-center">
                         <input type="hidden" name="idEvento" value="<?php echo $eventoData->getIdEvento(); ?>">
                         <input type="hidden" name="idDetalle" value="<?php echo $detallesData->getIdDetallesEvento(); ?>">
+                        <input type="hidden" name="aforo" value="<?php echo $detallesData->getAforoEvento(); ?>">
                         <div class="d-flex justify-content-center align-items-center mb-3">
                             <span>Cantidad de entradas: </span>
                             <div class="d-flex align-items-center ms-2">

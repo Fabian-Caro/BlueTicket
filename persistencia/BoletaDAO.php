@@ -1,5 +1,5 @@
 <?php
-class FacturaDAO{
+class BoletaDAO{
     private $idBoleta;
     private $nombre;
     private $factura;
@@ -16,10 +16,10 @@ class FacturaDAO{
         return "SELECT MAX(idBoleta) FROM Boleta ";
     }
     
-    // public function insert($fecha="",$valor_subtotal=0,$valor_total=0,$idCliente=0) {
-    //     return "INSERT into Factura (fecha,valor_subtotal,valor_total,idCliente)
-    //             VALUES ($fecha,$valor_subtotal,$valor_total,$idCliente);";
-    // }
+    public function insert($nombre_usuario="",$idFactura=0,$idDetalle=0) {
+        return "INSERT into Boleta (nombre_usuario,idFactura,idDetalle)
+                VALUES ($nombre_usuario,$idFactura,$idDetalle);";
+    }
     
 }
 

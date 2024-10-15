@@ -23,7 +23,7 @@ class DetallesEvento {
         $this->idDetallesEvento = $idDetallesEvento;
     }
 
-    public function getFechaEvento() {
+    public function getFechaEvento(): mixed {
         return $this->fechaEvento;
     }
 
