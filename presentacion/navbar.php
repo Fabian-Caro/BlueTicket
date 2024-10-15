@@ -35,7 +35,7 @@ require_once(__DIR__ . '/../logica/Cliente.php');
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.php">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXu9fXcn2O9M2vE5nCisBfDjiey4LxYsxdXA&s" style="width: 30px; height: 30px;" alt="Logo">
+            <img src="imagenes/logo.webp" style="width: 30px; height: 30px;" alt="Logo">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
