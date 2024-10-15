@@ -7,7 +7,7 @@ $idDetalle = isset($_GET['idDetalle']) ? intval($_GET['idDetalle']) : 0;
 $aforo = isset($_GET['aforo']) ? intval($_GET['aforo']) : 0;
 $cantidadEntradas = isset($_GET['cantidad']) ? intval($_GET['cantidad']) : 0;
 
-echo "   aforo:   ".$aforo;
+echo "   aforo:   " . $aforo;
 $evento = new Evento();
 $eventoData = $evento->consultarIdEvento($idEvento);
 $detallesEvento = new DetallesEvento();
@@ -87,42 +87,41 @@ if (isset($_GET['cantidad'])) {
 
     <div class="container mt-5 px-5">
         <div class="row">
-            
-            <div class="col-md-8">
-
-        <div class="d-flex justify-content-center mt-3">
-            <form action="factura.php" method="GET" class="container">
-                <h4 class="text-center mb-4">Detalles de las Entradas</h4>
-                <?php
-                for ($i = 1; $i <= $cantidadEntradas; $i++) {
-                    echo '
-                    <div class="row g-3 mb-3">
-                        <div class="col-md-8 offset-md-2">
-                            <div class="input-group">
-                                <span class="input-group-text">Nombre ' . $i . '</span>
-                                <input type="text" class="form-control" name="nombres[]" placeholder="Nombre" required>
+            <!-- Columna para el formulario de detalles de las entradas -->
+            <div class="col-md-6"> <!-- Cambié a col-md-6 -->
+                <div class="d-flex justify-content-center mt-3">
+                    <form action="factura.php" method="GET" class="container">
+                        <h4 class="text-center mb-4">Detalles de las Entradas</h4>
+                        <?php
+                        for ($i = 1; $i <= $cantidadEntradas; $i++) {
+                            echo '
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-8 offset-md-2">
+                                <div class="input-group">
+                                    <span class="input-group-text">Nombre ' . $i . '</span>
+                                    <input type="text" class="form-control" name="nombres[]" placeholder="Nombre" required>
+                                </div>
+                            </div>
+                        </div>';
+                        }
+                        ?>
+                        <!-- Campos ocultos para datos adicionales -->
+                        <input type="hidden" name="idEvento" value="<?php echo $eventoData->getIdEvento(); ?>">
+                        <input type="hidden" name="idDetalle" value="<?php echo $detallesData->getIdDetallesEvento(); ?>">
+                        <input type="hidden" name="cantidad" value="<?php echo $cantidadEntradas; ?>">
+                        <input type="hidden" name="aforo" value="<?php echo $aforo; ?>">
+                        <!-- Botón para pagar -->
+                        <div class="row mt-4">
+                            <div class="col-md-8 offset-md-2">
+                                <button type="submit" class="btn btn-primary btn-lg w-100">Pagar</button>
                             </div>
                         </div>
-                    </div>';
-                }
-                ?>
-                <!-- Campos ocultos para datos adicionales -->
-                <input type="hidden" name="idEvento" value="<?php echo $eventoData->getIdEvento(); ?>">
-                <input type="hidden" name="idDetalle" value="<?php echo $detallesData->getIdDetallesEvento(); ?>">
-                <input type="hidden" name="cantidad" value="<?php echo $cantidadEntradas; ?>">
-                <input type="hidden" name="aforo" value="<?php echo $aforo; ?>">
-                <!-- Botón para pagar -->
-                <div class="row mt-4">
-                    <div class="col-md-8 offset-md-2">
-                        <button type="submit" class="btn btn-primary btn-lg w-100">Pagar</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
+                    </form>
                 </div>
             </div>
-            <div class="col-md-4">
+
+            <!-- Columna para la tarjeta de información del evento -->
+            <div class="col-md-6"> <!-- Cambié a col-md-6 -->
                 <div class="card card-blue p-3 text-black mb-3 text-center">
                     <div class="d-flex justify-content-center">
                         <img src="imagenes/100.png" alt="Descripción de la imagen" class="img-fluid mb-2" style="max-width: 100px;">
@@ -150,9 +149,9 @@ if (isset($_GET['cantidad'])) {
                     ?>
                 </div>
             </div>
-
         </div>
     </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-4cGFmA9Im4u9OFt8S1rfqESzO5xR7KZGtYt7Lk1AaeoafIYGf1VGzF2dEXKxJwdr" crossorigin="anonymous"></script>
 </body>
