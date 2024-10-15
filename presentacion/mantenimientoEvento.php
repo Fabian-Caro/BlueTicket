@@ -23,7 +23,7 @@ if (!$eventoData) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php echo $eventoData->getNombre(); ?></title>
+    <title><?php echo $eventoData->getNombreEvento(); ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -44,7 +44,7 @@ if (!$eventoData) {
             </div>
             <div class="col-md-8">
                 <?php
-                echo "<h2>" . $eventoData->getNombre() . "</h2>";
+                echo "<h2>" . $eventoData->getNombreEvento() . "</h2>";
                 echo "<p>";
                 echo    "<ul>";
                 echo            "<li>" . $eventoData->getArtista()->getNombre() . "</li>";
@@ -62,7 +62,7 @@ if (!$eventoData) {
     ?>
         <div class="row">
         <div class="col-md-12 text-center">
-            <button class='btn btn-primary' onclick="location.href='detalleEvento.php?idEvento=<?php echo $idEvento; ?>'">Detalle Evento</button>
+            <button class='btn btn-primary' onclick="location.href='detalleEvento.php?idEvento=<?php echo $idEvento; ?>'">Crear Detalle Evento</button>
         </div>
     </div>
     </div>

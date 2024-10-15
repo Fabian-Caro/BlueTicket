@@ -12,6 +12,9 @@ if ($paginaAnterior == "evento.php") {
     $_SESSION["idEvento"] = $idEvento;
     $_SESSION["idDetalle"] = $idDetalle;
     $_SESSION["cantidad"] = isset($_GET['cantidad']) ? intval($_GET['cantidad']) : 0; // Definir cantidad
+    if (!isset($_SESSION["idCliente"])){
+        header("Location: iniciarSesion.php?paginaAnterior=pago.php");                
+    }
 }
 
 
