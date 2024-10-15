@@ -124,9 +124,8 @@ class Factura {
         try {
             $query = $facturaDAO->insert($fecha, $valor_subtotal,$valor_total,$idCliente);
             $conexion->ejecutarConsulta($query);
-            echo "Consulta ejecutada correctamente.";
         } catch (Exception $e) {
-            echo "Error al ejecutar la consulta: " . $e->getMessage();
+            $e->getMessage();
         }
         
         $conexion -> cerrarConexion();

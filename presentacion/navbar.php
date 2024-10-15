@@ -1,6 +1,6 @@
 <?php
 $paginaAnterior = basename($_SERVER['PHP_SELF']);
-echo $paginaAnterior;
+
 session_start();
 
 if ($paginaAnterior == "evento.php") {
@@ -66,7 +66,6 @@ require_once(__DIR__ . '/../logica/Cliente.php');
             <?php
             } else {
                 $idCliente = $_SESSION["idCliente"];
-                echo "idCliente: " . $idCliente;
                 $cliente = new Cliente($idCliente);
                 $cliente->consultar();
             ?>

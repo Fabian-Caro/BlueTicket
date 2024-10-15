@@ -89,6 +89,21 @@ class Lugar {
         $this->ciudad = $ciudad;
         $conexion -> cerrarConexion();
     } 
+
+    public function insertar($nombreLugar="", $direccionLugar="", $idCiudad=0){
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $lugarDAO = new LugarDAO();
+        
+        try {
+            $query = $lugarDAO->insert($nombreLugar, $direccionLugar, $idCiudad);
+            $conexion->ejecutarConsulta($query);
+        } catch (Exception $e) {
+            $e->getMessage();
+        }
+        
+        $conexion -> cerrarConexion();
+    }
 }
 
 ?>

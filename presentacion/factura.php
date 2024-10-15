@@ -10,10 +10,6 @@ $idDetalle = isset($_GET['idDetalle']) ? intval($_GET['idDetalle']) : 0;
 $cantidadEntradas = isset($_GET['cantidad']) ? intval($_GET['cantidad']) : 0;
 $nombres = isset($_GET['nombres']) ? $_GET['nombres'] : [];
 $aforo = isset($_GET['aforo']) ? intval($_GET['aforo']) : 0;
-// echo "Cantidad de entradas: " . $cantidadEntradas; 
-// echo "   aforo  :" . $aforo;
-// echo $idEvento;
-// echo $idDetalle;
 
 $evento = new Evento();
 $eventoData = $evento->consultarIdEvento($idEvento);
@@ -50,11 +46,9 @@ $factura = new Factura();
     <?php include 'navbar.php';
     $factura -> insertar("'".$fechaFactura."'",$subTotal,$total,$idCliente);
     $idFactura = $factura -> ultimoId();
-    //echo "  idFactura : ". $idFactura. "   "; 
     
     $boleta = new  Boleta();
     foreach ($nombres as $nombre) {
-        echo "Nombre: " . htmlspecialchars($nombre) . "<br>";
         $boleta -> insertar("'".$nombre."'",$idFactura,$idDetalle);
     }
     ?>

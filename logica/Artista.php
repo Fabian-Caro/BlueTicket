@@ -59,9 +59,8 @@ class Artista{
         try {
             $query = $artistaDAO->insert($nombre);
             $conexion->ejecutarConsulta($query);
-            echo "Consulta ejecutada correctamente.";
         } catch (Exception $e) {
-            echo "Error al ejecutar la consulta: " . $e->getMessage();
+            $e->getMessage();
         }
         
         $conexion -> cerrarConexion();

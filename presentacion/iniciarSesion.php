@@ -6,7 +6,6 @@ require_once(__DIR__ . '/../logica/Proveedor.php');
 
 $error = false;
 $paginaAnterior = isset($_GET['paginaAnterior']) ? $_GET['paginaAnterior'] : 'index.php';
-echo $paginaAnterior;
 
 if ($paginaAnterior == "evento.php") {
 	$paginaAnterior .= "?idEvento=" . urlencode($_SESSION["idEvento"]);
