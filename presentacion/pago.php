@@ -83,23 +83,17 @@ if (isset($_GET['cantidad'])) {
         ?>
     </div>
 
-    <div class="container mt-4">
-        <form>
-            <?php for ($i = 1; $i <= $cantidadEntradas; $i++): ?>
-                <div class="row g-3 mb-4">
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="nombre_<?php echo $i; ?>" placeholder="Nombre" required>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="apellido_<?php echo $i; ?>" placeholder="Apellido" required>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="documento_<?php echo $i; ?>" placeholder="Documento" required>
-                    </div>
-                </div>
-            <?php endfor; ?>
-        </form>
-    </div>
+    <?php
+    echo '<form class="container mt-4">';
+
+    for ($i = 1; $i <= $cantidadEntradas; $i++) {
+        echo '
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="nombre_' . $i . '" placeholder="Nombre" required>
+            </div>
+        </div>';
+    }
 
     <div class="container mt-5">
         <div class="row">
