@@ -7,7 +7,6 @@ $idDetalle = isset($_GET['idDetalle']) ? intval($_GET['idDetalle']) : 0;
 $aforo = isset($_GET['aforo']) ? intval($_GET['aforo']) : 0;
 $cantidadEntradas = isset($_GET['cantidad']) ? intval($_GET['cantidad']) : 0;
 
-echo "   aforo:   " . $aforo;
 $evento = new Evento();
 $eventoData = $evento->consultarIdEvento($idEvento);
 $detallesEvento = new DetallesEvento();
@@ -152,7 +151,7 @@ if (isset($_GET['cantidad'])) {
         </div>
     </div>
 
-
+    <?php include 'footer.php' ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-4cGFmA9Im4u9OFt8S1rfqESzO5xR7KZGtYt7Lk1AaeoafIYGf1VGzF2dEXKxJwdr" crossorigin="anonymous"></script>
 </body>
 

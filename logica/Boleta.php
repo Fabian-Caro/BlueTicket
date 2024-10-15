@@ -39,9 +39,8 @@ class Boleta {
         try {
             $query = $boletaDAO->insert($nombre_usuario,$idFactura,$idDetalle);
             $conexion->ejecutarConsulta($query);
-            echo "Consulta ejecutada correctamente.";
         } catch (Exception $e) {
-            echo "Error al ejecutar la consulta: " . $e->getMessage();
+            $e->getMessage();
         }
         
         $conexion -> cerrarConexion();

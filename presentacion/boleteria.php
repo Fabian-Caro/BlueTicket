@@ -4,8 +4,6 @@ require_once(__DIR__ . '/../logica/Cliente.php');
 
 $cliente = new Cliente();
 $nombreCliente = $cliente->getNombre();
-
-echo "nombre: " . $nombreCliente;
 ?>
 
 <!DOCTYPE html>

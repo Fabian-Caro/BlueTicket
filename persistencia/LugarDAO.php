@@ -17,6 +17,10 @@ class LugarDAO {
     public function consultar() {
         return "SELECT nombre,direccion,idCiudad FROM lugar WHERE idLugar ='" . $this->idLugar . "'";
     }
+
+    public function insert($nombreLugar="", $direccionLugar="", $idCiudad=0) {
+        return "INSERT INTO lugar (nombre, direccion, idCiudad) VALUES ($nombreLugar, $direccionLugar, $idCiudad)";
+    }
 }
 
 ?>

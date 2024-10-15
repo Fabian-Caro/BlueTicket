@@ -21,7 +21,7 @@ require_once(__DIR__ . '/../logica/Artista.php');
     ?>
 
     <div class="container form-container">
-        <h2>Agregar Nuevo Artists</h2>
+        <h2>Agregar Nuevo Artista</h2>
         <form action="newArtista.php" method="POST">
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre del Artista</label>
