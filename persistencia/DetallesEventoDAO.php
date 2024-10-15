@@ -38,6 +38,10 @@ class DetallesEventoDAO {
         return "INSERT INTO Detalle_evento (fecha,hora_inicio,hora_final,costo,aforo,idLugar,idEvento) 
         VALUES ($fecha,$horaInicio,$horaFinal,$costo,$aforo,$idLugar,$idEvento)";
     }
+
+    public function descontarAforo($valorAforo,$idDetalle){
+        return "UPDATE `Detalle_evento` SET `aforo` = $valorAforo WHERE `detalle_evento`.`idDetalle` = $idDetalle;";
+    }
 }
 
 ?>

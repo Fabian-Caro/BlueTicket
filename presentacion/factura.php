@@ -3,15 +3,17 @@ require_once(__DIR__ . '/../logica/Lugar.php');
 require_once(__DIR__ . '/../logica/Evento.php');
 require_once(__DIR__ . '/../logica/DetallesEvento.php');
 require_once(__DIR__ . '/../logica/Factura.php');
+require_once(__DIR__ . '/../logica/Boleta.php');
 
 $idEvento = isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0;
 $idDetalle = isset($_GET['idDetalle']) ? intval($_GET['idDetalle']) : 0;
 $cantidadEntradas = isset($_GET['cantidad']) ? intval($_GET['cantidad']) : 0;
-
-echo "Cantidad de entradas: " . $cantidadEntradas; // Verifica si llega el valor correcto
-
-echo $idEvento;
-echo $idDetalle;
+$nombres = isset($_GET['nombres']) ? $_GET['nombres'] : [];
+$aforo = isset($_GET['aforo']) ? intval($_GET['aforo']) : 0;
+// echo "Cantidad de entradas: " . $cantidadEntradas; 
+// echo "   aforo  :" . $aforo;
+// echo $idEvento;
+// echo $idDetalle;
 
 $evento = new Evento();
 $eventoData = $evento->consultarIdEvento($idEvento);
@@ -46,8 +48,15 @@ $factura = new Factura();
 
 <body>
     <?php include 'navbar.php';
-    //$factura -> insertar("'".$fechaFactura."'",$subTotal,$total,$idCliente);
-    echo "  idFactura : ". $factura -> ultimoId(). "   "; 
+    $factura -> insertar("'".$fechaFactura."'",$subTotal,$total,$idCliente);
+    $idFactura = $factura -> ultimoId();
+    //echo "  idFactura : ". $idFactura. "   "; 
+    
+    $boleta = new  Boleta();
+    foreach ($nombres as $nombre) {
+        echo "Nombre: " . htmlspecialchars($nombre) . "<br>";
+        $boleta -> insertar("'".$nombre."'",$idFactura,$idDetalle);
+    }
     ?>
 
     <div class="container mt-5">

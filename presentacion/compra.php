@@ -45,6 +45,7 @@ if (!$eventoData) {
                     <form action="pago.php" method="GET">
                         <input type="hidden" name="idEvento" value="<?php echo $eventoData->getIdEvento(); ?>">
                         <input type="hidden" name="idDetalle" value="<?php echo $detallesData->getIdDetallesEvento(); ?>">
+                        <input type="hidden" name="aforo" value="<?php echo $detallesData->getAforoEvento(); ?>">
                         <div class="d-flex justify-content-center align-items-center mb-3">
                             <label for="contador" class="me-2">Cantidad de entradas:</label>
                             <input type="number" name="cantidad" id="contador" class="form-control" value="1" min="1" max="<?php echo $detallesData->getAforoEvento(); ?>" style="width: 100px;" required>

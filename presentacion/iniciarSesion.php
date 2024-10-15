@@ -13,7 +13,7 @@ if ($paginaAnterior == "evento.php") {
 } else if ($paginaAnterior == 'compra.php') {
 	$paginaAnterior .= "?idEvento=" . urlencode($_SESSION["idEvento"]) . "&idDetalle=" . urlencode($_SESSION["idDetalle"]);
 } else if ($paginaAnterior == 'pago.php') {
-	$paginaAnterior .= "?idEvento=" . urlencode($_SESSION["idEvento"]) . "&idDetalle=" . urlencode($_SESSION["idDetalle"]) . "&cantidad=" . urlencode($_SESSION["cantidad"]);
+	$paginaAnterior .= "?idEvento=" . urlencode($_SESSION["idEvento"]) . "&idDetalle=" . urlencode($_SESSION["idDetalle"]) . "&cantidad=" . urlencode($_SESSION["cantidad"]) . "&aforo=" . urlencode($_SESSION["aforo"]);
 }
 if (isset($_POST["autenticar"])) {
 	if ($paginaAnterior != 'sesionProveedor.php') {

@@ -28,21 +28,21 @@ class Boleta {
         }
         return $registro[0];
     }
-    // public function insertar($fecha="",$valor_subtotal=0,$valor_total=0,$idCliente=0){
-    //     $conexion = new Conexion();
-    //     $conexion -> abrirConexion();
-    //     $facturaDAO = new FacturaDAO();
+    public function insertar($nombre_usuario="",$idFactura=0,$idDetalle=0){
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $boletaDAO = new BoletaDAO();
         
-    //     try {
-    //         $query = $facturaDAO->insert($fecha, $valor_subtotal,$valor_total,$idCliente);
-    //         $conexion->ejecutarConsulta($query);
-    //         echo "Consulta ejecutada correctamente.";
-    //     } catch (Exception $e) {
-    //         echo "Error al ejecutar la consulta: " . $e->getMessage();
-    //     }
+        try {
+            $query = $boletaDAO->insert($nombre_usuario,$idFactura,$idDetalle);
+            $conexion->ejecutarConsulta($query);
+            echo "Consulta ejecutada correctamente.";
+        } catch (Exception $e) {
+            echo "Error al ejecutar la consulta: " . $e->getMessage();
+        }
         
-    //     $conexion -> cerrarConexion();
-    // }
+        $conexion -> cerrarConexion();
+    }
 }
 
 ?>
