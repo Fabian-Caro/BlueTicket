@@ -100,12 +100,6 @@ if (isset($_GET['cantidad'])) {
             <div class="col-md-4">
                 <input type="text" class="form-control" name="nombre_' . $i . '" placeholder="Nombre" required>
             </div>
-            <div class="col-md-4">
-                <input type="text" class="form-control" name="apellido_' . $i . '" placeholder="Apellido" required>
-            </div>
-            <div class="col-md-4">
-                <input type="text" class="form-control" name="documento_' . $i . '" placeholder="Documento" required>
-            </div>
         </div>';
     }
 

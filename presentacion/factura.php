@@ -2,30 +2,33 @@
 require_once(__DIR__ . '/../logica/Lugar.php');
 require_once(__DIR__ . '/../logica/Evento.php');
 require_once(__DIR__ . '/../logica/DetallesEvento.php');
+require_once(__DIR__ . '/../logica/Factura.php');
 $idEvento = isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0;
 $idDetalle = isset($_GET['idDetalle']) ? intval($_GET['idDetalle']) : 0;
 $cantidadEntradas = isset($_GET['cantidad']) ? intval($_GET['cantidad']) : 0;
 
 echo "Cantidad de entradas: " . $cantidadEntradas; // Verifica si llega el valor correcto
 
-
-
 echo $idEvento;
 echo $idDetalle;
 
 $evento = new Evento();
 $eventoData = $evento->consultarIdEvento($idEvento);
-$detallesEvento = new DetallesEvento();
-$detallesData = $detallesEvento->consultarIdDetalles($idDetalle);
-$valorPorEntrada = $detallesData->getCostoEvento();
-$costoTotal = $cantidadEntradas * $valorPorEntrada;
-
 if (!$eventoData) {
     echo "Evento no encontrado";
     exit;
 }
+$detallesEvento = new DetallesEvento();
+$detallesData = $detallesEvento->consultarIdDetalles($idDetalle);
+$valorPorEntrada = $detallesData->getCostoEvento();
+$subTotal = $cantidadEntradas * $valorPorEntrada;
+$ivaAgregado = $subTotal*0.19;
+$total = $subTotal+$ivaAgregado;
+
 // Obtener fecha actual para la factura
 $fechaFactura = date("Y-m-d");
+$factura = new Factura();
+
 ?>
 
 <!doctype html>
@@ -39,7 +42,10 @@ $fechaFactura = date("Y-m-d");
 </head>
 
 <body>
-    <?php include 'navbar.php'; ?>
+    <?php include 'navbar.php';
+    //$factura -> insertar("'".$fechaFactura."'",$subTotal,$total,$idCliente);
+    echo "  idFactura : ". $factura -> ultimoId(). "   "; 
+    ?>
 
     <div class="container mt-5">
         <div class="invoice-header">
@@ -63,17 +69,17 @@ $fechaFactura = date("Y-m-d");
                         <td><?php echo $eventoData->getNombreEvento() ?></td>
                         <td><?php echo $cantidadEntradas ?></td>
                         <td>$<?php echo $detallesData->getCostoEvento() ?></td>
-                        <td>$<?php echo $costoTotal ?></td>
+                        <td>$<?php echo $subTotal ?></td>
                     </tr>
                 </tbody>
                 <tfoot>
                     <tr>
                         <td colspan="3" class="text-right">IVA (19%):</td>
-                        <td>$<?php echo $ivaAgregado = $costoTotal*0.19 ?></td>
+                        <td>$<?php echo $ivaAgregado?></td>
                     </tr>
                     <tr class="total">
                         <td colspan="3" class="text-right">Total:</td>
-                        <td>$<?php echo $costoTotal+$ivaAgregado ?></td>
+                        <td>$<?php echo $total ?></td>
                     </tr>
                 </tfoot>
             </table>
