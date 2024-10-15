@@ -1,33 +1,31 @@
+<!doctype html>
+<html lang="es">
 
-<html>
 <head>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="css/estilos.css" rel="stylesheet">
 </head>
+
 <body>
 
-	<?php include 'navProveedor.php';?>
+    <?php include 'navProveedor.php'; ?>
 
     <div class="container mt-4">
+        <div class="session-header mb-4">
+            <h4>Bienvenido, proveedor <?php echo $proveedor->getNombre() . " " . $proveedor->getApellido(); ?></h4>
+        </div>
+
         <div class="row justify-content-center">
-			<div class="col">
-				<div class="card border-primary">
-					<div class="card-header text-bg-info">
-						<h4>Sesion proveedor</h4>
-					</div>
-					<div class="card-body">
-						<p>Bienvenido proveedor <?php echo $proveedor -> getNombre() . " " . $proveedor -> getApellido() ?></p>
-					
-					</div>
-				</div>
-			</div>
             <?php
-            $i = 0;
             $eventos = $proveedor->consultarEventos();
-            foreach ($eventos as $temp) {
+            foreach ($eventos as $i => $temp) {
+                if ($i % 4 == 0 && $i != 0) {
+                    echo "</div>";  // Cierra la fila cada cuatro columnas
+                }
+
                 if ($i % 4 == 0) {
                     echo "<div class='row mb-3 justify-content-center'>";
                 }
@@ -50,7 +48,6 @@
                 if ($i % 4 == 3) {
                     echo "</div>";  // Cierra la fila cada cuatro columnas
                 }
-                $i++;
             }
             if ($i % 4 != 0) {
                 echo "</div>";  // Cierra la fila si no es múltiplo de 4
@@ -59,4 +56,5 @@
         </div>
     </div>
 </body>
+
 </html>

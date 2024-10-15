@@ -3,13 +3,13 @@ require_once(__DIR__ . '/../logica/Lugar.php');
 require_once(__DIR__ . '/../logica/Ciudad.php');
 require_once(__DIR__ . '/../logica/Evento.php');
 require_once(__DIR__ . '/../logica/DetallesEvento.php');
+
 $idEvento = isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0;
 
 $evento = new Evento();
 $eventoData = $evento->consultarIdEvento($idEvento);
 $detallesEvento = new DetallesEvento();
 $detallesData = $detallesEvento->consultarDetallesEvento($idEvento);
-echo $idEvento;
 
 if (!$eventoData) {
     echo "Evento no encontrado";
@@ -25,57 +25,53 @@ if (!$eventoData) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo $eventoData->getArtista()->getNombre(); ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="estilos.css" rel="stylesheet">
+    <link href="css/estilos.css" rel="stylesheet">
 </head>
 
 <body>
+    <?php include 'navbar.php'; ?>
 
-    <?php include 'navbar.php' ?>
-
-    <div class="container mt-4">
-
+    <div class="container event-container">
         <?php foreach ($detallesData as $detalle) { ?>
-
             <div class="row align-items-center mb-4">
-                <div class="col-md-4">
-                    <?php echo "<h1>" . $eventoData->getArtista()->getNombre() . "</h1>"; ?>
-                    <img src="imagenes/100.png" alt="Descripción de la imagen" class="img-fluid" style="max-width: 100px; height: auto;">
+                <div class="col-md-4 text-center">
+                    <h1 class="event-header"><?php echo $eventoData->getArtista()->getNombre(); ?></h1>
+                    <img src="imagenes/100.png" alt="Descripción de la imagen" class="img-fluid event-image">
                 </div>
                 <div class="col-md-8">
-                    <?php
-                    echo "<h2>" . $detalle->getLugar()->getNombreLugar()  . "</h2>";
-                    echo "<p>";
-                    echo    "<div class='fs-6'>" . $eventoData->getNombreEvento() . " - " . $detalle->getLugar()->getCiudad()->getNombreCiudad() . "</div>";
-                    $fecha = $detalle->getFechaEvento();
+                    <h2 class="event-header"><?php echo $detalle->getLugar()->getNombreLugar(); ?></h2>
+                    <p class="event-details">
+                        <?php echo "<div class='fs-6'>" . $eventoData->getNombreEvento() . " - " . $detalle->getLugar()->getCiudad()->getNombreCiudad() . "</div>"; ?>
 
-                    if ($fecha) {
-                        $date = new DateTime($fecha);
-                        $dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
-                        $meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+                        <?php
+                        $fecha = $detalle->getFechaEvento();
+                        if ($fecha) {
+                            $date = new DateTime($fecha);
+                            $dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+                            $meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
 
-                        $diaNombre = $dias[$date->format('w')]; // Día de la semana
-                        $dia = $date->format('d'); // Día del mes
-                        $mesNombre = $meses[$date->format('n') - 1]; // Nombre del mes
-                        $anio = $date->format('Y'); // Año
+                            $diaNombre = $dias[$date->format('w')]; // Día de la semana
+                            $dia = $date->format('d'); // Día del mes
+                            $mesNombre = $meses[$date->format('n') - 1]; // Nombre del mes
+                            $anio = $date->format('Y'); // Año
 
-                        $fechaFormateada = "{$diaNombre}, {$dia} de {$mesNombre} de {$anio}";
+                            $fechaFormateada = "{$diaNombre}, {$dia} de {$mesNombre} de {$anio}";
 
-                        echo "<div class='fs-6'>" . $fechaFormateada . "</div>"; // Muestra la fecha en español
-                    } else {
-                        echo "Fecha no disponible.";
-                    }
-                    echo    "<div class='fs-6'>"  . $detalle->getHoraInicioEvento() . "</div>";
-                    echo "</p>";
-                    echo "<button class='btn btn-primary' onclick=\"location.href='compra.php?idEvento=" . $eventoData->getIdEvento() . "&idDetalle=" . $detalle->getIdDetallesEvento() . "'\">Ver evento</button>";
-                    ?>
+                            echo "<div class='fs-6'>" . $fechaFormateada . "</div>"; // Muestra la fecha en español
+                        } else {
+                            echo "Fecha no disponible.";
+                        }
+                        ?>
+
+                        <div class="fs-6"><?php echo $detalle->getHoraInicioEvento(); ?></div>
+                    </p>
+                    <button class="event-btn" onclick="location.href='compra.php?idEvento=<?php echo $eventoData->getIdEvento(); ?>&idDetalle=<?php echo $detalle->getIdDetallesEvento(); ?>'">Ver evento</button>
                 </div>
             </div>
-        <?php
-        }
-        ?>
+        <?php } ?>
+    </div>
 
-        <?php include 'footer.php' ?>
-
+    <?php include 'footer.php'; ?>
 </body>
 
 </html>
