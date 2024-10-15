@@ -1,4 +1,7 @@
 <?php
+
+use PSpell\Config;
+
 require_once(__DIR__ . '/../persistencia/Conexion.php');
 require_once(__DIR__ . '/../persistencia/BoletaDAO.php');
 

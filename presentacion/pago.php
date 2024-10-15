@@ -85,7 +85,7 @@ if (isset($_GET['cantidad'])) {
         ?>
     </div>
 
-    <div class="container mt-5 px-5">
+    <div class="container mt-5">
         <div class="row">
             <!-- Columna para el formulario de detalles de las entradas -->
             <div class="col-md-6"> <!-- Cambié a col-md-6 -->
