@@ -19,6 +19,11 @@ class ArtistaDAO{
                 from Artista
                 where idArtista = '" . $this -> idArtista . "'";
     }
+
+    public function insert($nombre="") {
+        return "INSERT INTO artista (nombre) 
+        VALUES ($nombre)";
+    }
 }
 
 ?>

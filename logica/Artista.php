@@ -49,7 +49,23 @@ class Artista{
         $registro = $conexion -> siguienteRegistro();
         $this -> nombre = $registro[0];
         $conexion -> cerrarConexion();
-    }    
+    }
+    
+    public function insertar($nombre=""){
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $artistaDAO = new ArtistaDAO();
+        
+        try {
+            $query = $artistaDAO->insert($nombre);
+            $conexion->ejecutarConsulta($query);
+            echo "Consulta ejecutada correctamente.";
+        } catch (Exception $e) {
+            echo "Error al ejecutar la consulta: " . $e->getMessage();
+        }
+        
+        $conexion -> cerrarConexion();
+    }
 }
 
 ?>

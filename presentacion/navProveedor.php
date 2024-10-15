@@ -26,6 +26,7 @@ $proveedor -> consultar();
 						aria-expanded="false">Evento</a>
 						<ul class="dropdown-menu">
                             <li><a class='dropdown-item' href='newEvento.php'>Nuevo Evento</a></li>
+							<li><a class='dropdown-item' href='newArtista.php'>Nuevo Artista</a></li>
 						</ul>
 					</li>
 				</ul>
