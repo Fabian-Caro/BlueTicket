@@ -21,6 +21,7 @@ if (!$eventoData) {
     echo "Evento no encontrado";
     exit;
 }
+
 $detallesEvento = new DetallesEvento();
 $detallesData = $detallesEvento->consultarIdDetalles($idDetalle);
 $valorPorEntrada = $detallesData->getCostoEvento();
@@ -42,6 +43,7 @@ $factura = new Factura();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Blue Ticket</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="css/estilos.css" rel="stylesheet">
 </head>
 
 <body>
@@ -66,7 +68,7 @@ $factura = new Factura();
 
         <div class="invoice-details">
             <table class="table table-bordered">
-                <thead>
+                <thead class="table-light">
                     <tr>
                         <th>Producto</th>
                         <th>Cantidad</th>
@@ -97,7 +99,6 @@ $factura = new Factura();
     </div>
 
     <?php include 'footer.php'; ?>
-
 </body>
 
 </html>
