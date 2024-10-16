@@ -1,6 +1,6 @@
 <?php
 
-require_once('./logica/Lugar.php');
+require_once('./logica/Cliente_boleta.php');
 
 ?>
 
@@ -26,9 +26,9 @@ require_once('./logica/Lugar.php');
         <div class="row justify-content-center">
             <?php
             $i = 0;
-            $lugar = new Lugar();
-            $lugares = $lugar->consultarTodos();
-            foreach ($lugares as $temp) {
+            $c_boleta = new Cliente_boleta();
+            $boletas = $c_boleta->consultarBoletas(1);
+            foreach ($boletas as $temp) {
                 if ($i % 4 == 0) {
                     echo "<div class='row mb-3 justify-content-center'>";
                 }
@@ -37,12 +37,12 @@ require_once('./logica/Lugar.php');
 
                 echo "<div class='col-md-4 mb-4 $paddingClass'>";
                 echo "<div class='card' style='width: 100%; background-color: #0033cc;'>";
-                echo "<a href='evento.php?idEvento=" . $temp->getIdLugar() . "' style='text-decoration: none; color: inherit;'>";
+                echo "<a href='evento.php?idEvento=" . $temp->getNombreCliente() . "' style='text-decoration: none; color: inherit;'>";
                 echo "<img src='imagenes/evento_categoria_concierto.jpeg' class='card-img-top' style='height: 300px;'>";
                 echo "<div class='card-body'>";
-                echo "<h5 class='card-title' style='color: white;'>" . $temp->getNombreLugar() . "</h5>";
-                echo "<p class='card-text' style='color: white;'>Direccion: " . $temp->getDireccionLugar() . "</p>";
-                echo "<p class='card-text' style='color: white;'>Ciudad: " . $temp->getCiudad()->getNombreCiudad() . "</p>";
+                echo "<h5 class='card-title' style='color: white;'>" . $temp->getNombreUsuario() . "</h5>";
+                echo "<p class='card-text' style='color: white;'>: " . $temp->getNombreEvento() . "</p>";
+                echo "<p class='card-text' style='color: white;'>: " . $temp->getFecha() . "</p>";
                 echo "</div>";
                 echo "</a>";
                 echo "</div>";

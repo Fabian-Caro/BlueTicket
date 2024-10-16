@@ -26,6 +26,17 @@ class ClienteDAO{
                 from Cliente
                 where idCliente = '" . $this -> idCliente . "'";
     }
+
+    public function consultarBoletas(){
+        return "SELECT b.idFactura, c.nombre, c.apellido, b.nombre_usuario, e.nombre, d.fecha, f.idCliente 
+                FROM boleta b 
+                JOIN factura f ON b.idFactura = f.idFactura 
+                JOIN cliente c ON f.idCliente = c.idCliente
+                JOIN detalle_evento d ON b.idDetalle = d.idDetalle 
+                JOIN evento e ON d.idEvento = e.idEvento
+                WHERE f.idCliente = ".$this->idCliente;
+
+    }
 }
 
 ?>
