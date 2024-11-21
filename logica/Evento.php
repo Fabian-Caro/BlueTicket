@@ -144,9 +144,8 @@ class Evento{
         try {
             $query = $eventoDAO->insert($nombre, $idProveedor,$idCategoria,$idArtista);
             $conexion->ejecutarConsulta($query);
-            echo "Consulta ejecutada correctamente.";
         } catch (Exception $e) {
-            echo "Error al ejecutar la consulta: " . $e->getMessage();
+            $e->getMessage();
         }
         
         $conexion -> cerrarConexion();

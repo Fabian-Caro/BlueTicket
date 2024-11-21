@@ -11,20 +11,12 @@ require_once(__DIR__ . '/../logica/Evento.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Blue Ticket</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="estilos.css" rel="stylesheet">
+    <link href="css/estilos.css" rel="stylesheet">
 </head>
 
 <body>
-    <?php 
-    include 'navbar.php';
-    ?>
-    <div class="container mt-4">
-        <div class="justify-content-center">
-            <a href="evento.php" class="d-block">
-                <img src="https://images3.alphacoders.com/134/1342988.png" alt="Descripción de la imagen" class="img-fluid" style="width: 100%; height: auto; max-height: 200px;">
-            </a>
-        </div>
-    </div>
+
+    <?php include 'navbar.php'; ?>
 
     <div class="container mt-4">
         <div class="row justify-content-center">

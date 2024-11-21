@@ -1,0 +1,156 @@
+/* Reset y configuración inicial */
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: #f8f9fa; /* Fondo del body */
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1;
+}
+
+/* Footer */
+footer {
+    position: relative;
+    bottom: 0; 
+    width: 100%; 
+}
+
+/* Estilos generales */
+ul {
+    list-style-type: none; /* Elimina los puntos de la lista */
+    padding-left: 0; /* Opcional: elimina el espacio de sangría predeterminado */
+}
+
+.inputbox i {
+    position: absolute;
+    top: 13px;
+    right: 8px;
+    transition: 0.5s;
+    color: #3F51B5;
+}
+
+/* Encabezados de sesión */
+.session-header {
+    background-color: #0033cc;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+/* Tarjetas */
+.card {
+    transition: transform 0.2s; /* Añadir transición */
+}
+
+.card:hover {
+    transform: scale(1.05); /* Aumentar el tamaño al pasar el ratón */
+}
+
+/* Contenedores de formularios */
+.form-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+    color: #343a40;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #495057;
+}
+
+.form-check-label {
+    margin-left: 10px;
+}
+
+/* Botones */
+.submit-btn,
+.event-btn {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover,
+.event-btn:hover {
+    background-color: #0056b3; /* Color al pasar el ratón */
+}
+
+/* Contenedores de eventos */
+.event-container {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.event-header {
+    font-size: 1.5rem;
+    color: #343a40;
+    font-weight: bold;
+}
+
+.event-details {
+    font-size: 1rem;
+    color: #495057;
+}
+
+.event-image {
+    max-width: 100px;
+    height: auto;
+}
+
+/* Facturas */
+.invoice-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.invoice-details {
+    margin-top: 2rem;
+}
+
+.total {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Colores adicionales */
+.yellow {
+    color: #FFC107; /* Color amarillo */
+}
+
+.card-blue {
+    background-color: #007BFF; /* Color de fondo azul */
+    color: white; /* Texto blanco */
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .form-container {
+        margin: 20px; /* Espaciado menor en pantallas pequeñas */
+    }
+
+    .event-container {
+        padding: 10px; /* Espaciado menor en pantallas pequeñas */
+    }
+
+    .session-header {
+        padding: 0.5rem; /* Menor padding en pantallas pequeñas */
+    }
+}

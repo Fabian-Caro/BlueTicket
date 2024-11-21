@@ -77,6 +77,31 @@ class Factura {
         $this->cliente = $cliente;
     }
 
+    public function consultarTodos () {
+        $clientes = array();
+        $facturas = array();
+
+        $conexion = new Conexion();
+        $conexion->abrirConexion();
+        $facturaDAO = new FacturaDAO();
+        $conexion->ejecutarConsulta($facturaDAO->consultarTodos());
+        while($registro = $conexion->siguienteRegistro()) {
+            $clientes = null;
+
+            if(array_keys($registro[4], $clientes)) {
+                $cliente = $clientes[$registro[4]];
+            }
+            else {
+                $cliente = new Cliente($registro[4]);
+                $cliente->consultar();
+                $clientes[$registro[4]] = $cliente;
+            }
+
+            $factura = new Factura($registro[0], $registro[1], $registro[2], $registro[3], $cliente);
+            array_push($facturas, $factura);
+        }
+    }
+
     public function ultimoId(){
         $conexion = new Conexion();
         $conexion -> abrirConexion();
@@ -90,6 +115,7 @@ class Factura {
         }
         return $registro[0];
     }
+
     public function insertar($fecha="",$valor_subtotal=0,$valor_total=0,$idCliente=0){
         $conexion = new Conexion();
         $conexion -> abrirConexion();
@@ -98,13 +124,27 @@ class Factura {
         try {
             $query = $facturaDAO->insert($fecha, $valor_subtotal,$valor_total,$idCliente);
             $conexion->ejecutarConsulta($query);
-            echo "Consulta ejecutada correctamente.";
         } catch (Exception $e) {
-            echo "Error al ejecutar la consulta: " . $e->getMessage();
+            $e->getMessage();
         }
         
         $conexion -> cerrarConexion();
     }
+
+    public function consultar(){
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $facturaDAO = new FacturaDAO($this->idFactura);
+        $conexion->ejecutarConsulta($facturaDAO->consultar());
+        $registro = $conexion->siguienteRegistro();
+        $this->fecha = $registro[0];
+        $this->valorSubtotal = $registro[1];
+        $this->valorTotal = $registro[2];
+        $cliente = new Cliente($registro[3]);
+        $cliente->consultar();
+        $this->cliente = $cliente;
+        $conexion -> cerrarConexion();
+    } 
 }
 
 ?>

@@ -173,8 +173,6 @@ class DetallesEvento {
         $conexion = new Conexion();
         $conexion->abrirConexion();
         $detallesEventoDAO = new DetallesEventoDAO();
-
-        echo "en DTO" . $idDetalle;
         
         $conexion->ejecutarConsulta($detallesEventoDAO->consultarIdDetallesEvento($idDetalle));
         
@@ -202,9 +200,8 @@ class DetallesEvento {
         try {
             $query = $detalleEventoDAO->insert($fecha,$horaInicio,$horaFinal,$costo,$aforo,$idLugar,$idEvento);
             $conexion->ejecutarConsulta($query);
-            echo "Consulta ejecutada correctamente.";
         } catch (Exception $e) {
-            echo "Error al ejecutar la consulta: " . $e->getMessage();
+            $e->getMessage();
         }
         
         $conexion -> cerrarConexion();
