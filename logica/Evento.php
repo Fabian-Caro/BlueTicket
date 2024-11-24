@@ -134,6 +134,12 @@ class Evento{
         $conexion->ejecutarConsulta($eventoDAO->consultar());
         $registro = $conexion->siguienteRegistro();
         $this->nombreEvento = $registro[0];
+        $categoria = new Categoria($registro[2]);
+        $categoria->consultar();
+        $this->categoria = $categoria;
+        $artista = new Artista($registro[3]);
+        $artista->consultar();
+        $this->artista = $artista;
         $conexion -> cerrarConexion();
     }
     public function insertar($nombre="",$idProveedor=0,$idCategoria=0,$idArtista=0){

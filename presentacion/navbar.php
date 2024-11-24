@@ -78,6 +78,7 @@ require_once(__DIR__ . '/../logica/Cliente.php');
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class='dropdown-item' href='boleteria.php'>Historial</a></li>
+                            <li><a class='dropdown-item' href='Carro.php'>Carro</a></li>
                             <li><a class='dropdown-item' href='index.php?cerrarSesion=true'>Cerrar Sesion</a></li>
                         </ul>
                     </li>

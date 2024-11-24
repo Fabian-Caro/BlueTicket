@@ -18,7 +18,7 @@ class EventoDAO{
     }
 
     public function consultar() {
-        return "SELECT nombre FROM evento WHERE idEvento ='" . $this->idEvento . "'";
+        return "SELECT nombre, idProveedor, idCategoria, idArtista FROM evento WHERE idEvento ='" . $this->idEvento . "'";
     }
     
     public function insert($nombre="",$idProveedor=0,$idCategoria=0,$idArtista=0) {

@@ -22,6 +22,10 @@ class DetallesEventoDAO {
         $this->idEvento = $idEvento;        
     }
 
+    public function consultar() {
+        return "SELECT idDetalle, fecha, hora_inicio, hora_final, costo, aforo, idLugar, idEvento FROM detalle_evento
+                where idDetalle = ". $this->idDetallesEvento.";";
+    }
     public function consultarTodos() {
         return "SELECT idDetalle, fecha, hora_inicio, hora_final, costo, aforo, idLugar, idEvento FROM detalle_evento";
     }
