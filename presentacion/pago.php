@@ -47,7 +47,8 @@ if (isset($_GET['cantidad'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Blue Ticket</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="css/estilos.css" rel="stylesheet">
 </head>
 
@@ -57,7 +58,8 @@ if (isset($_GET['cantidad'])) {
 
     <div class="container mt-4">
         <div class="text-center">
-            <h1 class="fs-1"><?php echo $eventoData->getArtista()->getNombre() . ": " . $eventoData->getNombreEvento(); ?></h1>
+            <h1 class="fs-1">
+                <?php echo $eventoData->getArtista()->getNombre() . ": " . $eventoData->getNombreEvento(); ?></h1>
             <p class="fs-6 text-muted"><?php echo $detallesData->getLugar()->getCiudad()->getNombreCiudad(); ?></p>
         </div>
 
@@ -87,45 +89,72 @@ if (isset($_GET['cantidad'])) {
     <div class="container mt-5">
         <div class="row">
             <!-- Columna para el formulario de detalles de las entradas -->
-            <div class="col-md-6"> <!-- Cambié a col-md-6 -->
+            <div class="col-md-6">
+                <!-- Cambié a col-md-6 -->
                 <div class="d-flex justify-content-center mt-3">
-                    <form action="factura.php" method="GET" class="container">
+                    <form id="formulario" action="factura.php" method="GET" class="container">
                         <h4 class="text-center mb-4">Detalles de las Entradas</h4>
                         <?php
-                        for ($i = 1; $i <= $cantidadEntradas; $i++) {
-                            echo '
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-8 offset-md-2">
-                                <div class="input-group">
-                                    <span class="input-group-text">Nombre ' . $i . '</span>
-                                    <input type="text" class="form-control" name="nombres[]" placeholder="Nombre" required>
-                                </div>
-                            </div>
-                        </div>';
-                        }
-                        ?>
+                for ($i = 1; $i <= $cantidadEntradas; $i++) {
+                    echo '
+                <div class="row g-3 mb-3">
+                    <div class="col-md-8 offset-md-2">
+                        <div class="input-group">
+                            <span class="input-group-text">Nombre ' . $i . '</span>
+                            <input type="text" class="form-control" name="nombres[]" placeholder="Nombre" required>
+                        </div>
+                    </div>
+                </div>';
+                }
+                ?>
                         <!-- Campos ocultos para datos adicionales -->
                         <input type="hidden" name="idEvento" value="<?php echo $eventoData->getIdEvento(); ?>">
-                        <input type="hidden" name="idDetalle" value="<?php echo $detallesData->getIdDetallesEvento(); ?>">
+                        <input type="hidden" name="idDetalle"
+                            value="<?php echo $detallesData->getIdDetallesEvento(); ?>">
                         <input type="hidden" name="cantidad" value="<?php echo $cantidadEntradas; ?>">
                         <input type="hidden" name="aforo" value="<?php echo $aforo; ?>">
-                        <!-- Botón para pagar -->
+
+                        <!-- Botones -->
                         <div class="row mt-4">
+                            <!-- Botón para pagar -->
                             <div class="col-md-8 offset-md-2">
-                                <button type="submit" class="btn btn-primary btn-lg w-100">Pagar</button>
+                                <button type="submit" onclick="cambiarDireccion('factura.php')"
+                                    class="btn btn-primary btn-lg w-100">
+                                    Pagar
+                                </button>
+                            </div>
+                            <!-- Botón para Carro -->
+                            <div class="col-md-8 offset-md-2">
+                                <button type="button" onclick="cambiarDireccion('Carro.php')"
+                                    class="btn btn-secondary btn-lg w-100">
+                                    Carro
+                                </button>
                             </div>
                         </div>
                     </form>
+
+                    <script>
+                    function cambiarDireccion(url) {
+                        const form = document.getElementById('formulario');
+                        form.action = url; // Cambiamos el atributo action
+                        form.submit(); // Enviamos el formulario
+                    }
+                    </script>
+
                 </div>
             </div>
 
             <!-- Columna para la tarjeta de información del evento -->
-            <div class="col-md-6"> <!-- Cambié a col-md-6 -->
+            <div class="col-md-6">
+                <!-- Cambié a col-md-6 -->
                 <div class="card card-blue p-3 text-black mb-3 text-center">
                     <div class="d-flex justify-content-center">
-                        <img src="imagenes/100.png" alt="Descripción de la imagen" class="img-fluid mb-2" style="max-width: 100px;">
+                        <img src="imagenes/100.png" alt="Descripción de la imagen" class="img-fluid mb-2"
+                            style="max-width: 100px;">
                     </div>
-                    <h2 class="fs-5"><?php echo $eventoData->getNombreEvento() . " - " . $detallesData->getLugar()->getCiudad()->getNombreCiudad(); ?></h2>
+                    <h2 class="fs-5">
+                        <?php echo $eventoData->getNombreEvento() . " - " . $detallesData->getLugar()->getCiudad()->getNombreCiudad(); ?>
+                    </h2>
                     <h4 class='yellow mb-0'><?php echo number_format($costoTotal, 2); ?></h4>
                     <?php
                     $fecha = $detallesData->getFechaEvento();
@@ -152,7 +181,9 @@ if (isset($_GET['cantidad'])) {
     </div>
 
     <?php include 'footer.php' ?>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-4cGFmA9Im4u9OFt8S1rfqESzO5xR7KZGtYt7Lk1AaeoafIYGf1VGzF2dEXKxJwdr" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-4cGFmA9Im4u9OFt8S1rfqESzO5xR7KZGtYt7Lk1AaeoafIYGf1VGzF2dEXKxJwdr" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

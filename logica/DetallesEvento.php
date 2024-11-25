@@ -91,6 +91,25 @@ class DetallesEvento {
         $this->evento = $evento;        
     }
 
+    public function consultar(){
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $detalleDAO = new DetallesEventoDAO($this->idDetallesEvento);
+        $conexion->ejecutarConsulta($detalleDAO->consultar());
+        $registro = $conexion->siguienteRegistro();
+        $this->idDetallesEvento = $registro[0];
+        $this->fechaEvento = $registro[1];
+        $this->horaInicioEvento = $registro[2];
+        $this->horaFinEvento = $registro[3];
+        $this->costoEvento = $registro[4];
+        $lugar = new Lugar($registro[6]);
+        $lugar->consultar();
+        $this->lugar = $lugar;
+        $evento = new Evento($registro[7]);
+        $evento->consultar();
+        $this->evento = $evento;
+        $conexion -> cerrarConexion();
+    } 
     public function consultarTodos() {
         $lugaresEvento = array();
         $eventos = array();

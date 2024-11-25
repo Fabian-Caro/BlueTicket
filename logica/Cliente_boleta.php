@@ -84,7 +84,6 @@ class Cliente_boleta{
         $conexion -> abrirConexion();
         $clienteDAO = new ClienteDAO($idCliente);
         $conexion -> ejecutarConsulta($clienteDAO -> consultarBoletas());
-
         $boletas = array();
         while($registro = $conexion -> siguienteRegistro()){
             $boleta = new Cliente_boleta($registro[0], $registro[1], $registro[2], $registro[3],$registro[4],$registro[5],$registro[6]);
