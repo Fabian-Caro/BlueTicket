@@ -1,39 +1,3 @@
-<?php
-session_start();
-
-require_once(__DIR__ . '/../logica/Cliente.php');
-require_once(__DIR__ . '/../logica/Proveedor.php');
-
-$error = false;
-$paginaAnterior = isset($_GET['paginaAnterior']) ? $_GET['paginaAnterior'] : 'index.php';
-
-if ($paginaAnterior == "evento.php") {
-	$paginaAnterior .= "?idEvento=" . urlencode($_SESSION["idEvento"]);
-} else if ($paginaAnterior == 'compra.php') {
-	$paginaAnterior .= "?idEvento=" . urlencode($_SESSION["idEvento"]) . "&idDetalle=" . urlencode($_SESSION["idDetalle"]);
-} else if ($paginaAnterior == 'pago.php') {
-	$paginaAnterior .= "?idEvento=" . urlencode($_SESSION["idEvento"]) . "&idDetalle=" . urlencode($_SESSION["idDetalle"]) . "&cantidad=" . urlencode($_SESSION["cantidad"]) . "&aforo=" . urlencode($_SESSION["aforo"]);
-}
-if (isset($_POST["autenticar"])) {
-	if ($paginaAnterior != 'sesionProveedor.php') {
-		$cliente = new Cliente(null, null, null, $_POST["correo"], $_POST["clave"]);
-		if ($cliente->autenticar()) {
-			$_SESSION["idCliente"] = $cliente->getIdCliente();
-			header("Location: $paginaAnterior");
-		} else {
-			$error = true;
-		}
-	} else {
-		$proveedor = new Proveedor(null, null, null, $_POST["correo"], $_POST["clave"]);
-		if ($proveedor->autenticar()) {
-			$_SESSION["idProveedor"] = $proveedor->getIdProveedor();
-			header("Location: $paginaAnterior");
-		} else {
-			$error = true;
-		}
-	}
-}
-?>
 <html>
 
 <head>
@@ -46,6 +10,45 @@ if (isset($_POST["autenticar"])) {
 </head>
 
 <body>
+	<header>
+		<?php include 'navbar.php' ?>
+	</header>
+
+	<?php
+	require_once(__DIR__ . '/../logica/Cliente.php');
+	require_once(__DIR__ . '/../logica/Proveedor.php');
+
+	$error = false;
+	$paginaAnterior = isset($_GET['paginaAnterior']) ? $_GET['paginaAnterior'] : 'index.php';
+
+	if ($paginaAnterior == "evento.php") {
+		$paginaAnterior .= "?idEvento=" . urlencode($_SESSION["idEvento"]);
+	} else if ($paginaAnterior == 'compra.php') {
+		$paginaAnterior .= "?idEvento=" . urlencode($_SESSION["idEvento"]) . "&idDetalle=" . urlencode($_SESSION["idDetalle"]);
+	} else if ($paginaAnterior == 'pago.php') {
+		$paginaAnterior .= "?idEvento=" . urlencode($_SESSION["idEvento"]) . "&idDetalle=" . urlencode($_SESSION["idDetalle"]) . "&cantidad=" . urlencode($_SESSION["cantidad"]) . "&aforo=" . urlencode($_SESSION["aforo"]);
+	}
+	if (isset($_POST["autenticar"])) {
+		if ($paginaAnterior != 'sesionProveedor.php') {
+			$cliente = new Cliente(null, null, null, $_POST["correo"], $_POST["clave"]);
+			if ($cliente->autenticar()) {
+				$_SESSION["idCliente"] = $cliente->getIdCliente();
+				header("Location: $paginaAnterior");
+			} else {
+				$error = true;
+			}
+		} else {
+			$proveedor = new Proveedor(null, null, null, $_POST["correo"], $_POST["clave"]);
+			if ($proveedor->autenticar()) {
+				$_SESSION["idProveedor"] = $proveedor->getIdProveedor();
+				header("Location: $paginaAnterior");
+			} else {
+				$error = true;
+			}
+		}
+	}
+	?>
+
 	<div class="container">
 		<div class="row mt-5">
 			<div class="col-4"></div>
@@ -65,17 +68,20 @@ if (isset($_POST["autenticar"])) {
 								<input type="password" name="clave" class="form-control" placeholder="Clave">
 							</div>
 							<button type="submit" name="autenticar" class="btn btn-primary">Iniciar Sesion</button>
-							<?php if ($error) { ?>
+							<?php if ($error) : ?>
 								<div class="alert alert-danger mt-3" role="alert">
 									Error de correo o clave
 								</div>
-							<?php } ?>
+							<?php endif ?>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<footer>
+		<?php include 'footer.php' ?>
+	</footer>
 </body>
 
 </html>

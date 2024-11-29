@@ -15,6 +15,12 @@ class ClienteDAO{
         $this -> correo = $correo;
         $this -> clave = $clave;
     }
+
+    public function insertar($nombre, $apellido, $correo, $clave) {
+        $sentenciaSQL = "INSERT INTO cliente (nombre, apellido, correo, clave) VALUES ('$nombre', '$apellido', '$correo', $clave)";
+        return $sentenciaSQL;
+    }
+
     public function autenticar(){
         return "select idCliente
                 from Cliente 
@@ -22,9 +28,11 @@ class ClienteDAO{
     }
     
     public function consultar(){
-        return "select nombre, apellido, correo
-                from Cliente
-                where idCliente = '" . $this -> idCliente . "'";
+        $sentenciaSQL = "SELECT idCliente, nombre, apellido, correo
+                FROM cliente
+                WHERE idCliente = '" . $this -> idCliente . "'";
+        return $sentenciaSQL;
+
     }
 
     public function consultarBoletas(){

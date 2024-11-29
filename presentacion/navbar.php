@@ -60,7 +60,7 @@ require_once(__DIR__ . '/../logica/Cliente.php');
                         <a href="iniciarSesion.php?paginaAnterior=sesionProveedor.php" class="nav-link">Iniciar Sesión Proveedor</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Registrarse</a>
+                        <a class="nav-link" href="registrarCliente.php">Registrarse</a>
                     </li>
                 </ul>
             <?php
