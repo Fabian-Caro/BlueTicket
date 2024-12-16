@@ -73,7 +73,6 @@ class Proveedor{
         $conexion -> abrirConexion();
         $proveedorDAO = new ProveedorDAO(null, null, null, $this -> correo, $this -> clave);
         $conexion -> ejecutarConsulta($proveedorDAO -> autenticar());
-        echo $proveedorDAO -> autenticar();
         if($conexion -> numeroFilas() == 0){
             $conexion -> cerrarConexion();
             return false;
@@ -83,6 +82,15 @@ class Proveedor{
             $conexion -> cerrarConexion();
             return true;
         }
+    }
+
+    public function registrar($nombre, $apellido, $correo, $clave) {
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $proveedorDAO = new ProveedorDAO();
+        $conexion -> ejecutarConsulta($proveedorDAO->insertar($nombre, $apellido, $correo, $clave));
+        $conexion -> cerrarConexion();
+        return true;
     }
     
     public function consultar(){

@@ -18,8 +18,9 @@ class LugarDAO {
         return "SELECT nombre,direccion,idCiudad FROM lugar WHERE idLugar ='" . $this->idLugar . "'";
     }
 
-    public function insert($nombreLugar="", $direccionLugar="", $idCiudad=0) {
-        return "INSERT INTO lugar (nombre, direccion, idCiudad) VALUES ($nombreLugar, $direccionLugar, $idCiudad)";
+    public function insert($nombreLugar="", $direccionLugar="", $capacidadMaximaLugar = "", $idCiudad=0) {
+        $sentenciaSQL = "INSERT INTO lugar (nombre, direccion, capacidad_maxima, idCiudad) VALUES ($nombreLugar, $direccionLugar, $capacidadMaximaLugar, $idCiudad)";
+        return $sentenciaSQL;
     }
 }
 

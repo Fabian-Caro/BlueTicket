@@ -26,12 +26,13 @@ require_once(__DIR__ . '/../logica/Evento.php');
             $eventos = $evento->consultarTodos();
             foreach ($eventos as $temp) {
                 if ($i % 4 == 0) {
-                    echo "<div class='row mb-3 justify-content-center'>";
+                    if ($i > 0) {
+                        echo "</div>"; // Cierra la fila anterior
+                    }
+                    echo "<div class='row mb-3 justify-content-center'>"; // Abre una nueva fila
                 }
 
-                $paddingClass = ($i % 4 == 1) ? 'px-2' : 'p-0';
-
-                echo "<div class='col-md-4 mb-4 $paddingClass'>";
+                echo "<div class='col-md-3 mb-4'>"; // Siempre usa col-md-3 para 4 columnas por fila
                 echo "<div class='card' style='width: 100%; background-color: #0033cc;'>";
                 echo "<a href='evento.php?idEvento=" . $temp->getIdEvento() . "' style='text-decoration: none; color: inherit;'>";
                 echo "<img src='imagenes/evento_categoria_concierto.jpeg' class='card-img-top' style='height: 300px;'>";
@@ -44,15 +45,13 @@ require_once(__DIR__ . '/../logica/Evento.php');
                 echo "</div>";
                 echo "</div>";
 
-                if ($i % 4 == 3) {
-                    echo "</div>";  // Cierra la fila cada cuatro columnas
-                }
                 $i++;
             }
             if ($i % 4 != 0) {
-                echo "</div>";  // Cierra la fila si no es múltiplo de 4
+                echo "</div>"; // Cierra la última fila si no está completa
             }
             ?>
+
         </div>
     </div>
 

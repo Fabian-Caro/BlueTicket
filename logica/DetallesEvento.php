@@ -80,7 +80,7 @@ class DetallesEvento {
     }
 
 
-    public function __construct($idDetallesEvento=0, $fechaEvento="", $horaInicioEvento="", $horaFinEvento="", $costoEvento=0, $aforoEvento=0, $lugar=null, $evento=null) {
+    public function __construct($idDetallesEvento=0, $fechaEvento="", $horaInicioEvento="", $horaFinEvento="", $costoEvento=0, $aforoEvento=0, $lugar="", $evento="") {
         $this->idDetallesEvento = $idDetallesEvento;
         $this->fechaEvento = $fechaEvento;
         $this->horaInicioEvento = $horaInicioEvento;

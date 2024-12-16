@@ -1,11 +1,11 @@
 <?php
-require_once('../logica/Cliente.php');
+require_once('../../logica/Cliente.php');
 
 if (isset($_POST['registrar'])) {
     $nombre = $_POST['nombre'];
     $apellido = $_POST['apellido'];
     $correo = $_POST['correo'];
-    $clave = $_POST['clave'];
+    $clave = md5($_POST['clave']);
 
     $cliente = new Cliente(null, $nombre, $apellido, $correo, $clave);
 
@@ -16,7 +16,7 @@ if (isset($_POST['registrar'])) {
                 Registro completado
                 </div>";
       
-        header("Location: index.php");
+        header("Location: ../index.php");
         exit();
     } else {
         echo "error al registrar al cliente.";
@@ -36,14 +36,14 @@ if (isset($_POST['registrar'])) {
 
 <body>
 
-    <?php include 'navbar.php'; ?>
+    <?php include '../navbar.php'; ?>
 
     <div class="container vh-100 d-flex justify-content-center align-items-center">
         <div class="row">
             <div class="col-md-12">
                 <div class="card border-primary">
                     <div class="card-header text-bg-info text-center">
-                        <h4>Registrar Cliente</h4>
+                        <h4>Registro</h4>
                     </div>
                     <div class="card-body">
                         <form method="post" action="registrarCliente.php">
@@ -59,15 +59,16 @@ if (isset($_POST['registrar'])) {
                             <div class="mb-3">
                                 <input type="password" name="clave" class="form-control" placeholder="Clave" required>
                             </div>
-                            <button type="submit" name="registrar" class="btn btn-info w-100">Registrar Cliente</button>
+                            <button type="submit" name="registrar" class="btn btn-info w-100">Registrarse</button>
                         </form>
+                        <a href="/proveedor/registrarProveedor.php" class="d-block text-center mt-3">Registrarse como proveedor</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <?php include 'footer.php' ?>
+    <?php include '../footer.php' ?>
 </body>
 
 </html>

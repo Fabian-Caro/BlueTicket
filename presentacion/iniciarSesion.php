@@ -28,22 +28,19 @@
 	} else if ($paginaAnterior == 'pago.php') {
 		$paginaAnterior .= "?idEvento=" . urlencode($_SESSION["idEvento"]) . "&idDetalle=" . urlencode($_SESSION["idDetalle"]) . "&cantidad=" . urlencode($_SESSION["cantidad"]) . "&aforo=" . urlencode($_SESSION["aforo"]);
 	}
+
 	if (isset($_POST["autenticar"])) {
-		if ($paginaAnterior != 'sesionProveedor.php') {
-			$cliente = new Cliente(null, null, null, $_POST["correo"], $_POST["clave"]);
+		$proveedor = new Proveedor(null, null, null, $_POST["correo"], md5($_POST["clave"]));
+		if ($proveedor->autenticar()) {
+			$_SESSION["idProveedor"] = $proveedor->getIdProveedor();
+			header("Location: sesionProveedor.php");
+		} else {
+			$cliente = new Cliente(null, null, null, $_POST["correo"], md5($_POST["clave"]));
 			if ($cliente->autenticar()) {
 				$_SESSION["idCliente"] = $cliente->getIdCliente();
 				header("Location: $paginaAnterior");
 			} else {
-				$error = true;
-			}
-		} else {
-			$proveedor = new Proveedor(null, null, null, $_POST["correo"], $_POST["clave"]);
-			if ($proveedor->autenticar()) {
-				$_SESSION["idProveedor"] = $proveedor->getIdProveedor();
-				header("Location: $paginaAnterior");
-			} else {
-				$error = true;
+				$error = "Error de correo o clave";
 			}
 		}
 	}
@@ -68,11 +65,11 @@
 								<input type="password" name="clave" class="form-control" placeholder="Clave">
 							</div>
 							<button type="submit" name="autenticar" class="btn btn-primary">Iniciar Sesion</button>
-							<?php if ($error) : ?>
-								<div class="alert alert-danger mt-3" role="alert">
-									Error de correo o clave
-								</div>
-							<?php endif ?>
+							<?php if ($error) : 
+								echo "<div class='alert alert-danger mt-3' role='alert'>";
+								echo $error;
+								echo "</div>";
+							endif ?>
 						</form>
 					</div>
 				</div>

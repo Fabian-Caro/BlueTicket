@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . '/../logica/Lugar.php');
 require_once(__DIR__ . '/../logica/DetallesEvento.php');
+require_once(__DIR__ . '/../logica/Zona.php');
 $idEvento = isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0;
 ?>
 
@@ -43,6 +44,17 @@ $idEvento = isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0;
             <div class="mb-3">
                 <label for="horaFinal" class="form-label">Hora de Finalización</label>
                 <input type="time" class="form-control" id="horaFinal" name="horaFinal" required>
+            </div>
+
+            <div class="mb-3">
+                <?php
+                $i = 0;
+                $zona = new Zona();
+                $zonas = $zona -> consultarZonas();
+                foreach ($zonas as $temp) {
+                    echo "<span>" . $temp -> getNombreZona() . "</span><br>";
+                }
+                ?>
             </div>
 
             <div class="mb-3">
