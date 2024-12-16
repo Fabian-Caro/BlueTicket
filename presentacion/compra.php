@@ -48,7 +48,7 @@ if (!$eventoData) {
                         <input type="hidden" name="aforo" value="<?php echo $detallesData->getAforoEvento(); ?>">
                         <div class="d-flex justify-content-center align-items-center mb-3">
                             <label for="contador" class="me-2">Cantidad de entradas:</label>
-                            <input type="number" name="cantidad" id="contador" class="form-control" value="1" min="1" max="<?php echo $detallesData->getAforoEvento(); ?>" style="width: 100px;" required>
+                            <input type="number" name="cantidad" id="contador" class="form-control" value="" min="1" max="<?php echo $detallesData->getAforoEvento(); ?>" style="width: 100px;" required>
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary">Continuar</button>

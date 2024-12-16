@@ -7,6 +7,7 @@ class Lugar {
     private $idLugar;
     private $nombreLugar;
     private $direccionLugar;
+    private $capacidadMaximaLugar;
     private $ciudad;
 
     public function getIdLugar() {
@@ -33,6 +34,14 @@ class Lugar {
         $this->direccionLugar = $direccionLugar;
     }
 
+    public function getCapacidadMaximaLugar () {
+        return $this -> capacidadMaximaLugar;
+    }
+
+    public function setCapacidadMaximaLugar ($capacidadMaximaLugar) {
+        $this -> capacidadMaximaLugar = $capacidadMaximaLugar;
+    }
+
     public function getCiudad() {
         return $this->ciudad;
     }
@@ -41,10 +50,11 @@ class Lugar {
         $this->ciudad = $ciudad;
     }
 
-    public function __construct($idLugar = 0, $nombreLugar = "", $direccionLugar = "", $ciudad = null) {
+    public function __construct($idLugar = 0, $nombreLugar = "", $direccionLugar = "", $capacidadMaximaLugar = "", $ciudad = null) {
         $this->idLugar = $idLugar;
         $this->nombreLugar = $nombreLugar;
         $this->direccionLugar = $direccionLugar;
+        $this -> capacidadMaximaLugar = $capacidadMaximaLugar;
         $this->ciudad = $ciudad;
     }
 
@@ -90,13 +100,13 @@ class Lugar {
         $conexion -> cerrarConexion();
     } 
 
-    public function insertar($nombreLugar="", $direccionLugar="", $idCiudad=0){
+    public function insertar($nombreLugar="", $direccionLugar="", $capacidadMaximaLugar = "", $idCiudad=0){
         $conexion = new Conexion();
         $conexion -> abrirConexion();
         $lugarDAO = new LugarDAO();
         
         try {
-            $query = $lugarDAO->insert($nombreLugar, $direccionLugar, $idCiudad);
+            $query = $lugarDAO->insert($nombreLugar, $direccionLugar, $capacidadMaximaLugar, $idCiudad);
             $conexion->ejecutarConsulta($query);
         } catch (Exception $e) {
             $e->getMessage();

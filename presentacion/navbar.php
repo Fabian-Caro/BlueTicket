@@ -1,6 +1,9 @@
 <?php
-$paginaAnterior = basename($_SERVER['PHP_SELF']);
-
+echo basename($_SERVER['PHP_SELF']);
+$paginaAnterior = $_SERVER['REQUEST_URI'];
+if (basename(parse_url($paginaAnterior, PHP_URL_PATH)) === 'iniciarSesion.php') {
+    $paginaAnterior = '/index.php'; // Cambiar a una página base para evitar bucles
+}
 session_start();
 
 if ($paginaAnterior == "evento.php") {
@@ -15,7 +18,7 @@ if ($paginaAnterior == "evento.php") {
     $_SESSION["aforo"] = isset($_GET['aforo']) ? intval($_GET['aforo']) : 0;
 
     if (!isset($_SESSION["idCliente"])) {
-        header("Location: iniciarSesion.php?paginaAnterior=pago.php");
+        header("Location: iniciarSesion.php?paginaAnterior=" . $paginaAnterior);
     }
 }
 
@@ -36,8 +39,8 @@ require_once(__DIR__ . '/../logica/Cliente.php');
 </head>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.php">
-            <img src="imagenes/logo.webp" style="width: 30px; height: 30px;" alt="Logo">
+        <a class="navbar-brand" href="../index.php">
+            <img src="../imagenes/logo.webp" style="width: 30px; height: 30px;" alt="Logo">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -54,13 +57,10 @@ require_once(__DIR__ . '/../logica/Cliente.php');
             ?>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a href="iniciarSesion.php?paginaAnterior=<?php echo urlencode($paginaAnterior); ?>" class="nav-link">Iniciar Sesión Cliente</a>
+                        <a class="nav-link" href="/iniciarSesion.php?paginaAnterior=<?php echo urlencode($paginaAnterior); ?>">Iniciar Sesión</a>
                     </li>
                     <li class="nav-item">
-                        <a href="iniciarSesion.php?paginaAnterior=sesionProveedor.php" class="nav-link">Iniciar Sesión Proveedor</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="registrarCliente.php">Registrarse</a>
+                        <a class="nav-link" href="/clientes/registrarCliente.php">Registrarse</a>
                     </li>
                 </ul>
             <?php

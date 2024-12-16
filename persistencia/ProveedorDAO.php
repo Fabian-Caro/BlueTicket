@@ -19,6 +19,11 @@ class ProveedorDAO{
                 from Proveedor 
                 where correo = '" . $this -> correo . "' and clave = '" . $this -> clave . "'";
     }
+
+    public function insertar($nombre, $apellido, $correo, $clave) {
+        $sentenciaSQL = "INSERT INTO proveedor (nombre, apellido, correo, clave) VALUES ('$nombre', '$apellido', '$correo', '$clave')";
+        return $sentenciaSQL;
+    }
     
     public function consultar(){
         return "select nombre, apellido, correo

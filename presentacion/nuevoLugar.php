@@ -16,10 +16,11 @@ require_once(__DIR__ . '/../logica/DetallesEvento.php');
     if (isset($_POST["submit"])) {
         $nombreLugar = "'" . $_POST['nombreLugar'] . "'";
         $direccionLugar = "'" . $_POST['direccionLugar'] . "'";
+        $capacidadMaximaLugar = "'" . $_POST['capacidadLugar'] . "'";
         $idCiudad = "'" . $_POST['idCiudad'] . "'";
 
         $lugar = new Lugar();
-        $lugar->insertar($nombreLugar, $direccionLugar, $idCiudad);
+        $lugar->insertar($nombreLugar, $direccionLugar, $capacidadMaximaLugar, $idCiudad);
     }
     ?>
 
@@ -31,6 +32,8 @@ require_once(__DIR__ . '/../logica/DetallesEvento.php');
                 <input type="text" class="form-control" id="nombreLugar" name="nombreLugar" required>
                 <label for="nombre" class="form-label">Dirección del Lugar</label>
                 <input type="text" class="form-control" id="direccionLugar" name="direccionLugar" required>
+                <label for="nombre" class="form-label">Capacidad máxima</label>
+                <input type="number" class="form-control" id="capacidadLugar" name="capacidadLugar" min="1" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Ciudad</label><br>
@@ -45,7 +48,7 @@ require_once(__DIR__ . '/../logica/DetallesEvento.php');
                     }
                 ?>
             </div>
-            <button type="submit" name="submit" class="submit-btn btn btn-primary">Agregar Ciudad</button>
+            <button type="submit" name="submit" class="submit-btn btn btn-primary">Agregar lugar</button>
         </form>
     </div>
 </body>

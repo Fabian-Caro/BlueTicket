@@ -17,7 +17,7 @@ class ClienteDAO{
     }
 
     public function insertar($nombre, $apellido, $correo, $clave) {
-        $sentenciaSQL = "INSERT INTO cliente (nombre, apellido, correo, clave) VALUES ('$nombre', '$apellido', '$correo', $clave)";
+        $sentenciaSQL = "INSERT INTO cliente (nombre, apellido, correo, clave) VALUES ('$nombre', '$apellido', '$correo', '$clave')";
         return $sentenciaSQL;
     }
 

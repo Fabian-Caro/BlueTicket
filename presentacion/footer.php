@@ -14,6 +14,7 @@
                     <li><a href="https://github.com/Fabian-Caro/BlueTicket" class="text-dark" target="_blank">Sobre nosotros</a></li>
                     <li><a href="#" class="text-dark">Servicios</a></li>
                     <li><a href="#" class="text-dark">Contacto</a></li>
+                    <li><a href="/clientes/registrarCliente.php" class="text-dark">Trabajar con nosotros</a></li>
                 </ul>
             </div>
             <div class="col-lg-4 col-md-6 mb-4">
@@ -24,9 +25,9 @@
                     <a href="mailto:fmcaror@udistrital.edu.co"><br>fmcaror@udistrital.edu.co</a>
                 </p>
                 <p>
-                    Teléfono: 
-                    <a href="tel:+573219874566">+57 321 987 4566</a>
-                    <a href="tel:+573194614735">+57 319 461 7435</a>
+                    Teléfono:                   
+                    <a href="tel:+573219874566"><br>+57 321 987 4566</a>
+                    <a href="tel:+573194614735"><br>+57 319 461 7435</a>
                 </p>
             </div>
         </div>

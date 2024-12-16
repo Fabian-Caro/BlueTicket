@@ -7,7 +7,7 @@ require_once(__DIR__ . '/../logica/Boleta.php');
 require_once(__DIR__ . '/../logica/Carro.php');
 
 include 'navbar.php';
-    
+
 if (isset($_POST['items']) && isset($_POST['data'])) {
     // Los índices de los elementos seleccionados en el formulario
     $seleccionados = $_POST['items']; // Ejemplo: [0, 2, 3]
@@ -16,20 +16,20 @@ if (isset($_POST['items']) && isset($_POST['data'])) {
     $datos = $_POST['data'];
 
     $valor_subtotal = isset($_POST['costo_total']) ? floatval($_POST['costo_total']) : 0;
-    $ivaAgregado = $valor_subtotal*0.19;
-    $valor_total = $valor_subtotal+$ivaAgregado;
+    $ivaAgregado = $valor_subtotal * 0.19;
+    $valor_total = $valor_subtotal + $ivaAgregado;
 
     $fechaFactura = date("Y-m-d");
     $factura = new Factura();
-    $factura -> insertar("'".$fechaFactura."'",$valor_subtotal,$valor_total,$idCliente);
-    $idFactura = $factura -> ultimoId();
+    $factura->insertar("'" . $fechaFactura . "'", $valor_subtotal, $valor_total, $idCliente);
+    $idFactura = $factura->ultimoId();
     $boleta = new  Boleta();
     $carro = new Carro();
     // Iterar sobre los elementos seleccionados
     foreach ($seleccionados as $indice) {
         // Obtener los datos del elemento seleccionado usando su índice
         $elementos = $datos[$indice];
-        
+
         // Acceder a cada campo enviado
         $idCarro = $elementos['idsCarro'];
         $idDetalles = $elementos['idsDetalles'];
@@ -38,8 +38,8 @@ if (isset($_POST['items']) && isset($_POST['data'])) {
         $evento = $elementos['eventos'];
         $artista = $elementos['artistas'];
         $costo = $elementos['costos'];
-        $boleta -> insertar("'".$nombre."'",$idFactura,$idDetalles);
-        $carro -> eliminar($idCarro);
+        $boleta->insertar("'" . $nombre . "'", $idFactura, $idDetalles);
+        $carro->eliminar($idCarro);
         echo "ID Detalles: " . $idDetalles . "<br>";
         echo "Nombre: " . $nombre . "<br>";
         echo "Lugar: " . $lugar . "<br>";
@@ -48,16 +48,16 @@ if (isset($_POST['items']) && isset($_POST['data'])) {
         echo "Costo: " . $costo . "<br><hr>";
     }
 
-    echo "valor subtotal: ".$valor_subtotal. "<br>"; 
-    echo "valor total: ".$valor_total. "<br>"; 
-    echo "fecha: ".$fechaFactura. "<br>";
+    echo "valor subtotal: " . $valor_subtotal . "<br>";
+    echo "valor total: " . $valor_total . "<br>";
+    echo "fecha: " . $fechaFactura . "<br>";
 } else {
     // Si no se seleccionaron elementos o no llegaron datos
     echo "No se seleccionaron elementos para pagar.";
 }
 ?>
 
-<!-- <!doctype html>
+<!doctype html>
 <html lang="es">
 
 <head>
@@ -98,7 +98,7 @@ if (isset($_POST['items']) && isset($_POST['data'])) {
                 <tfoot>
                     <tr>
                         <td colspan="3" class="text-right">IVA (19%):</td>
-                        <td>$<?php echo $ivaAgregado?></td>
+                        <td>$<?php echo $ivaAgregado ?></td>
                     </tr>
                     <tr class="total">
                         <td colspan="3" class="text-right">Total:</td>
@@ -112,4 +112,4 @@ if (isset($_POST['items']) && isset($_POST['data'])) {
     <?php include 'footer.php'; ?>
 </body>
 
-</html> -->
+</html>
