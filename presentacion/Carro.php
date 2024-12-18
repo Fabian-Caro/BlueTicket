@@ -2,8 +2,8 @@
 require_once(__DIR__ . '/../logica/Carro.php');
 
 echo "pagina carro.php<br>";
-$idDetalle = isset($_GET['idDetalle']) ? intval($_GET['idDetalle']) : 0;
-$nombres = isset($_GET['nombres']) ? $_GET['nombres'] : [];
+$idDetalle = isset($_POST['idDetalle']) ? intval($_POST['idDetalle']) : 0;
+$nombres = isset($_POST['nombres']) ? $_POST['nombres'] : [];
 
 echo "idDetalle" . $idDetalle . "<br>";
 ?>
@@ -75,13 +75,16 @@ echo "idDetalle" . $idDetalle . "<br>";
                 echo '</div>';
 
                 // Datos ocultos
+                echo $index;
                 echo '<input type="hidden" name="data[' . $index . '][idsCarro]" value="' . $temp->getIdCarro() . '">';
-                echo '<input type="hidden" name="data[' . $index . '][idsDetalles]" value="' . $temp->getDetallesEvento()->getIdDetallesEvento() . '">';
+                echo '<input type="hidden" name="data[' . $index . '][idDetalle]" value="' . $temp->getDetallesEvento()->getIdDetallesEvento() . '">';
                 echo '<input type="hidden" name="data[' . $index . '][nombres]" value="' . $temp->getNombre() . '">';
                 echo '<input type="hidden" name="data[' . $index . '][lugares]" value="' . $temp->getDetallesEvento()->getLugar()->getNombreLugar() . '">';
                 echo '<input type="hidden" name="data[' . $index . '][eventos]" value="' . $temp->getDetallesEvento()->getEvento()->getNombreEvento() . '">';
                 echo '<input type="hidden" name="data[' . $index . '][artistas]" value="' . $temp->getDetallesEvento()->getEvento()->getArtista()->getNombre() . '">';
                 echo '<input type="hidden" name="data[' . $index . '][costos]" value="' . $costo . '">';
+                echo '<input type="hidden" name="idEvento" value="' . $temp->getDetallesEvento()->getEvento()->getIdEvento() . '">';
+                echo '<input type="hidden" name="idCliente" value="' . $idCliente . '">';
             }
             ?>
             <div class="mt-3">

@@ -60,7 +60,7 @@ if (isset($_GET['cantidad'])) {
         <div class="text-center">
             <h1 class="fs-1">
                 <?php echo $eventoData->getArtista()->getNombre() . ": " . $eventoData->getNombreEvento(); ?></h1>
-            <p class="fs-6 text-muted"><?php echo $detallesData->getLugar()->getCiudad()->getNombreCiudad(); ?></p>
+            <p class="fs-6 text-muted"><?php echo $detallesData->getLugar()->getNombreLugar(); ?></p>
         </div>
 
         <?php
@@ -92,25 +92,24 @@ if (isset($_GET['cantidad'])) {
             <div class="col-md-6">
                 <!-- Cambié a col-md-6 -->
                 <div class="d-flex justify-content-center mt-3">
-                    <form id="formulario" action="factura.php" method="GET" class="container">
+                    <form id="formulario" action="factura.php" method="POST" class="container">
                         <h4 class="text-center mb-4">Detalles de las Entradas</h4>
                         <?php
-                for ($i = 1; $i <= $cantidadEntradas; $i++) {
-                    echo '
-                <div class="row g-3 mb-3">
-                    <div class="col-md-8 offset-md-2">
-                        <div class="input-group">
-                            <span class="input-group-text">Nombre ' . $i . '</span>
-                            <input type="text" class="form-control" name="nombres[]" placeholder="Nombre" required>
-                        </div>
-                    </div>
-                </div>';
-                }
-                ?>
+                        for ($i = 1; $i <= $cantidadEntradas; $i++) {
+                            echo '
+                                <div class="row g-3 mb-3">
+                                    <div class="col-md-8 offset-md-2">
+                                        <div class="input-group">
+                                            <span class="input-group-text">Nombre ' . $i . '</span>
+                                            <input type="text" class="form-control" name="nombres[]" placeholder="Nombre" required>
+                                        </div>
+                                    </div>
+                                </div>';
+                        }
+                        ?>
                         <!-- Campos ocultos para datos adicionales -->
                         <input type="hidden" name="idEvento" value="<?php echo $eventoData->getIdEvento(); ?>">
-                        <input type="hidden" name="idDetalle"
-                            value="<?php echo $detallesData->getIdDetallesEvento(); ?>">
+                        <input type="hidden" name="idDetalle" value="<?php echo $detallesData->getIdDetallesEvento(); ?>">
                         <input type="hidden" name="cantidad" value="<?php echo $cantidadEntradas; ?>">
                         <input type="hidden" name="aforo" value="<?php echo $aforo; ?>">
 
@@ -134,11 +133,11 @@ if (isset($_GET['cantidad'])) {
                     </form>
 
                     <script>
-                    function cambiarDireccion(url) {
-                        const form = document.getElementById('formulario');
-                        form.action = url; // Cambiamos el atributo action
-                        form.submit(); // Enviamos el formulario
-                    }
+                        function cambiarDireccion(url) {
+                            const form = document.getElementById('formulario');
+                            form.action = url; // Cambiamos el atributo action
+                            form.submit(); // Enviamos el formulario
+                        }
                     </script>
 
                 </div>
@@ -153,7 +152,7 @@ if (isset($_GET['cantidad'])) {
                             style="max-width: 100px;">
                     </div>
                     <h2 class="fs-5">
-                        <?php echo $eventoData->getNombreEvento() . " - " . $detallesData->getLugar()->getCiudad()->getNombreCiudad(); ?>
+                        <?php echo $eventoData->getNombreEvento() . " - " . $detallesData->getLugar()->getNombreLugar(); ?>
                     </h2>
                     <h4 class='yellow mb-0'><?php echo number_format($costoTotal, 2); ?></h4>
                     <?php

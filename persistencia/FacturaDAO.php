@@ -29,12 +29,16 @@ class FacturaDAO
     }
 
     public function consultar() {
-        return "SELECT fecha, valor_subtotal, valor_total, idCliente FROM factura WHERE idFactura ='" . $this->idFactura . "'";
+        $sentenciaSQL = "SELECT idFactura, fecha, valor_subtotal, valor_total, idCliente 
+                         FROM factura 
+                         WHERE idFactura ='" . $this->idFactura . "'";
+
+        return $sentenciaSQL;
     }
 
-    public function insert($fecha = "", $valor_subtotal = 0, $valor_total = 0, $idCliente = 0)
-    {
-        return "INSERT into Factura (fecha,valor_subtotal,valor_total,idCliente)
-                VALUES ($fecha,$valor_subtotal,$valor_total,$idCliente);";
+    public function insert($fechaHoraActual = "", $valor_subtotal = 0, $valor_total = 0, $idCliente = 0) {
+        $sentenciaSQL = "INSERT into Factura (fecha,valor_subtotal,valor_total,idCliente)
+                VALUES ($fechaHoraActual,$valor_subtotal,$valor_total,$idCliente);";
+        return $sentenciaSQL;
     }
 }

@@ -1,11 +1,41 @@
-<html>
+<?php
+require_once(__DIR__ . '/../config/config.php');
+require_once(__DIR__ . '/../logica/Autentificacion.php');
+
+$paginaAnterior = isset($_GET['paginaAnterior']) ? $_GET['paginaAnterior'] : 'index.php';
+
+$error = false;
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	$correo = filter_var($_POST['correo'], FILTER_SANITIZE_EMAIL);
+	$clave = md5($_POST['clave']);
+
+	$resultado = Autentificacion::autentificar($correo, $clave);
+
+	if ($resultado) {
+
+		if ($resultado['rol'] === 'proveedor') {
+			$_SESSION['idProveedor'] = $resultado['id'];
+			header("Location: sesionProveedor.php");
+		} elseif ($resultado['rol'] === 'cliente') {
+			$_SESSION['idCliente'] = $resultado['id'];
+			header("Location: $paginaAnterior");
+		}
+		exit;
+	} else {
+		$error = "Error de correo o clave";
+	}
+}
+?>
+
+<!DOCTYPE html>
+<html lang="es">
 
 <head>
-	<link
-		href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-		rel="stylesheet">
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Iniciar Sesión</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 	<link href="css/estilos.css" rel="stylesheet">
 </head>
 
@@ -15,12 +45,6 @@
 	</header>
 
 	<?php
-	require_once(__DIR__ . '/../logica/Cliente.php');
-	require_once(__DIR__ . '/../logica/Proveedor.php');
-
-	$error = false;
-	$paginaAnterior = isset($_GET['paginaAnterior']) ? $_GET['paginaAnterior'] : 'index.php';
-
 	if ($paginaAnterior == "evento.php") {
 		$paginaAnterior .= "?idEvento=" . urlencode($_SESSION["idEvento"]);
 	} else if ($paginaAnterior == 'compra.php') {
@@ -28,51 +52,30 @@
 	} else if ($paginaAnterior == 'pago.php') {
 		$paginaAnterior .= "?idEvento=" . urlencode($_SESSION["idEvento"]) . "&idDetalle=" . urlencode($_SESSION["idDetalle"]) . "&cantidad=" . urlencode($_SESSION["cantidad"]) . "&aforo=" . urlencode($_SESSION["aforo"]);
 	}
-
-	if (isset($_POST["autenticar"])) {
-		$proveedor = new Proveedor(null, null, null, $_POST["correo"], md5($_POST["clave"]));
-		if ($proveedor->autenticar()) {
-			$_SESSION["idProveedor"] = $proveedor->getIdProveedor();
-			header("Location: sesionProveedor.php");
-		} else {
-			$cliente = new Cliente(null, null, null, $_POST["correo"], md5($_POST["clave"]));
-			if ($cliente->autenticar()) {
-				$_SESSION["idCliente"] = $cliente->getIdCliente();
-				header("Location: $paginaAnterior");
-			} else {
-				$error = "Error de correo o clave";
-			}
-		}
-	}
 	?>
 
-	<div class="container">
-		<div class="row mt-5">
-			<div class="col-4"></div>
-			<div class="col-4">
-				<div class="card border-primary">
-					<div class="card-header text-bg-info">
-						<h4>Iniciar Sesion</h4>
+	<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+		<div class="card w-50 border-primary">
+			<div class="card-header bg-primary text-white">
+				<h4>Iniciar Sesión</h4>
+			</div>
+			<div class="card-body">
+				<form method="post" action="iniciarSesion.php?paginaAnterior=<?php echo urlencode($paginaAnterior); ?>">
+					<div class="mb-3">
+						<label for="correo" class="form-label">Correo</label>
+						<input type="email" name="correo" class="form-control" placeholder="Correo" required>
 					</div>
-					<div class="card-body">
-						<?php $paginaAnterior = isset($_GET['paginaAnterior']) ? $_GET['paginaAnterior'] : 'index.php';
-						?>
-						<form method="post" action="iniciarSesion.php?paginaAnterior=<?php echo urlencode($paginaAnterior); ?>">
-							<div class="mb-3">
-								<input type="email" name="correo" class="form-control" placeholder="Correo">
-							</div>
-							<div class="mb-3">
-								<input type="password" name="clave" class="form-control" placeholder="Clave">
-							</div>
-							<button type="submit" name="autenticar" class="btn btn-primary">Iniciar Sesion</button>
-							<?php if ($error) : 
-								echo "<div class='alert alert-danger mt-3' role='alert'>";
-								echo $error;
-								echo "</div>";
-							endif ?>
-						</form>
+					<div class="mb-3">
+						<label for="clave" class="form-label">Clave</label>
+						<input type="password" name="clave" class="form-control" placeholder="Clave" required>
 					</div>
-				</div>
+					<button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+				</form>
+				<?php if ($error): ?>
+					<div class="alert alert-danger mt-3">
+						<?php echo $error; ?>
+					</div>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>

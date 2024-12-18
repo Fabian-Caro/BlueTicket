@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . '/../persistencia/Conexion.php');
+require_once(__DIR__ . '/../logica/Cliente.php');
 require_once(__DIR__ . '/../persistencia/FacturaDAO.php');
 
 class Factura {
@@ -57,8 +58,7 @@ class Factura {
         return $this;
     }
 
-    public function getCliente()
-    {
+    public function getCliente() {
         return $this->cliente;
     }
 
@@ -116,13 +116,13 @@ class Factura {
         return $registro[0];
     }
 
-    public function insertar($fecha="",$valor_subtotal=0,$valor_total=0,$idCliente=0){
+    public function insertar($fechaHoraActual="",$valor_subtotal=0,$valor_total=0,$idCliente=0){
         $conexion = new Conexion();
         $conexion -> abrirConexion();
         $facturaDAO = new FacturaDAO();
         
         try {
-            $query = $facturaDAO->insert($fecha, $valor_subtotal,$valor_total,$idCliente);
+            $query = $facturaDAO->insert($fechaHoraActual, $valor_subtotal,$valor_total,$idCliente);
             $conexion->ejecutarConsulta($query);
         } catch (Exception $e) {
             $e->getMessage();
@@ -134,13 +134,21 @@ class Factura {
     public function consultar(){
         $conexion = new Conexion();
         $conexion -> abrirConexion();
+
         $facturaDAO = new FacturaDAO($this->idFactura);
         $conexion->ejecutarConsulta($facturaDAO->consultar());
+        
         $registro = $conexion->siguienteRegistro();
-        $this->fecha = $registro[0];
-        $this->valorSubtotal = $registro[1];
-        $this->valorTotal = $registro[2];
-        $cliente = new Cliente($registro[3]);
+
+        if (!$registro) {
+            throw new Exception("Factura no encontrada.");
+        }
+        $this -> idFactura = $registro[0];
+        $this -> fecha = $registro[1];
+        $this -> valorSubtotal = $registro[2];
+        $this -> valorTotal = $registro[3];
+        
+        $cliente = new Cliente($registro[4]);
         $cliente->consultar();
         $this->cliente = $cliente;
         $conexion -> cerrarConexion();
