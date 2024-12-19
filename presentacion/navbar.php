@@ -1,10 +1,12 @@
 <?php
+require_once(__DIR__ . '/../config/config.php');
+require_once(__DIR__ . '/../logica/Cliente.php');
+
 echo basename($_SERVER['PHP_SELF']);
 $paginaAnterior = $_SERVER['REQUEST_URI'];
 if (basename(parse_url($paginaAnterior, PHP_URL_PATH)) === 'iniciarSesion.php') {
     $paginaAnterior = '/index.php'; // Cambiar a una página base para evitar bucles
 }
-session_start();
 
 if ($paginaAnterior == "evento.php") {
     $_SESSION["idEvento"] = $idEvento;
@@ -27,7 +29,7 @@ if (isset($_GET["cerrarSesion"])) {
     session_destroy();
     header("Location: index.php");
 }
-require_once(__DIR__ . '/../logica/Cliente.php');
+
 ?>
 
 <head>

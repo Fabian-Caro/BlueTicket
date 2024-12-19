@@ -29,7 +29,7 @@ class ClienteDAO{
     
     public function consultar(){
         $sentenciaSQL = "SELECT idCliente, nombre, apellido, correo
-                FROM cliente
+                FROM cliente 
                 WHERE idCliente = '" . $this -> idCliente . "'";
         return $sentenciaSQL;
 

@@ -8,6 +8,10 @@ require_once(__DIR__ . '/../logica/Carro.php');
 
 include 'navbar.php';
 
+$idEvento = $_POST['idEvento'];
+$evento = new Evento();
+$eventoData = $evento->consultarIdEvento($idEvento);
+
 if (isset($_POST['items']) && isset($_POST['data'])) {
     // Los índices de los elementos seleccionados en el formulario
     $seleccionados = $_POST['items']; // Ejemplo: [0, 2, 3]
@@ -26,31 +30,34 @@ if (isset($_POST['items']) && isset($_POST['data'])) {
     $boleta = new  Boleta();
     $carro = new Carro();
     // Iterar sobre los elementos seleccionados
+    $eventosAgrupados = [];
     foreach ($seleccionados as $indice) {
         // Obtener los datos del elemento seleccionado usando su índice
         $elementos = $datos[$indice];
+        $evento = $elementos['eventos'];
+        $costo = $elementos['costos'];
+
+        if (!isset($eventosAgrupados[$evento])) {
+            $eventosAgrupados[$evento] = [
+                'cantidad' => 0,
+                'subtotal' => 0,
+                'costo_unitario' => $costo
+            ];
+        }
+
+        $eventosAgrupados[$evento]['cantidad']++;
+        $eventosAgrupados[$evento]['subtotal'] += $costo;
 
         // Acceder a cada campo enviado
         $idCarro = $elementos['idsCarro'];
         $idDetalles = $elementos['idsDetalles'];
         $nombre = $elementos['nombres'];
         $lugar = $elementos['lugares'];
-        $evento = $elementos['eventos'];
         $artista = $elementos['artistas'];
-        $costo = $elementos['costos'];
+
         $boleta->insertar("'" . $nombre . "'", $idFactura, $idDetalles);
         $carro->eliminar($idCarro);
-        echo "ID Detalles: " . $idDetalles . "<br>";
-        echo "Nombre: " . $nombre . "<br>";
-        echo "Lugar: " . $lugar . "<br>";
-        echo "Evento: " . $evento . "<br>";
-        echo "Artista: " . $artista . "<br>";
-        echo "Costo: " . $costo . "<br><hr>";
     }
-
-    echo "valor subtotal: " . $valor_subtotal . "<br>";
-    echo "valor total: " . $valor_total . "<br>";
-    echo "fecha: " . $fechaFactura . "<br>";
 } else {
     // Si no se seleccionaron elementos o no llegaron datos
     echo "No se seleccionaron elementos para pagar.";
@@ -81,6 +88,7 @@ if (isset($_POST['items']) && isset($_POST['data'])) {
             <table class="table table-bordered">
                 <thead class="table-light">
                     <tr>
+                        <th>COD.</th>
                         <th>Producto</th>
                         <th>Cantidad</th>
                         <th>Precio</th>
@@ -88,12 +96,15 @@ if (isset($_POST['items']) && isset($_POST['data'])) {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><?php echo $eventoData->getNombreEvento() ?></td>
-                        <td><?php echo $cantidadEntradas ?></td>
-                        <td>$<?php echo $detallesData->getCostoEvento() ?></td>
-                        <td>$<?php echo $subTotal ?></td>
-                    </tr>
+                    <?php foreach ($eventosAgrupados as $evento => $detalles): ?>
+                        <tr>
+                            <td></td>
+                            <td><?php echo $evento; ?></td>
+                            <td><?php echo $detalles['cantidad']; ?></td>
+                            <td>$<?php echo number_format($detalles['costo_unitario'], 2); ?></td>
+                            <td>$<?php echo number_format($detalles['subtotal'], 2); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
                 <tfoot>
                     <tr>
@@ -102,7 +113,7 @@ if (isset($_POST['items']) && isset($_POST['data'])) {
                     </tr>
                     <tr class="total">
                         <td colspan="3" class="text-right">Total:</td>
-                        <td>$<?php echo $total ?></td>
+                        <td>$<?php echo $valor_total ?></td>
                     </tr>
                 </tfoot>
             </table>
