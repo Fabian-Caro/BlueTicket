@@ -58,7 +58,7 @@ echo "idDetalle" . $idDetalle . "<br>";
         }
     </script>
 
-    <form action="factura.php" method="POST" class="mt-4">
+    <form action="facturaCarro.php" method="POST" class="mt-4">
         <div class="container">
             <h3 class="mb-3">Carrito de Compras</h3>
             <?php
@@ -75,9 +75,9 @@ echo "idDetalle" . $idDetalle . "<br>";
                 echo '</div>';
 
                 // Datos ocultos
-                echo $index;
                 echo '<input type="hidden" name="data[' . $index . '][idsCarro]" value="' . $temp->getIdCarro() . '">';
-                echo '<input type="hidden" name="data[' . $index . '][idDetalle]" value="' . $temp->getDetallesEvento()->getIdDetallesEvento() . '">';
+                echo '<input type="hidden" name="data[' . $index . '][idsDetalles]" value="' . $temp->getDetallesEvento()->getIdDetallesEvento() . '">';
+                echo "ID Detalles: " . $temp->getDetallesEvento()->getIdDetallesEvento() . "<br>";
                 echo '<input type="hidden" name="data[' . $index . '][nombres]" value="' . $temp->getNombre() . '">';
                 echo '<input type="hidden" name="data[' . $index . '][lugares]" value="' . $temp->getDetallesEvento()->getLugar()->getNombreLugar() . '">';
                 echo '<input type="hidden" name="data[' . $index . '][eventos]" value="' . $temp->getDetallesEvento()->getEvento()->getNombreEvento() . '">';
