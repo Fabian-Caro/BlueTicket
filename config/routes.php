@@ -29,6 +29,10 @@ return [
         'view' => '/public/views/cliente/factura.php',
         'requires_session' => true,
     ],
-    
+
+    '/pdf' => [
+        'view' => '/src/Services/facturaPDF.php',
+        'requires_session' => true,
+    ],
 ];
 ?>

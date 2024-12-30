@@ -10,6 +10,7 @@ $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 if (!array_key_exists($currentPath, $routes)) {
     http_response_code(404);
     include 'views/shared/errors/error404.php';
+    echo "Error 404: Página no encontrada.";
     exit;
 }
 
@@ -52,6 +53,7 @@ if (!$viewPath || !file_exists(__DIR__ . '/../' . $viewPath)) {
     </main>
 
     <?php include 'views/shared/footer.php' ?>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

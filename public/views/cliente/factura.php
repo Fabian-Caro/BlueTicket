@@ -2,8 +2,8 @@
 <?php
 date_default_timezone_set('America/Bogota');
 
-require_once (__DIR__ . '/../../../config/config.php');
-require_once (__DIR__ . '/../../../config/routes.php');
+require_once(__DIR__ . '/../../../config/routes.php');
+require_once(__DIR__ . '/../../../config/config.php');
 require_once(__DIR__ . '/../../../logica/Lugar.php');
 require_once(__DIR__ . '/../../../logica/Evento.php');
 require_once(__DIR__ . '/../../../logica/DetallesEvento.php');
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $boleta->insertar("'" . $nombre . "'", $idFactura, $idDetalle);
     }
 
-    header("Location: factura.php?idFactura=$idFactura&idEvento=$idEvento&cantidad=$cantidadEntradas&idDetalle=$idDetalle");
+    header("Location: /factura?idFactura=$idFactura&idEvento=$idEvento&cantidad=$cantidadEntradas&idDetalle=$idDetalle");
     exit;
 }
 
@@ -81,73 +81,51 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $cliente->consultar();
 }
 ?>
-
-<!doctype html>
-<html lang="es">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Blue Ticket</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="css/estilos.css" rel="stylesheet">
-</head>
-
-<body>
-
-    <header>
-        <?php include 'navbar.php'; ?>
-    </header>
-
-    <div class="container mt-5">
-        <div class="invoice-header">
-            <h1>Factura</h1>
-            <p>Fecha: <strong id="invoice-date"><?php echo $fechaFacturacion; ?></strong></p>
-            <p>Nombre del Comprador: <strong id="buyer-name"><?php echo $cliente->getNombre() . " " . $cliente->getApellido(); ?></strong></p>
-        </div>
-
-        <div class="invoice-details">
-            <table class="table table-bordered">
-                <thead class="table-light">
-                    <tr>
-                        <th>Cod</th>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th>Precio</th>
-                        <th>Subtotal</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><?php echo $idDetalle ?></td>
-                        <td><?php echo $eventoData->getNombreEvento() ?></td>
-                        <td><?php echo $cantidadEntradas ?></td>
-                        <td>$<?php echo $detallesData->getCostoEvento() ?></td>
-                        <td>$<?php echo $subTotal ?></td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3" class="text-right">IVA (19%):</td>
-                        <td>$<?php echo $ivaAgregado ?></td>
-                    </tr>
-                    <tr class="total">
-                        <td colspan="3" class="text-right">Total:</td>
-                        <td>$<?php echo $total ?></td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-        <form action="/servicios/facturaPDF.php" method="POST" target="_blank">
-            <input type="hidden" name="idCliente" value="<?php echo $_SESSION['idCliente']; ?>"> <!-- Asegúrate de que la ID del cliente esté en la sesión -->
-            <input type="hidden" name="idFactura" value="<?php echo $idFactura; ?>"> <!-- Si tienes una ID de factura también -->
-            <input type="hidden" name="idDetalle" value="<?php echo $idDetalle; ?>">
-            <input type="hidden" name="idEvento" value="<?php echo $idEvento; ?>">
-            <input type="hidden" name="cantidadEntradas" value="<?php echo $cantidadEntradas; ?>">
-            <button type="submit">Factura <?php echo $idDetalle . "," . $idEvento ?></button>
-        </form>
+<div class="container mt-5">
+    <div class="invoice-header">
+        <h1>Factura</h1>
+        <p>Fecha: <strong id="invoice-date"><?php echo $fechaFacturacion; ?></strong></p>
+        <p>Nombre del Comprador: <strong id="buyer-name"><?php echo $cliente->getNombre() . " " . $cliente->getApellido(); ?></strong></p>
     </div>
-    <?php include 'footer.php'; ?>
-</body>
 
-</html>
+    <div class="invoice-details">
+        <table class="table table-bordered">
+            <thead class="table-light">
+                <tr>
+                    <th>Cod</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><?php echo $idDetalle ?></td>
+                    <td><?php echo $eventoData->getNombreEvento() ?></td>
+                    <td><?php echo $cantidadEntradas ?></td>
+                    <td>$<?php echo $detallesData->getCostoEvento() ?></td>
+                    <td>$<?php echo $subTotal ?></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-right">IVA (19%):</td>
+                    <td>$<?php echo $ivaAgregado ?></td>
+                </tr>
+                <tr class="total">
+                    <td colspan="3" class="text-right">Total:</td>
+                    <td>$<?php echo $total ?></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <form action="/generarFactura.php" method="POST" target="_blank">
+        <input type="hidden" name="idCliente" value="<?php echo $_SESSION['idCliente']; ?>"> 
+        <input type="hidden" name="idFactura" value="<?php echo $idFactura; ?>"> 
+        <input type="hidden" name="idDetalle" value="<?php echo $idDetalle; ?>">
+        <input type="hidden" name="idEvento" value="<?php echo $idEvento; ?>">
+        <input type="hidden" name="cantidadEntradas" value="<?php echo $cantidadEntradas; ?>">
+        <button type="submit">Factura <?php echo $idCliente . "," . $idFactura ?></button>
+    </form>
+</div>

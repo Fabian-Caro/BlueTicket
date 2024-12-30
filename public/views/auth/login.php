@@ -28,10 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 			$_SESSION['idProveedor'] = $resultado['id'];
 			header("Location: sesionProveedor.php");
+
 		} elseif ($resultado['rol'] === 'cliente') {
 
 			$_SESSION['idCliente'] = $resultado['id'];
 			header("Location: $paginaAnterior");
+			
 		}
 		exit;
 	} else {

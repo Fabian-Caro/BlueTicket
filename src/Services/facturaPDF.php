@@ -1,8 +1,7 @@
 <?php
 /// Powered by Evilnapsis go to http://evilnapsis.com
-session_start();
-
 require_once (__DIR__ . '/../../libreries/FPDF/fpdf.php');
+require_once (__DIR__ . '/../../config/config.php');
 $datosEmpresa = require_once (__DIR__ . '/../../config/datosEmpresa.php');
 require_once (__DIR__ . '/../../logica/Cliente.php');
 require_once (__DIR__ . '/../../logica/Factura.php');
@@ -11,6 +10,9 @@ require_once (__DIR__ . '/../../logica/Lugar.php');
 require_once (__DIR__ . '/../../logica/Evento.php');
 require_once (__DIR__ . '/../../logica/DetallesEvento.php');
 require_once (__DIR__ . '/../../logica/Boleta.php');
+
+// $idCliente = isset($_POST['idCliente']) ? intval($_POST['idCliente']) : 0;
+// $idFactura = isset($_POST['idFactura']) ? intval($_POST['idFactura']) : 0;
 
 if (isset($_POST['idCliente']) && isset($_POST['idFactura'])) {
     $idCliente = $_POST['idCliente'];
@@ -174,6 +176,8 @@ if (isset($_POST['idCliente']) && isset($_POST['idFactura'])) {
     $pdf->output();
 } else {
     // Redirigir si no se recibieron los datos correctamente
-    header("Location: /error.php");
+    echo $idCliente;
+    echo $idFactura;
+    //header("Location: /views/shared/errors/error404.php");
     exit;
 }

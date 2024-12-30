@@ -10,9 +10,7 @@ class Cliente
     private $correo;
     private $clave;
 
-    public function getIdCliente()
-    {
-        echo "en get: " . $this->idCliente;
+    public function getIdCliente() {
         return $this->idCliente;
     }
 

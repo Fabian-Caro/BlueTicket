@@ -10,7 +10,7 @@
             <div class="col-lg-4 col-md-6 mb-4">
                 <h5 class="text-uppercase">Enlaces útiles</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-dark">Inicio</a></li>
+                    <li><a href="/" class="text-dark">Inicio</a></li>
                     <li><a href="https://github.com/Fabian-Caro/BlueTicket" class="text-dark" target="_blank">Sobre nosotros</a></li>
                     <li><a href="#" class="text-dark">Servicios</a></li>
                     <li><a href="#" class="text-dark">Contacto</a></li>
