@@ -14,7 +14,11 @@ $idEvento = isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0;
 </head>
 
 <body>
-    <?php include 'navProveedor.php';
+
+    <header>
+    <?php include 'navProveedor.php';?>
+    </header>
+    
     if (isset($_POST["submit"])) {
         $fecha = "'" . $_POST['fecha'] . "'";
         $horaInicio = "'" . $_POST['horaInicio'] . "'";
@@ -50,9 +54,9 @@ $idEvento = isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0;
                 <?php
                 $i = 0;
                 $zona = new Zona();
-                $zonas = $zona -> consultarZonas();
+                $zonas = $zona->consultarZonas();
                 foreach ($zonas as $temp) {
-                    echo "<span>" . $temp -> getNombreZona() . "</span><br>";
+                    echo "<span>" . $temp->getNombreZona() . "</span><br>";
                 }
                 ?>
             </div>

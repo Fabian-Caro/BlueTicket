@@ -1,5 +1,5 @@
-<?php 
-require_once(__DIR__ . '/../logica/Cliente_boleta.php'); 
+<?php
+require_once(__DIR__ . '/../logica/Cliente_boleta.php');
 require_once(__DIR__ . '/../logica/Cliente.php');
 
 $cliente = new Cliente();
@@ -18,7 +18,9 @@ $nombreCliente = $cliente->getNombre();
 
 <body>
 
-    <?php include 'navbar.php'; ?>
+    <header>
+        <?php include 'navbar.php'; ?>
+    </header>
 
     <div class="container mt-5">
         <h2 class="text-center">Datos de Factura</h2>
@@ -33,7 +35,7 @@ $nombreCliente = $cliente->getNombre();
                     </tr>
                 </thead>
                 <tbody>
-                <?php
+                    <?php
                     $i = 0;
                     $c_boleta = new Cliente_boleta();
                     $boletas = $c_boleta->consultarBoletas($idCliente);
@@ -45,7 +47,7 @@ $nombreCliente = $cliente->getNombre();
                         echo "<td>" . $temp->getFecha() . "</td>";
                         echo "</tr>";
                     }
-                        ?>
+                    ?>
                 </tbody>
             </table>
         </div>

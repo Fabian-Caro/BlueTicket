@@ -31,7 +31,11 @@ if (!$eventoData) {
 </head>
 
 <body>
-    <?php include 'navProveedor.php'; ?>
+    
+    <header>
+        <?php include 'navProveedor.php'; ?>
+    </header>
+
 
     <div class="container mt-4">
         <?php

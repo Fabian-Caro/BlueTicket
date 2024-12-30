@@ -1,12 +1,14 @@
 <!--utilización del patrón PRG (POST, Redirect, GET)-->
 <?php
 date_default_timezone_set('America/Bogota');
-require_once(__DIR__ . '/../config/config.php');
-require_once(__DIR__ . '/../logica/Lugar.php');
-require_once(__DIR__ . '/../logica/Evento.php');
-require_once(__DIR__ . '/../logica/DetallesEvento.php');
-require_once(__DIR__ . '/../logica/Factura.php');
-require_once(__DIR__ . '/../logica/Boleta.php');
+
+require_once (__DIR__ . '/../../../config/config.php');
+require_once (__DIR__ . '/../../../config/routes.php');
+require_once(__DIR__ . '/../../../logica/Lugar.php');
+require_once(__DIR__ . '/../../../logica/Evento.php');
+require_once(__DIR__ . '/../../../logica/DetallesEvento.php');
+require_once(__DIR__ . '/../../../logica/Factura.php');
+require_once(__DIR__ . '/../../../logica/Boleta.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $idEvento = isset($_POST['idEvento']) ? intval($_POST['idEvento']) : 0;
@@ -74,9 +76,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     $evento = new Evento();
     $eventoData = $evento->consultarIdEvento($idEvento);
-    $idCliente = $factura -> getCliente() -> getIdCliente();
+    $idCliente = $factura->getCliente()->getIdCliente();
     $cliente = new Cliente($idCliente);
-    $cliente -> consultar();
+    $cliente->consultar();
 }
 ?>
 
@@ -92,7 +94,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 </head>
 
 <body>
-    <?php include 'navbar.php'; ?>
+
+    <header>
+        <?php include 'navbar.php'; ?>
+    </header>
 
     <div class="container mt-5">
         <div class="invoice-header">
@@ -139,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <input type="hidden" name="idDetalle" value="<?php echo $idDetalle; ?>">
             <input type="hidden" name="idEvento" value="<?php echo $idEvento; ?>">
             <input type="hidden" name="cantidadEntradas" value="<?php echo $cantidadEntradas; ?>">
-            <button type="submit">Factura <?php echo $idDetalle.",".$idEvento?></button>
+            <button type="submit">Factura <?php echo $idDetalle . "," . $idEvento ?></button>
         </form>
     </div>
     <?php include 'footer.php'; ?>

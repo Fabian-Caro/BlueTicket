@@ -12,7 +12,12 @@ require_once(__DIR__ . '/../logica/DetallesEvento.php');
 </head>
 
 <body>
-    <?php include 'navProveedor.php';
+
+    <header>
+        <?php include 'navProveedor.php'; ?>
+    </header>
+    
+    <?php
     if (isset($_POST["submit"])) {
         $nombreLugar = "'" . $_POST['nombreLugar'] . "'";
         $direccionLugar = "'" . $_POST['direccionLugar'] . "'";
@@ -38,14 +43,14 @@ require_once(__DIR__ . '/../logica/DetallesEvento.php');
             <div class="mb-3">
                 <label class="form-label">Ciudad</label><br>
                 <?php
-                    $ciudad = new Ciudad();
-                    $ciudades = $ciudad->consultarTodos();
-                    foreach ($ciudades as $temp) {
-                        echo '<div class="form-check">';
-                        echo '<input class="form-check-input" type="radio" name="idCiudad" value="' . $temp->getIdCiudad() . '" required>';
-                        echo '<label class="form-check-label">' . $temp->getNombreCiudad() . '</label>';
-                        echo '</div>';
-                    }
+                $ciudad = new Ciudad();
+                $ciudades = $ciudad->consultarTodos();
+                foreach ($ciudades as $temp) {
+                    echo '<div class="form-check">';
+                    echo '<input class="form-check-input" type="radio" name="idCiudad" value="' . $temp->getIdCiudad() . '" required>';
+                    echo '<label class="form-check-label">' . $temp->getNombreCiudad() . '</label>';
+                    echo '</div>';
+                }
                 ?>
             </div>
             <button type="submit" name="submit" class="submit-btn btn btn-primary">Agregar lugar</button>

@@ -22,7 +22,9 @@ echo "idDetalle" . $idDetalle . "<br>";
 
 <body>
 
-    <?php include 'navbar.php'; ?>
+    <header>
+        <?php include 'navbar.php'; ?>
+    </header>
 
     <?php
     echo "idCliente  " . $idCliente . "<br>";

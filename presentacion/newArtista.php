@@ -11,7 +11,10 @@ require_once(__DIR__ . '/../logica/Artista.php');
 </head>
 
 <body>
-    <?php include 'navProveedor.php';
+    <header>
+        <?php include 'navProveedor.php'; ?>
+    </header>
+    <?php
     if (isset($_POST["submit"])) {
         $nombre = "'" . $_POST['nombre'] . "'";
 

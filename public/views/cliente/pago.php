@@ -1,7 +1,10 @@
 <?php
-require_once(__DIR__ . '/../logica/Lugar.php');
-require_once(__DIR__ . '/../logica/Evento.php');
-require_once(__DIR__ . '/../logica/DetallesEvento.php');
+require_once (__DIR__ . '/../../../config/routes.php');
+require_once (__DIR__ . '/../../../config/config.php');
+require_once(__DIR__ . '/../../../logica/Lugar.php');
+require_once(__DIR__ . '/../../../logica/Evento.php');
+require_once(__DIR__ . '/../../../logica/DetallesEvento.php');
+
 $idEvento = isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0;
 $idDetalle = isset($_GET['idDetalle']) ? intval($_GET['idDetalle']) : 0;
 $aforo = isset($_GET['aforo']) ? intval($_GET['aforo']) : 0;
@@ -40,22 +43,6 @@ if (isset($_GET['cantidad'])) {
 }
 ?>
 
-<!doctype html>
-<html lang="es">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Blue Ticket</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="css/estilos.css" rel="stylesheet">
-</head>
-
-<body>
-
-    <?php include 'navbar.php'; ?>
-
     <div class="container mt-4">
         <div class="text-center">
             <h1 class="fs-1">
@@ -92,7 +79,7 @@ if (isset($_GET['cantidad'])) {
             <div class="col-md-6">
                 <!-- Cambié a col-md-6 -->
                 <div class="d-flex justify-content-center mt-3">
-                    <form id="formulario" action="factura.php" method="POST" class="container">
+                    <form id="formulario" action="/factura" method="POST" class="container">
                         <h4 class="text-center mb-4">Detalles de las Entradas</h4>
                         <?php
                         for ($i = 1; $i <= $cantidadEntradas; $i++) {
@@ -117,7 +104,7 @@ if (isset($_GET['cantidad'])) {
                         <div class="row mt-4">
                             <!-- Botón para pagar -->
                             <div class="col-md-8 offset-md-2">
-                                <button type="submit" onclick="cambiarDireccion('factura.php')"
+                                <button type="submit" onclick="cambiarDireccion('/factura')"
                                     class="btn btn-primary btn-lg w-100">
                                     Pagar
                                 </button>
@@ -146,9 +133,9 @@ if (isset($_GET['cantidad'])) {
             <!-- Columna para la tarjeta de información del evento -->
             <div class="col-md-6">
                 <!-- Cambié a col-md-6 -->
-                <div class="card card-blue p-3 text-black mb-3 text-center">
+                <div class="card card-white p-3 text-black mb-3 text-center">
                     <div class="d-flex justify-content-center">
-                        <img src="imagenes/100.png" alt="Descripción de la imagen" class="img-fluid mb-2"
+                        <img src="/assets/images/100.png" alt="Descripción de la imagen" class="img-fluid mb-2"
                             style="max-width: 100px;">
                     </div>
                     <h2 class="fs-5">
@@ -178,11 +165,3 @@ if (isset($_GET['cantidad'])) {
             </div>
         </div>
     </div>
-
-    <?php include 'footer.php' ?>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-4cGFmA9Im4u9OFt8S1rfqESzO5xR7KZGtYt7Lk1AaeoafIYGf1VGzF2dEXKxJwdr" crossorigin="anonymous">
-    </script>
-</body>
-
-</html>
