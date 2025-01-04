@@ -1,6 +1,6 @@
 <?php
-require_once(__DIR__ . '/../persistencia/Conexion.php');
-require_once(__DIR__ . '/../persistencia/ClienteDAO.php');
+require_once(__DIR__ . '/../Database/Conexion.php');
+require_once(__DIR__ . '/../Persistence/ClienteDAO.php');
 class Cliente_boleta{
     private $idFactura;
     private $nombreCliente;

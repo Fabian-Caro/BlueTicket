@@ -1,6 +1,16 @@
 <?php
 require_once(__DIR__ . '/../config/config.php');
 
+if (isset($_GET['cerrarSesion']) && $_GET['cerrarSesion'] === 'true') {
+    // Limpia las variables de sesión
+    $_SESSION = [];
+    // Destruye la sesión
+    session_destroy();
+    // Redirige al usuario al inicio o login
+    header("Location: /");
+    exit;
+}
+
 require_once(__DIR__ . '/../src/Logic/Evento.php');
 
 $routes = require(__DIR__ . '/../config/routes.php');
@@ -16,7 +26,7 @@ if (!array_key_exists($currentPath, $routes)) {
 
 $requiresSession = $routes[$currentPath]['requires_session'] ?? false;
 
-if ($requiresSession && empty($_SESSION['idCliente'])) {
+if ($requiresSession && empty($_SESSION['idProveedor']) && empty($_SESSION['idCliente'])) {
     header("Location: /login");
     exit;
 }
@@ -45,7 +55,13 @@ if (!$viewPath || !file_exists(__DIR__ . '/../' . $viewPath)) {
     <?php echo $viewPath; ?>
 
     <header>
-        <?php include 'views/shared/navbar.php'; ?>
+        <?php
+        if (!empty($_SESSION['idProveedor'])) {
+            include 'views/shared/navbarProveedor.php';
+        } else {
+            include 'views/shared/navbar.php';
+        }
+        ?>
     </header>
 
     <main>
@@ -53,7 +69,7 @@ if (!$viewPath || !file_exists(__DIR__ . '/../' . $viewPath)) {
     </main>
 
     <?php include 'views/shared/footer.php' ?>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

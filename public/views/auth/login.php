@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if ($resultado['rol'] === 'proveedor') {
 
 			$_SESSION['idProveedor'] = $resultado['id'];
-			header("Location: sesionProveedor.php");
+			header("Location: /admin");
 
 		} elseif ($resultado['rol'] === 'cliente') {
 

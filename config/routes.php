@@ -1,9 +1,5 @@
 <?php
 return [
-    '/' => [
-        'view' => '/public/views/cliente/inicioCliente.php',
-        'requires_session' => false,
-    ],
 
     '/login' => [
         'view' => '/public/views/auth/login.php',
@@ -13,6 +9,46 @@ return [
     '/registro' => [
         'view' => '/public/views/cliente/registrarCliente.php',
         'requires_session' => false,
+    ],
+
+    '/registroProveedor' => [
+        'view' => '/public/views/proveedor/registrarProveedor.php',
+        'requires_session' => false,
+    ],
+
+    '/' => [
+        'view' => '/public/views/cliente/inicioCliente.php',
+        'requires_session' => false,
+    ],
+
+    '/admin' => [
+        'view' => '/public/views/proveedor/inicioProveedor.php',
+        'requires_session' => true,
+    ],
+
+    '/mantenimientoEvento' => [
+        'view' => '/public/views/proveedor/mantenimientoEvento.php',
+        'requires_session' => true,
+    ],
+
+    '/crearEvento' => [
+        'view' => '/public/views/proveedor/detalleEvento.php',
+        'requires_session' => true,
+    ],
+
+    '/nuevoEvento' => [
+        'view' => '/public/views/proveedor/nuevoEvento.php',
+        'requires_session' => true,
+    ],
+
+    '/nuevoArtista' => [
+        'view' => '/public/views/proveedor/nuevoArtista.php',
+        'requires_session' => true,
+    ],
+
+    '/nuevoLugar' => [
+        'view' => '/public/views/proveedor/nuevoLugar.php',
+        'requires_session' => true,
     ],
 
     '/evento' => [
@@ -32,6 +68,16 @@ return [
 
     '/factura' => [
         'view' => '/public/views/cliente/factura.php',
+        'requires_session' => true,
+    ],
+
+    '/facturaCarro' => [
+        'view' => '/public/views/cliente/facturaCarro.php',
+        'requires_session' => true,
+    ],
+
+    '/boleteria' => [
+        'view' => '/public/views/cliente/boleteria.php',
         'requires_session' => true,
     ],
 

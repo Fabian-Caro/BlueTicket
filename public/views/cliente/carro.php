@@ -73,7 +73,7 @@ $carros = $carro->consultarTodos($idCliente);
     }
 </script>
 
-<form action="/factura" method="POST" class="mt-4">
+<form action="/facturaCarro" method="POST" class="mt-4">
     <div class="container">
         <h3 class="mb-3">Carrito de Compras</h3>
         <?php

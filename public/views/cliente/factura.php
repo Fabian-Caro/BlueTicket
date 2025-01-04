@@ -263,26 +263,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 <?php echo "adios"; ?>
                 <tr>
                     <td><?php echo $idDetalle ?></td>
-                    <td><?php //echo $eventoData->getNombreEvento() 
+                    <td><?php echo $eventoData->getNombreEvento() 
                         ?></td>
                     <td><?php echo $cantidadEntradas ?></td>
-                    <td>$<?php //echo $detallesData->getCostoEvento() 
+                    <td>$<?php echo $detallesData->getCostoEvento() 
                             ?></td>
-                    <td>$<?php //echo $subTotal 
-                            ?></td>
+                    <td>$<?php echo $subTotal ?></td>
                 </tr>
 
                 </tbody>
                 <tfoot>
                     <tr>
                         <td colspan="3" class="text-right">IVA (19%):</td>
-                        <td>$<?php //echo $ivaAgregado 
+                        <td>$<?php echo $ivaAgregado 
                                 ?></td>
                     </tr>
                     <tr class="total">
                         <td colspan="3" class="text-right">Total:</td>
-                        <td>$<?php //echo $total 
-                                ?></td>
+                        <td>$<?php echo $total ?></td>
                     </tr>
                 </tfoot>
             <?php endif; ?>

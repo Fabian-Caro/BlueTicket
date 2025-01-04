@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/../../../src/Logic/Cliente.php');
+require_once(__DIR__ . '/../../../src/Logic/Proveedor.php');
 
 if (isset($_POST['registrar'])) {
     $nombre = $_POST['nombre'];
@@ -7,23 +7,23 @@ if (isset($_POST['registrar'])) {
     $correo = $_POST['correo'];
     $clave = md5($_POST['clave']);
 
-    $cliente = new Cliente(null, $nombre, $apellido, $correo, $clave);
+    $proveedor = new Proveedor(null, $nombre, $apellido, $correo, $clave);
 
-    if ($cliente->registrar($nombre, $apellido, $correo, $clave)) {
-        $_SESSION['idCliente'] = $cliente->getIdCliente();
+    if ($proveedor->registrar($nombre, $apellido, $correo, $clave)) {
+        session_start();
+        $_SESSION['idProveedor'] = $proveedor->getIdProveedor();
         echo "  <div class='alert alert-success' role='alert'>
                 Registro completado
                 </div>";
 
-        //header("Location: ../index.php");
+        header("Location: /");
         exit();
     } else {
-        echo "error al registrar al cliente.";
+        echo "error al registrar al proveedor.";
     }
 }
 
 ?>
-
 
 <div class="container vh-100 d-flex justify-content-center align-items-center">
     <div class="row">
@@ -33,7 +33,7 @@ if (isset($_POST['registrar'])) {
                     <h4>Registro</h4>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="/registro">
+                    <form method="post" action="registrarProveedor.php">
                         <div class="mb-3">
                             <input type="text" name="nombre" class="form-control" placeholder="Nombre" required>
                         </div>
@@ -47,8 +47,8 @@ if (isset($_POST['registrar'])) {
                             <input type="password" name="clave" class="form-control" placeholder="Clave" required>
                         </div>
                         <button type="submit" name="registrar" class="btn btn-primary w-100">Registrarse</button>
+                        <a href="/registro" class="d-block text-center mt-3">Registrarse como cliente</a>
                     </form>
-                    <a href="/registroProveedor" class="d-block text-center mt-3">Registrarse como proveedor</a>
                 </div>
             </div>
         </div>

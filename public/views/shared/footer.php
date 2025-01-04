@@ -14,7 +14,7 @@
                     <li><a href="https://github.com/Fabian-Caro/BlueTicket" class="text-dark" target="_blank">Sobre nosotros</a></li>
                     <li><a href="#" class="text-dark">Servicios</a></li>
                     <li><a href="#" class="text-dark">Contacto</a></li>
-                    <li><a href="/clientes/registrarCliente.php" class="text-dark">Trabajar con nosotros</a></li>
+                    <li><a href="/registroProveedor" class="text-dark">Trabajar con nosotros</a></li>
                 </ul>
             </div>
             <div class="col-lg-4 col-md-6 mb-4">
