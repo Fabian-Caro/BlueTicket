@@ -1,6 +1,5 @@
 <?php
 
-
 class DetallesEventoDAO {
     private $idDetallesEvento;
     private $fechaEvento;

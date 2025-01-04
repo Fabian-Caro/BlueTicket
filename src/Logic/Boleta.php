@@ -2,8 +2,8 @@
 
 use PSpell\Config;
 
-require_once(__DIR__ . '/../persistencia/Conexion.php');
-require_once(__DIR__ . '/../persistencia/BoletaDAO.php');
+require_once (__DIR__ . '/../Database/Conexion.php');
+require_once(__DIR__ . '/../Persistence/BoletaDAO.php');
 
 class Boleta {
     private $idBoleta;
@@ -44,6 +44,23 @@ class Boleta {
         }
         
         $conexion -> cerrarConexion();
+    }
+
+    public function consultarPorFactura ($idFactura){
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $boletaDAO = new BoletaDAO();
+        $conexion -> ejecutarConsulta($boletaDAO -> consultarPorFactura($idFactura));
+        $boletas = [];
+        while ($registro = $conexion -> siguienteRegistro()) {
+            $boletas[] = [
+                'idDetalle' => $registro[0],
+                'nombreEvento' => $registro[1],
+                'costoUnitario' => $registro[2]
+            ];
+        }
+        $conexion -> cerrarConexion();
+        return $boletas;
     }
 }
 

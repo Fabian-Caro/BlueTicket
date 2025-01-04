@@ -1,9 +1,9 @@
 <?php
 
-require_once (__DIR__ . '/../persistencia/Conexion.php');
-require (__DIR__ . '/../persistencia/DetallesEventoDAO.php');
-require_once (__DIR__ . '/../logica/Lugar.php');
-require_once (__DIR__ . '/../logica/Evento.php');
+require_once (__DIR__ . '/../Database/Conexion.php');
+require_once (__DIR__ . '/../Persistence/DetallesEventoDAO.php');
+require_once (__DIR__ . '/Lugar.php');
+require_once (__DIR__ . '/Evento.php');
 
 class DetallesEvento {
     private $idDetallesEvento;

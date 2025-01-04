@@ -1,6 +1,6 @@
 <?php
-require_once('Cliente.php');
-require_once('Proveedor.php');
+require_once (__DIR__ . '/../Cliente.php');
+require_once (__DIR__ . '/../Proveedor.php');
 
 class Autentificacion {
     public static function autentificar ($correo, $clave) {

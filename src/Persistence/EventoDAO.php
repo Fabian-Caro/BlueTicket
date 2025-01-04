@@ -1,4 +1,5 @@
 <?php
+
 class EventoDAO{
     private $idEvento;
     private $nombre;

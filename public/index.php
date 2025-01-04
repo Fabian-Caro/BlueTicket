@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__ . '/../config/config.php');
 
-require_once(__DIR__ . '/../logica/Evento.php');
+require_once(__DIR__ . '/../src/Logic/Evento.php');
 
 $routes = require(__DIR__ . '/../config/routes.php');
 

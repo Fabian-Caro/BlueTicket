@@ -1,8 +1,8 @@
 <?php
 
-require_once(__DIR__ . '/../persistencia/Conexion.php');
-require_once(__DIR__ . '/../persistencia/CarroDAO.php');
-require_once(__DIR__ . '/../logica/DetallesEvento.php');
+require_once (__DIR__ . '/../Database/Conexion.php');
+require_once(__DIR__ . '/../Persistence/CarroDAO.php');
+require_once(__DIR__ . '/DetallesEvento.php');
 
 class Carro {
     private $idCarro;

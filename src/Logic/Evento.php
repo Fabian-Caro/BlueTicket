@@ -1,8 +1,8 @@
 <?php
-require_once (__DIR__ . '/../persistencia/Conexion.php');
-require (__DIR__ . '/../persistencia/EventoDAO.php');
-require_once(__DIR__ . '/../logica/Categoria.php');
-require_once(__DIR__ . '/../logica/Artista.php');
+require_once (__DIR__ . '/../Database/Conexion.php');
+require_once (__DIR__ . '/../Persistence/EventoDAO.php');
+require_once(__DIR__ . '/Categoria.php');
+require_once(__DIR__ . '/Artista.php');
 class Evento{
     private $idEvento;
     private $nombreEvento;

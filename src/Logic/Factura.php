@@ -1,7 +1,7 @@
 <?php
-require_once(__DIR__ . '/../persistencia/Conexion.php');
-require_once(__DIR__ . '/../logica/Cliente.php');
-require_once(__DIR__ . '/../persistencia/FacturaDAO.php');
+require_once (__DIR__ . '/../Database/Conexion.php');
+require_once(__DIR__ . '/Cliente.php');
+require_once(__DIR__ . '/../Persistence/FacturaDAO.php');
 
 class Factura {
     private $idFactura;

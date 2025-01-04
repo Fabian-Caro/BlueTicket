@@ -1,7 +1,7 @@
 <?php
 require_once (__DIR__ . '/../../../config/config.php');
 require_once (__DIR__ . '/../../../config/routes.php');
-require_once(__DIR__ . '/../../../logica/Autentificacion.php');
+require_once(__DIR__ . '/../../../src/Logic/Auth/Autentificacion.php');
 
 $paginaAnterior = isset($_GET['paginaAnterior']) ? $_GET['paginaAnterior'] : '/';
 

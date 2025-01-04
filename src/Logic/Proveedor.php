@@ -1,9 +1,9 @@
 <?php
-require_once(__DIR__ . '/../persistencia/Conexion.php');
-require_once(__DIR__ . '/../persistencia/ProveedorDAO.php');
-require_once(__DIR__ . '/../logica/Categoria.php');
-require_once(__DIR__ . '/../logica/Artista.php');
-require_once(__DIR__ . '/../logica/Evento.php');
+require_once (__DIR__ . '/../Database/Conexion.php');
+require_once (__DIR__ . '/../Persistence/ProveedorDAO.php');
+require_once (__DIR__ . '/Categoria.php');
+require_once (__DIR__ . '/Artista.php');
+require_once (__DIR__ . '/Evento.php');
 class Proveedor{
     private $idProveedor;
     private $nombre;

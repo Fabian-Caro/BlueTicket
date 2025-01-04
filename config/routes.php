@@ -10,6 +10,11 @@ return [
         'requires_session' => false,
     ],
 
+    '/registro' => [
+        'view' => '/public/views/cliente/registrarCliente.php',
+        'requires_session' => false,
+    ],
+
     '/evento' => [
         'view' => '/public/views/cliente/evento.php',
         'requires_session' => false,
@@ -27,6 +32,11 @@ return [
 
     '/factura' => [
         'view' => '/public/views/cliente/factura.php',
+        'requires_session' => true,
+    ],
+
+    '/carro' => [
+        'view' => '/public/views/cliente/carro.php',
         'requires_session' => true,
     ],
 

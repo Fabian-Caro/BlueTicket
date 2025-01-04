@@ -1,9 +1,9 @@
 <?php
 require_once (__DIR__ . '/../../../config/routes.php');
-require_once(__DIR__ . '/../../../logica/Lugar.php');
-require_once(__DIR__ . '/../../../logica/Ciudad.php');
-require_once(__DIR__ . '/../../../logica/Evento.php');
-require_once(__DIR__ . '/../../../logica/DetallesEvento.php');
+require_once(__DIR__ . '/../../../src/Logic/Lugar.php');
+require_once(__DIR__ . '/../../../src/Logic/Ciudad.php');
+require_once(__DIR__ . '/../../../src/Logic/Evento.php');
+require_once(__DIR__ . '/../../../src/Logic/DetallesEvento.php');
 
 $idEvento = isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0;
 

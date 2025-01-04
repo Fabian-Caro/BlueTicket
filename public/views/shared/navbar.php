@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__ . '/../../../config/config.php');
 require_once (__DIR__ . '/../../../config/routes.php');
-require_once(__DIR__ . '/../../../logica/Cliente.php');
+require_once (__DIR__ .'/../../../src/Logic/Cliente.php');
 
 basename($_SERVER['PHP_SELF']);
 //echo basename($_SERVER['PHP_SELF']);
@@ -72,7 +72,7 @@ if (isset($_GET["cerrarSesion"])) {
                         <a class="nav-link" href="/login">Iniciar Sesión</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/presentacion/clientes/registrarCliente.php">Registrarse</a>
+                        <a class="nav-link" href="/registro">Registrarse</a>
                     </li>
                 </ul>
             <?php
@@ -90,7 +90,7 @@ if (isset($_GET["cerrarSesion"])) {
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class='dropdown-item' href='boleteria.php'>Historial</a></li>
-                            <li><a class='dropdown-item' href='Carro.php'>Carro</a></li>
+                            <li><a class='dropdown-item' href='/carro'>Carro</a></li>
                             <li><a class='dropdown-item' href='/../?cerrarSesion=true'>Cerrar Sesion</a></li>
                         </ul>
                     </li>

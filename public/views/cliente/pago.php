@@ -1,9 +1,9 @@
 <?php
 require_once(__DIR__ . '/../../../config/routes.php');
 require_once(__DIR__ . '/../../../config/config.php');
-require_once(__DIR__ . '/../../../logica/Lugar.php');
-require_once(__DIR__ . '/../../../logica/Evento.php');
-require_once(__DIR__ . '/../../../logica/DetallesEvento.php');
+require_once(__DIR__ . '/../../../src/Logic/Lugar.php');
+require_once(__DIR__ . '/../../../src/Logic/Evento.php');
+require_once(__DIR__ . '/../../../src/Logic/DetallesEvento.php');
 
 $idEvento = isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0;
 $idDetalle = isset($_GET['idDetalle']) ? intval($_GET['idDetalle']) : 0;
@@ -42,6 +42,9 @@ if (isset($_GET['cantidad'])) {
     exit();
 }
 ?>
+<div id="successMessage" class="alert alert-success mt-3" style="display:none;">
+    Producto agregado al carrito con éxito.
+</div>
 
 <div class="container mt-4">
     <div class="text-center">
@@ -80,12 +83,11 @@ if (isset($_GET['cantidad'])) {
             <!-- Cambié a col-md-6 -->
             <div class="d-flex justify-content-center mt-3">
 
-                <form action="/factura" method="POST">
+                <form id="formulario" action="/factura" method="POST">
                     <h4 class="text-center mb-4">Detalles de las Entradas</h4>
                     <?php
                     for ($i = 1; $i <= $cantidadEntradas; $i++) {
-                        echo '
-                                <div class="row g-3 mb-3">
+                        echo    '<div class="row g-3 mb-3">
                                     <div class="col-md-8 offset-md-2">
                                         <div class="input-group">
                                             <span class="input-group-text">Nombre ' . $i . '</span>
@@ -105,27 +107,61 @@ if (isset($_GET['cantidad'])) {
                     <div class="row mt-4">
                         <!-- Botón para pagar -->
                         <div class="col-md-8 offset-md-2">
-                            <button type="submit" class="btn btn-primary btn-lg w-100">
+                            <button type="button" class="btn btn-primary btn-lg w-100" onclick="cambiarDireccion('/factura')">
                                 Pagar
                             </button>
                         </div>
+                        <!-- funcionalidad ajax -->
+                        <button type="button" class="btn btn-secondary btn-lg w-100" id="addToCartButton">
+                            Agregar al Carrito
+                        </button>
                         <!-- Botón para Carro -->
-                        <!-- <div class="col-md-8 offset-md-2">
-                                <button type="button" onclick="cambiarDireccion('Carro.php')"
-                                    class="btn btn-secondary btn-lg w-100">
-                                    Carro
-                                </button>
-                            </div>-->
+                        <div class="col-md-8 offset-md-2">
+                            <button type="submit" class="btn btn-secondary btn-lg w-100" onclick="cambiarDireccion('/carro')">
+                                Carro
+                            </button>
+                        </div>
                     </div>
                 </form>
 
-                <!-- <script>
-                        function cambiarDireccion(url) {
-                            const form = document.getElementById('formulario');
-                            form.action = url; // Cambiamos el atributo action
-                            form.submit(); // Enviamos el formulario
-                        }
-                    </script> -->
+                <script>
+                    function cambiarDireccion(url) {
+                        const form = document.getElementById('formulario');
+                        form.action = url; // Cambiamos el atributo action
+                        form.submit(); // Enviamos el formulario
+                    }
+
+                    document.getElementById("addToCartButton").addEventListener("click", function() {
+                        const cantidadEntradas = <?php echo $cantidadEntradas; ?>;
+                        const idEvento = <?php echo $eventoData->getIdEvento(); ?>;
+                        const idDetalle = <?php echo $detallesData->getIdDetallesEvento(); ?>;
+
+                        // Hacemos la petición AJAX para agregar al carrito
+                        const xhr = new XMLHttpRequest();
+                        xhr.open("POST", "/carro", true);
+                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+                        // Pasamos los parámetros necesarios (se puede mejorar si es necesario)
+                        xhr.send(`idEvento=${idEvento}&idDetalle=${idDetalle}&cantidad=${cantidadEntradas}`);
+                        console.log(`idEvento=${idEvento}&idDetalle=${idDetalle}&cantidad=${cantidadEntradas}`);
+
+                        // Al recibir la respuesta, mostramos el mensaje de éxito
+                        xhr.onload = function() {
+                            if (xhr.status === 200) {
+                                // Muestra el mensaje de éxito
+                                console.log(xhr.responseText);
+                                document.getElementById("successMessage").style.display = "block";
+
+                                // Ocultar el mensaje después de 3 segundos (opcional)
+                                setTimeout(function() {
+                                    document.getElementById("successMessage").style.display = "none";
+                                }, 3000);
+                            } else {
+                                console.error("Error al agregar al carrito");
+                            }
+                        };
+                    });
+                </script>
             </div>
         </div>
 

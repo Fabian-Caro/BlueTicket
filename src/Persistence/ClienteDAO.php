@@ -1,6 +1,5 @@
 <?php
 
-
 class ClienteDAO{
     private $idCliente;
     private $nombre;

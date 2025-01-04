@@ -1,7 +1,7 @@
 <?php
-require_once(__DIR__ . '/../persistencia/Conexion.php');
-require(__DIR__ . '/../persistencia/LugarDAO.php');
-require_once(__DIR__ . '/../logica/Ciudad.php');
+require_once (__DIR__ . '/../Database/Conexion.php');
+require(__DIR__ . '/../Persistence/LugarDAO.php');
+require_once(__DIR__ . '/Ciudad.php');
 
 class Lugar {
     private $idLugar;
