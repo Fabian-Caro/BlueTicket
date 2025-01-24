@@ -34,6 +34,13 @@ class ClienteDAO{
 
     }
 
+    public function consultarGastoCliente(){
+        return "SELECT c.correo, SUM(f.valor_total) as sum
+                FROM cliente c LEFT JOIN factura f on c.idCliente = f.idCliente
+                GROUP by c.idCliente
+                ORDER BY sum DESC;";
+    }
+
     public function consultarBoletas(){
         return "SELECT b.idFactura, c.nombre, c.apellido, b.nombre_usuario, e.nombre, d.fecha, f.idCliente 
                 FROM boleta b 

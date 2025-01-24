@@ -115,6 +115,23 @@ class Cliente
         $conexion->cerrarConexion();
     }
 
+    public function consultarGastoCliente(){
+        $cliente_gasto = array();
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $clienteDAO = new ClienteDAO();
+        $conexion -> ejecutarConsulta($clienteDAO -> consultarGastoCliente());
+        while($registro = $conexion -> siguienteRegistro()){
+            $gasto = $registro[1];
+            if(is_null($gasto)) {
+                $gasto = 0;
+            }
+            array_push($cliente_gasto, array($registro[0], $gasto));
+        }
+        $conexion -> cerrarConexion();
+        return $cliente_gasto;   
+    }
+
     public function registrar($nombre, $apellido, $correo, $clave)
     {
         $conexion = new Conexion();

@@ -7,7 +7,7 @@ $nombreCliente = $cliente->getNombre();
 ?>
 
 <div class="container mt-5">
-    <h2 class="text-center">Datos de Factura</h2>
+    <h2 class="text-center">Boletas compradas</h2>
     <div class="table-responsive">
         <table class="table table-bordered table-striped">
             <thead>

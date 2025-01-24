@@ -142,6 +142,18 @@ class Evento{
         $this->artista = $artista;
         $conexion -> cerrarConexion();
     }
+    public function consultarEventoBoleta(){
+        $eventos_boleta = array();
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $eventoDAO = new EventoDAO();
+        $conexion -> ejecutarConsulta($eventoDAO -> consultarEventoBoleta());
+        while($registro = $conexion -> siguienteRegistro()){
+            array_push($eventos_boleta, array($registro[0], $registro[1]));
+        }
+        $conexion -> cerrarConexion();
+        return $eventos_boleta;   
+    }
     public function insertar($nombre="",$idProveedor=0,$idCategoria=0,$idArtista=0){
         $conexion = new Conexion();
         $conexion -> abrirConexion();

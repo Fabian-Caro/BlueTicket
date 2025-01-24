@@ -51,6 +51,21 @@ return [
         'requires_session' => true,
     ],
 
+    '/graficaEventoMasVendido' => [
+        'view' => '/public/views/proveedor/graficaEventoMasVendido.php',
+        'requires_session' => true,
+    ],
+
+    '/graficaCategoriaEvento' => [
+        'view' => '/public/views/proveedor/graficaCategoriaEvento.php',
+        'requires_session' => true,
+    ],
+
+    '/graficaGastosClientes' => [
+        'view' => '/public/views/proveedor/graficaGastosClientes.php',
+        'requires_session' => true,
+    ],
+
     '/evento' => [
         'view' => '/public/views/cliente/evento.php',
         'requires_session' => false,

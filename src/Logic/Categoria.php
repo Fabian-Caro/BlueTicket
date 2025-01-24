@@ -50,6 +50,19 @@ class Categoria{
         $this -> nombre = $registro[0];
         $conexion -> cerrarConexion();
     }    
+
+    public function consultarCategoriaEvento(){
+        $categorias_evento = array();
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $categoriaDAO = new CategoriaDAO();
+        $conexion -> ejecutarConsulta($categoriaDAO -> consultarCategoriaEvento());
+        while($registro = $conexion -> siguienteRegistro()){
+            array_push($categorias_evento, array($registro[0], $registro[1]));
+        }
+        $conexion -> cerrarConexion();
+        return $categorias_evento;   
+    }
 }
 
 ?>

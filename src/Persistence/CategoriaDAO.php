@@ -19,6 +19,14 @@ class CategoriaDAO{
                 from Categoria
                 where idCategoria = '" . $this -> idCategoria . "'";
     }
+
+    public function consultarCategoriaEvento(){
+        return "SELECT c.nombre, COUNT(e.idEvento) AS count
+                FROM categoria c 
+                LEFT JOIN evento e ON c.idCategoria = e.idCategoria
+                GROUP BY c.idCategoria
+                ORDER BY count DESC;";
+    }
 }
 
 ?>
