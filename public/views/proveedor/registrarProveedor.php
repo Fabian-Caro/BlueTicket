@@ -33,7 +33,7 @@ if (isset($_POST['registrar'])) {
                     <h4>Registro</h4>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="registrarProveedor.php">
+                    <form method="post" action="/registroProveedor">
                         <div class="mb-3">
                             <input type="text" name="nombre" class="form-control" placeholder="Nombre" required>
                         </div>
