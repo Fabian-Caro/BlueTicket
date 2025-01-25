@@ -130,7 +130,7 @@ class Proveedor{
                 $artista -> consultar();
                 $artistas[$registro[3]] = $artista;
             }
-            $evento = new Evento($registro[0], $registro[1], $categoria, $artista);
+            $evento = new Evento($registro[0], $registro[1], $categoria, $artista,$registro[4]);
             array_push($eventos, $evento);
         }
         $conexion -> cerrarConexion();

@@ -10,6 +10,7 @@ class Evento{
     private $categoria;
     private $artista;
 
+    private $imagen;
     public function getIdEvento()
     {
         return $this->idEvento;
@@ -67,11 +68,21 @@ class Evento{
         $this->artista = $artista;
     }
 
-    public function __construct($idEvento=0, $nombreEvento="", $categoria=null, $artista=null) {
+    public function getImagen()
+    {
+        return $this->imagen;
+    }
+
+    public function setImagen($imagen)
+    {
+        $this->imagen = $imagen;
+    }
+    public function __construct($idEvento=0, $nombreEvento="", $categoria=null, $artista=null,$imagen = null) {
         $this -> idEvento = $idEvento;
         $this -> nombreEvento = $nombreEvento;
         $this -> categoria = $categoria;
         $this -> artista = $artista;
+        $this -> imagen = $imagen;
     }
     public function consultarTodos(){
         $categorias = array();
@@ -98,7 +109,7 @@ class Evento{
                 $artista -> consultar();
                 $artistas[$registro[3]] = $artista;
             }
-            $evento = new Evento($registro[0], $registro[1], $categoria, $artista);
+            $evento = new Evento($registro[0], $registro[1], $categoria, $artista,$registro[4]);
             array_push($eventos, $evento);
         }
         $conexion -> cerrarConexion();
@@ -140,6 +151,7 @@ class Evento{
         $artista = new Artista($registro[3]);
         $artista->consultar();
         $this->artista = $artista;
+        $this->imagen = $registro[4];
         $conexion -> cerrarConexion();
     }
     public function consultarEventoBoleta(){
@@ -166,6 +178,13 @@ class Evento{
             $e->getMessage();
         }
         
+        $conexion -> cerrarConexion();
+    }
+    public function editarImagen(){
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $eventoDAO = new EventoDAO($this -> idEvento, "", null, null, $this -> imagen);
+        $conexion -> ejecutarConsulta($eventoDAO -> editarImagen());
         $conexion -> cerrarConexion();
     }
 }

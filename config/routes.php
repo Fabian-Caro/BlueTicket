@@ -36,6 +36,11 @@ return [
         'requires_session' => true,
     ],
 
+    '/editarImagen' => [
+        'view' => '/public/views/proveedor/editarImagen.php',
+        'requires_session' => true,
+    ],
+
     '/nuevoEvento' => [
         'view' => '/public/views/proveedor/nuevoEvento.php',
         'requires_session' => true,

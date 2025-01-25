@@ -10,7 +10,8 @@ $idDetalle = isset($_GET['idDetalle']) ? intval($_GET['idDetalle']) : 0;
 $aforo = isset($_GET['aforo']) ? intval($_GET['aforo']) : 0;
 $cantidadEntradas = isset($_GET['cantidad']) ? intval($_GET['cantidad']) : 0;
 
-$evento = new Evento();
+$evento = new Evento($idEvento);
+$evento->consultar();
 $eventoData = $evento->consultarIdEvento($idEvento);
 $detallesEvento = new DetallesEvento();
 $detallesData = $detallesEvento->consultarIdDetalles($idDetalle);
@@ -112,13 +113,11 @@ if (isset($_GET['cantidad'])) {
                             </button>
                         </div>
                         <!-- funcionalidad ajax -->
-                        <button type="button" class="btn btn-secondary btn-lg w-100" id="addToCartButton">
-                            Agregar al Carrito
-                        </button>
+
                         <!-- Botón para Carro -->
                         <div class="col-md-8 offset-md-2">
                             <button type="submit" class="btn btn-secondary btn-lg w-100" onclick="cambiarDireccion('/carro')">
-                                Carro
+                            Agregar al Carrito
                             </button>
                         </div>
                     </div>
@@ -170,8 +169,11 @@ if (isset($_GET['cantidad'])) {
             <!-- Cambié a col-md-6 -->
             <div class="card card-white p-3 text-black mb-3 text-center">
                 <div class="d-flex justify-content-center">
-                    <img src="/assets/images/100.png" alt="Descripción de la imagen" class="img-fluid mb-2"
-                        style="max-width: 100px;">
+                    <img 
+                        src="<?php echo 'assets/images/' . $evento->getImagen(); ?>" 
+                        alt="Descripción de la imagen" 
+                        class="img-fluid event-image" 
+                        style="max-width: 100px; ">
                 </div>
                 <h2 class="fs-5">
                     <?php echo $eventoData->getNombreEvento() . " - " . $detallesData->getLugar()->getNombreLugar(); ?>
