@@ -23,7 +23,7 @@
                 echo "<div class='col-md-4 mb-4 $paddingClass'>";
                 echo "<div class='card' style='width: 100%; background-color: #0033cc;'>";
                 echo "<a href='/mantenimientoEvento?idEvento=" . $temp->getIdEvento() . "' style='text-decoration: none; color: inherit;'>";
-                echo "<img src='/assets/images/evento_categoria_concierto.jpeg' class='card-img-top' style='height: 300px;'>";
+                echo "<img src='assets/images/" . $temp->getImagen() . "'class='card-img-top' style='height: 300px;'>";
                 echo "<div class='card-body'>";
                 echo "<h5 class='card-title' style='color: white;'>" . $temp->getNombreEvento() . "</h5>";
                 echo "<p class='card-text' style='color: white;'>Categoria: " . $temp->getCategoria()->getNombre() . "</p>";

@@ -19,7 +19,11 @@ require_once (__DIR__ . '/../../../config/routes.php');
             <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                 <div class="card shadow" style="background-color: rgb(77, 79, 218); max-width: 580px; margin: auto;">
                     <a href="/evento?idEvento=<?= $temp->getIdEvento(); ?>" style="text-decoration: none; color: inherit;">
-                        <img src="/assets/images/evento_categoria_concierto.jpeg" class="card-img-top" style="height: 300px; object-fit: cover;" alt="Imagen del Evento">
+                        <img 
+                            src="<?php echo "assets/images/".$temp->getImagen(); ?>"  
+                            class="card-img-top" 
+                            style="height: 300px; object-fit: cover;" 
+                            alt="Imagen del Evento">
                         <div class="card-body">
                             <h5 class="card-title text-white mb-0"><?= $temp->getNombreEvento(); ?></h5>
                             <p class="card-text text-white mb-0">Categoría: <?= $temp->getCategoria()->getNombre(); ?></p>

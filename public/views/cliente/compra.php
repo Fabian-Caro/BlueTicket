@@ -7,7 +7,8 @@ require_once(__DIR__ . '/../../../src/Logic/DetallesEvento.php');
 $idEvento = isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0;
 $idDetalle = isset($_GET['idDetalle']) ? intval($_GET['idDetalle']) : 0;
 
-$evento = new Evento();
+$evento = new Evento($idEvento);
+$evento -> consultar();
 $eventoData = $evento->consultarIdEvento($idEvento);
 $detallesEvento = new DetallesEvento();
 $detallesData = $detallesEvento->consultarIdDetalles($idDetalle);
@@ -45,7 +46,12 @@ if (!$eventoData) {
 
         <!-- Detalles del evento -->
         <div class="col-lg-4 col-md-5 text-center">
-            <img src="/assets/images/100.png" alt="Imagen del evento" class="img-fluid mb-3" style="max-width: 100px;">
+        <img 
+            src="<?php echo 'assets/images/' . $evento->getImagen(); ?>" 
+            alt="Descripción de la imagen" 
+            class="img-fluid event-image" 
+            style="max-width: 100px; ">
+
 
             <h4 class="text-primary"><?php echo $eventoData->getArtista()->getNombre(); ?></h4>
             <p class="text-muted">Presenta:</p>

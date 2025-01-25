@@ -2,15 +2,22 @@
 
 class EventoDAO{
     private $idEvento;
-    private $nombre;
+    private $nombreEvento;
+    private $proveedor;
+    private $categoria;
+    private $artista;
+    private $imagen;
     
-    public function __construct($idEvento=0, $nombre=""){
+    public function __construct($idEvento=0, $nombreEvento="", $categoria=null, $artista=null,$imagen = null) {
         $this -> idEvento = $idEvento;
-        $this -> nombre = $nombre;
+        $this -> nombreEvento = $nombreEvento;
+        $this -> categoria = $categoria;
+        $this -> artista = $artista;
+        $this -> imagen = $imagen;
     }
     
     public function consultarTodos(){
-        return "SELECT idEvento, nombre, idCategoria, idArtista 
+        return "SELECT idEvento, nombre, idCategoria, idArtista, imagen
                 FROM evento";
     }
 
@@ -19,7 +26,7 @@ class EventoDAO{
     }
 
     public function consultar() {
-        return "SELECT nombre, idProveedor, idCategoria, idArtista FROM evento WHERE idEvento ='" . $this->idEvento . "'";
+        return "SELECT nombre, idProveedor, idCategoria, idArtista, imagen FROM evento WHERE idEvento ='" . $this->idEvento . "'";
     }
     
     public function consultarEventoBoleta(){
@@ -35,7 +42,11 @@ class EventoDAO{
         return "INSERT INTO Evento (nombre,idProveedor,idCategoria,idArtista) 
         VALUES ($nombre, $idProveedor,$idCategoria,$idArtista)";
     }
-    
+    public function editarImagen(){
+        return "update Evento
+                set imagen = '" . $this -> imagen . "'
+                where idEvento = '" . $this -> idEvento . "'";
+    }
 }
 
 ?>

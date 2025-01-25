@@ -15,7 +15,6 @@ if (isset($_POST["submit"])) {
     $evento->insertar($nombre, $idProveedor, $idCategoria, $idArtista);
 }
 ?>
-
 <div class="container form-container">
     <h2>Crear Nuevo Evento</h2>
     <form action="/nuevoEvento" method="POST">
@@ -51,7 +50,6 @@ if (isset($_POST["submit"])) {
             }
             ?>
         </div>
-
         <button type="submit" name="submit" class="submit-btn btn btn-primary">Crear Evento</button>
     </form>
 </div>

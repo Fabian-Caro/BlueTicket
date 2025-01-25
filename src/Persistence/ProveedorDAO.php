@@ -31,7 +31,7 @@ class ProveedorDAO{
                 where idProveedor = '" . $this -> idProveedor . "'";
     }
     public function consultarEventos(){
-        return "SELECT idEvento, nombre, idCategoria, idArtista 
+        return "SELECT idEvento, nombre, idCategoria, idArtista, imagen
                 FROM Evento where idProveedor =  '". $this -> idProveedor . "'";
     }
 }

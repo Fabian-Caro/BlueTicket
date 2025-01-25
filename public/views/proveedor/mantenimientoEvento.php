@@ -6,7 +6,8 @@ require_once(__DIR__ . '/../../../src/Logic/Ciudad.php');
 
 $idEvento = isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0;
 
-$evento = new Evento();
+$evento = new Evento($idEvento);
+$evento -> consultar();
 $eventoData = $evento->consultarIdEvento($idEvento);
 $detallesEvento = new DetallesEvento();
 $detallesData = $detallesEvento->consultarDetallesEvento($idEvento);
@@ -24,7 +25,11 @@ if (!$eventoData) {
     ?>
         <div class="row align-items-center mb-4">
             <div class="col-md-4">
-                <img src="/assets/images/evento_categoria_concierto.jpeg" alt="Descripción de la imagen" class="img-fluid" style="max-width: 100px; height: auto;">
+            <img 
+            src="<?php echo "assets/images/".$evento->getImagen(); ?>" 
+            alt="Descripción de la imagen" 
+            class="img-fluid" 
+            style="max-width: 100px; height: auto;">
             </div>
             <div class="col-md-8">
                 <?php
@@ -47,6 +52,7 @@ if (!$eventoData) {
     <div class="row">
         <div class="col-md-12 text-center">
             <button class='btn btn-primary' onclick="location.href='/crearEvento?idEvento=<?php echo $idEvento; ?>'">Crear Detalle Evento</button>
+            <button class='btn btn-primary' onclick="location.href='/editarImagen?idEvento=<?php echo $idEvento; ?>'">Editar Imagen</button>
         </div>
     </div>
 </div>
