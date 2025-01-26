@@ -18,14 +18,14 @@ if (basename(parse_url($paginaAnterior, PHP_URL_PATH)) === 'iniciarSesion.php') 
 
 }
 
-if ($paginaAnterior == "evento.php") {
+if ($paginaAnterior == "/evento") {
 
     $_SESSION["idEvento"] = $idEvento;
-} else if ($paginaAnterior == 'compra.php') {
+} else if ($paginaAnterior == '/compra') {
 
     $_SESSION["idEvento"] = $idEvento;
     $_SESSION["idDetalle"] = $idDetalle;
-} else if ($paginaAnterior == 'pago.php') {
+} else if ($paginaAnterior == '/pago') {
 
     $_SESSION["idEvento"] = $idEvento;
     $_SESSION["idDetalle"] = $idDetalle;
@@ -34,7 +34,7 @@ if ($paginaAnterior == "evento.php") {
 
     if (!isset($_SESSION["idCliente"])) {
 
-        header("Location: iniciarSesion.php?paginaAnterior=" . $paginaAnterior);
+        header("Location: /login?paginaAnterior=" . $paginaAnterior);
     }
 }
 

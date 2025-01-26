@@ -1,39 +1,6 @@
 <?php
 require_once(__DIR__ . '/../../../src/Logic/Carro.php');
 
-// Este es un ejemplo básico de cómo manejar la solicitud para agregar al carrito
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-//     $idEvento = intval($_POST['idEvento']);
-//     $idDetalle = intval($_POST['idDetalle']);
-//     $cantidad = intval($_POST['cantidad']);
-//     $nombres = intval($_POST['nombres']) ? $_POST['nombres'] : [];
-
-//     // Lógica para agregar al carrito (esto debe integrarse con tu sistema de carrito)
-//     // Ejemplo de guardar el producto en la sesión:
-//     $_SESSION['carrito'][] = [
-//         'idEvento' => $idEvento,
-//         'idDetalle' => $idDetalle,
-//         'cantidad' => $cantidad,
-//         'nombres' => $nombres,
-//     ];
-
-//     $carro = new Carro();
-
-//     if ($_SESSION['carrito']) {
-//         echo "idDetalle  " . $idDetalle . "<br>";
-//         echo var_dump($nombres) . "<br>";
-//         foreach ($nombres as $nombre) {
-//             echo $nombre . "<br>";
-//             $carro->insertar('"' . $nombre . '"', $idCliente, $idDetalle);
-//             echo "Producto agregado al carrito";
-//         }
-//     }
-
-//     // Responder con éxito
-    
-// }
-
 echo "pagina carro.php<br>";
 $idDetalle = isset($_POST['idDetalle']) ? intval($_POST['idDetalle']) : 0;
 $nombres = isset($_POST['nombres']) ? $_POST['nombres'] : [];

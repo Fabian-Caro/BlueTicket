@@ -26,8 +26,26 @@ if (!array_key_exists($currentPath, $routes)) {
 
 $requiresSession = $routes[$currentPath]['requires_session'] ?? false;
 
-if ($requiresSession && empty($_SESSION['idProveedor']) && empty($_SESSION['idCliente'])) {
+$usuario = null;
+if (!empty($_SESSION['idProveedor'])) {
+    $usuario = ['rol' => 'proveedor', 'id' => $_SESSION['idProveedor']];
+} elseif (!empty($_SESSION['idCliente'])) {
+    $usuario = ['rol' => 'cliente', 'id' => $_SESSION['idCliente']];
+}
+
+if ($requiresSession && !$usuario) {
     header("Location: /login");
+    exit;
+}
+
+$allowedRoles = $routes[$currentPath]['allowed_roles'] ?? [];
+
+
+//debo usar esta?
+if ($allowedRoles && (!$usuario || !in_array($usuario['rol'], $allowedRoles))) {
+    http_response_code(403);
+    include 'views/shared/errors/error403.php';
+    echo "403 Forbidden - Acceso no permitido para tu rol.";
     exit;
 }
 
