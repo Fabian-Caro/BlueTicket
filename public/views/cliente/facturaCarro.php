@@ -35,17 +35,20 @@ if (isset($_POST['items']) && isset($_POST['data'])) {
         $elementos = $datos[$indice];
         $evento = $elementos['eventos'];
         $costo = $elementos['costos'];
+        $idDetalles = $elementos['idsDetalles'];
 
         if (!isset($eventosAgrupados[$evento])) {
             $eventosAgrupados[$evento] = [
                 'cantidad' => 0,
                 'subtotal' => 0,
-                'costo_unitario' => $costo
+                'costo_unitario' => $costo,
+                'idDetalles' => [],
             ];
         }
 
         $eventosAgrupados[$evento]['cantidad']++;
         $eventosAgrupados[$evento]['subtotal'] += $costo;
+        $eventosAgrupados[$evento]['idsDetalles'][] = $idDetalles;
 
         // Acceder a cada campo enviado
         $idCarro = $elementos['idsCarro'];
@@ -84,7 +87,7 @@ if (isset($_POST['items']) && isset($_POST['data'])) {
             <tbody>
                 <?php foreach ($eventosAgrupados as $evento => $detalles): ?>
                     <tr>
-                        <td></td>
+                        <td><?php echo implode(', ', $detalles['idsDetalles']); ?></td>
                         <td><?php echo $evento; ?></td>
                         <td><?php echo $detalles['cantidad']; ?></td>
                         <td>$<?php echo number_format($detalles['costo_unitario'], 2); ?></td>
@@ -104,4 +107,20 @@ if (isset($_POST['items']) && isset($_POST['data'])) {
             </tfoot>
         </table>
     </div>
+    <form action="/generarFactura.php" method="POST" target="_blank">
+        <input type="hidden" name="idCliente" value="<?php echo $_SESSION['idCliente']; ?>">
+        <input type="hidden" name="idFactura" value="<?php echo $idFactura; ?>">
+        <?php foreach ($eventosAgrupados as $evento => $detalles): ?>
+            <input type="hidden" name="eventos[<?php echo $evento; ?>][idsDetalles]" value="<?php echo implode(', ', $detalles['idsDetalles']); ?>">
+            <input type="hidden" name="eventos[<?php echo $evento; ?>][nombre]" value="<?php echo $evento; ?>">
+            <input type="hidden" name="eventos[<?php echo $evento; ?>][cantidad]" value="<?php echo $detalles['cantidad']; ?>">
+            <input type="hidden" name="eventos[<?php echo $evento; ?>][costo_unitario]" value="<?php echo $detalles['costo_unitario']; ?>">
+            <input type="hidden" name="eventos[<?php echo $evento; ?>][subtotal]" value="<?php echo $detalles['subtotal']; ?>">
+        <?php endforeach; ?>
+        <input type="hidden" name="valor_subtotal" value="<?php echo $valor_subtotal; ?>">
+        <input type="hidden" name="ivaAgregado" value="<?php echo $ivaAgregado; ?>">
+        <input type="hidden" name="valor_total" value="<?php echo $valor_total; ?>">
+        <input type="hidden" name="tipoFactura" value="carrito">
+        <button type="submit">Factura <?php echo $idCliente . "," . $idFactura ?></button>
+    </form>
 </div>

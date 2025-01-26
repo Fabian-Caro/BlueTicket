@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         foreach ($seleccionados as $indice) {
             // Obtener los datos del elemento seleccionado usando su índice
             $elementos = $datos[$indice];
-            print_r($elementos);
+            //print_r($elementos);
 
             if (isset($elementos['idEventos'])) {
                 // Agregar el valor de 'idEventos' al arreglo
@@ -146,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $idFactura = isset($_GET['idFactura']) ? intval($_GET['idFactura']) : 0;
     $idEvento = isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0;
-    echo $idEvento;
+    //echo $idEvento;
     $cantidadEntradas = isset($_GET['cantidad']) ? intval($_GET['cantidad']) : 0;
     $idDetalle = isset($_GET['idDetalle']) ? intval($_GET['idDetalle']) : 0;
 
@@ -185,7 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         foreach ($itemsFactura as $item) {
             echo $idEvento;
-            print_r($item);
+            //print_r($item);
             $evento = $item['idDetalle'];
             $costo = $item['costoUnitario'];
 
@@ -229,61 +229,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 </tr>
             </thead>
             <tbody>
-                <?php echo "<pre>";
-                print_r($_GET);
-                echo "</pre>";
-                echo "<pre>";
-                print_r($eventosAgrupados);
-                echo "</pre>";
-                ?>
-
-                <?php if (!empty($eventosAgrupados)) : ?>
-                    <?php foreach ($eventosAgrupados as $evento => $detalles) { ?>
-                        <?php echo "hola"; ?>
-                        <tr>
-                            <td><?php echo $detalles['nombre']; ?></td>
-                            <td><?php echo  $detalles['nombre']; ?></td>
-                            <td><?php echo $detalles['cantidad']; ?></td>
-                            <td>$<?php echo number_format($detalles['costo_unitario'], 2); ?></td>
-                            <td>$<?php echo number_format($detalles['subtotal'], 2); ?></td>
-                        </tr>
-                    <?php } ?>
+                <tr>
+                    <td><?php echo $idDetalle ?></td>
+                    <td><?php echo $eventoData->getNombreEvento() ?></td>
+                    <td><?php echo $cantidadEntradas ?></td>
+                    <td>$<?php echo $detallesData->getCostoEvento() ?></td>
+                    <td>$<?php echo $subTotal ?></td>
+                </tr>
 
             </tbody>
             <tfoot>
                 <tr>
                     <td colspan="3" class="text-right">IVA (19%):</td>
-                    <td>$<?php echo $ivaAgregado ?></td>
+                    <td>$<?php echo $ivaAgregado
+                            ?></td>
                 </tr>
                 <tr class="total">
                     <td colspan="3" class="text-right">Total:</td>
-                    <td>$<?php echo $valor_total ?></td>
+                    <td>$<?php echo $total ?></td>
                 </tr>
-            <?php else: ?>
-                <?php echo "adios"; ?>
-                <tr>
-                    <td><?php echo $idDetalle ?></td>
-                    <td><?php echo $eventoData->getNombreEvento() 
-                        ?></td>
-                    <td><?php echo $cantidadEntradas ?></td>
-                    <td>$<?php echo $detallesData->getCostoEvento() 
-                            ?></td>
-                    <td>$<?php echo $subTotal ?></td>
-                </tr>
-
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3" class="text-right">IVA (19%):</td>
-                        <td>$<?php echo $ivaAgregado 
-                                ?></td>
-                    </tr>
-                    <tr class="total">
-                        <td colspan="3" class="text-right">Total:</td>
-                        <td>$<?php echo $total ?></td>
-                    </tr>
-                </tfoot>
-            <?php endif; ?>
+            </tfoot>
         </table>
     </div>
     <form action="/generarFactura.php" method="POST" target="_blank">
@@ -292,6 +257,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <input type="hidden" name="idDetalle" value="<?php echo $idDetalle; ?>">
         <input type="hidden" name="idEvento" value="<?php echo $idEvento; ?>">
         <input type="hidden" name="cantidadEntradas" value="<?php echo $cantidadEntradas; ?>">
+        <input type="hidden" name="tipoFactura" value="individual">
         <button type="submit">Factura <?php echo $idCliente . "," . $idFactura ?></button>
     </form>
 </div>

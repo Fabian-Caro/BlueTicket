@@ -74,7 +74,7 @@ $carros = $carro->consultarTodos($idCliente);
         </div>
         <input type="hidden" name="costo_total" id="costo_total" value="0.00">
         <button type="submit" id="btnPagar" class="btn btn-primary mt-3" disabled>Pagar Seleccionados</button>
-        <button type="submit" id="btnCancelar" class="btn btn-primary mt-3" disabled onclick="cambiarDireccion('/carro')">Cancelar Seleccionados</button>
+        <button type="submit" id="btnCancelar" class="btn btn-primary mt-3" disabled onclick="cambiarDireccion('/carro')">Eliminar Seleccionados</button>
     </div>
 </form>
 
