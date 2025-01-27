@@ -22,9 +22,9 @@ if (isset($_POST['items']) && isset($_POST['data'])) {
     $ivaAgregado = $valor_subtotal * 0.19;
     $valor_total = $valor_subtotal + $ivaAgregado;
 
-    $fechaFactura = date("Y-m-d");
+    $fechaHoraActual = date('Y-m-d H:i:s');
     $factura = new Factura();
-    $factura->insertar("'" . $fechaFactura . "'", $valor_subtotal, $valor_total, $idCliente);
+    $factura->insertar("'" . $fechaHoraActual . "'", $valor_subtotal, $valor_total, $idCliente);
     $idFactura = $factura->ultimoId();
     $boleta = new  Boleta();
     $carro = new Carro();

@@ -132,5 +132,11 @@ return [
         'requires_session' => true,
         'allowed_roles' => ['cliente'],
     ],
+
+    '/boletaQR' => [
+        'view' => '/src/Services/boletaQR.php',
+        'requires_session' => true,
+        'allowed_roles' => ['cliente'],
+    ],
 ];
 ?>
