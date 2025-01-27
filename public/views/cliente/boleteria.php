@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__ . '/../../../src/Logic/Cliente_boleta.php');
-require_once (__DIR__ . '/../../../src/Logic/Cliente.php');
+require_once(__DIR__ . '/../../../src/Logic/Cliente.php');
 
 $cliente = new Cliente();
 $nombreCliente = $cliente->getNombre();
@@ -16,6 +16,7 @@ $nombreCliente = $cliente->getNombre();
                     <th>Nombre del Usuario</th>
                     <th>Nombre del Evento</th>
                     <th>Fecha del Evento</th>
+                    <th>Descargar</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,6 +30,18 @@ $nombreCliente = $cliente->getNombre();
                     echo "<td>" . $temp->getNombreUsuario() . "</td>";
                     echo "<td>" . $temp->getNombreEvento() . "</td>";
                     echo "<td>" . $temp->getFecha() . "</td>";
+                    echo "<td>";
+                ?>
+                    <form action='/generarQR.php' method='POST' target="_blank">
+                        <input type='hidden' name='nombreCliente' value='<?php echo $temp->getNombreCliente(); ?>'>
+                        <input type='hidden' name='nombreUsuario' value='<?php echo $temp->getNombreUsuario(); ?>'>
+                        <input type='hidden' name='nombreEvento' value='<?php echo $temp->getNombreEvento(); ?>'>
+                        <input type='hidden' name='fecha' value='<?php echo $temp->getFecha(); ?>'>
+                        <button type='submit' class='btn btn-primary'>Generar QR</button>
+                    </form>
+
+                <?php
+                    echo "</td>";
                     echo "</tr>";
                 }
                 ?>
