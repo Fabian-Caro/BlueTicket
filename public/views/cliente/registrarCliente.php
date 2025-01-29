@@ -91,7 +91,7 @@ function activarCuenta($idCliente, $correoCliente)
 </style>
 
 <div class="container vh-100 d-flex justify-content-center align-items-center">
-    <div class="row">
+    <div class="row w-50">
         <div class="col-md-12">
             <div class="card border-primary">
                 <div class="card-header bg-primary text-white">

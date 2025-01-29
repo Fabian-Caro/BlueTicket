@@ -1,5 +1,5 @@
 <?php
-require_once (__DIR__ . '/../../../config/routes.php');
+require_once(__DIR__ . '/../../../config/routes.php');
 require_once(__DIR__ . '/../../../src/Logic/Lugar.php');
 require_once(__DIR__ . '/../../../src/Logic/Ciudad.php');
 require_once(__DIR__ . '/../../../src/Logic/Evento.php');
@@ -8,7 +8,7 @@ require_once(__DIR__ . '/../../../src/Logic/DetallesEvento.php');
 $idEvento = isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0;
 
 $evento = new Evento($idEvento);
-$evento -> consultar();
+$evento->consultar();
 $eventoData = $evento->consultarIdEvento($idEvento);
 $detallesEvento = new DetallesEvento();
 $detallesData = $detallesEvento->consultarDetallesEvento($idEvento);
@@ -20,61 +20,98 @@ if (!$eventoData) {
 
 ?>
 
-<html lang="es">
+<style>
+    body {
+        background-color: #F8F9FA;
+        font-family: 'Poppins', sans-serif;
+    }
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php echo $eventoData->getArtista()->getNombre(); ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="css/estilos.css" rel="stylesheet">
-</head>
+    .event-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
 
-<body>
+    .event-header {
+        color: #007BFF;
+        font-weight: bold;
+        text-align: center;
+    }
 
-    <div class="container event-container">
-        <?php foreach ($detallesData as $detalle) { ?>
-            <div class="row align-items-center mb-4">
-                <div class="col-md-4 text-center">
-                    <h1 class="event-header"><?php echo $eventoData->getArtista()->getNombre(); ?></h1>
-                    <img 
-                        src="<?php echo 'assets/images/' . $evento->getImagen(); ?>" 
-                        alt="Descripción de la imagen" 
-                        class="img-fluid event-image" 
-                        style="max-width: 100px; height: auto;">
-                </div>
-                <div class="col-md-8">
-                    <h2 class="event-header"><?php echo $detalle->getLugar()->getNombreLugar(); ?></h2>
-                    <p class="event-details">
-                        <?php echo "<div class='fs-6'>" . $eventoData->getNombreEvento() . " - " . $detalle->getLugar()->getCiudad()->getNombreCiudad() . "</div>"; ?>
+    .event-image {
+        max-width: 150px;
+        height: auto;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
 
-                        <?php
-                        $fecha = $detalle->getFechaEvento();
-                        if ($fecha) {
-                            $date = new DateTime($fecha);
-                            $dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
-                            $meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+    .event-details {
+        font-size: 1rem;
+        color: #6C757D;
+        text-align: center;
+    }
 
-                            $diaNombre = $dias[$date->format('w')]; // Día de la semana
-                            $dia = $date->format('d'); // Día del mes
-                            $mesNombre = $meses[$date->format('n') - 1]; // Nombre del mes
-                            $anio = $date->format('Y'); // Año
+    .event-btn {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background-color: #007BFF;
+        border: none;
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+        text-align: center;
+        border-radius: 6px;
+        transition: background 0.3s ease;
+    }
 
-                            $fechaFormateada = "{$diaNombre}, {$dia} de {$mesNombre} de {$anio}";
+    .event-btn:hover {
+        background-color: #0056B3;
+    }
+</style>
 
-                            echo "<div class='fs-6'>" . $fechaFormateada . "</div>"; // Muestra la fecha en español
-                        } else {
-                            echo "Fecha no disponible.";
-                        }
-                        ?>
-
-                    <div class="fs-6"><?php echo $detalle->getHoraInicioEvento(); ?></div>
-                    </p>
-                    <button class="event-btn" onclick="location.href='/compra?idEvento=<?php echo $eventoData->getIdEvento(); ?>&idDetalle=<?php echo $detalle->getIdDetallesEvento(); ?>'">Ver evento</button>
-                </div>
+<div class="container event-container">
+    <?php foreach ($detallesData as $detalle) { ?>
+        <div class="row align-items-center mb-4">
+            <div class="col-md-4 text-center">
+                <h1 class="event-header"><?php echo $eventoData->getArtista()->getNombre(); ?></h1>
+                <img
+                    src="<?php echo 'assets/images/' . $evento->getImagen(); ?>"
+                    alt="Imagen del Artista"
+                    class="img-fluid event-image">
             </div>
-        <?php } ?>
-    </div>
-</body>
+            <div class="col-md-8 text-center">
+                <h2 class="event-header"><?php echo $detalle->getLugar()->getNombreLugar(); ?></h2>
+                <p class="event-details">
+                    <div class='fs-6'><?= $eventoData->getNombreEvento() . " - " . $detalle->getLugar()->getCiudad()->getNombreCiudad(); ?></div>
 
-</html>
+                    <?php
+                    $fecha = $detalle->getFechaEvento();
+                    if ($fecha) {
+                        $date = new DateTime($fecha);
+                        $dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+                        $meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+                        $diaNombre = $dias[$date->format('w')]; // Día de la semana
+                        $dia = $date->format('d'); // Día del mes
+                        $mesNombre = $meses[$date->format('n') - 1]; // Nombre del mes
+                        $anio = $date->format('Y'); // Año
+
+                        $fechaFormateada = "{$diaNombre}, {$dia} de {$mesNombre} de {$anio}";
+
+                        echo "<div class='fs-6'>$fechaFormateada</div>";
+                    } else {
+                        echo "Fecha no disponible.";
+                    }
+                    ?>
+
+                    <div class="fs-6"><?= $detalle->getHoraInicioEvento(); ?></div>
+                </p>
+                <button class="event-btn" onclick="location.href='/compra?idEvento=<?= $eventoData->getIdEvento(); ?>&idDetalle=<?= $detalle->getIdDetallesEvento(); ?>'">Ver evento</button>
+            </div>
+        </div>
+    <?php } ?>
+</div>

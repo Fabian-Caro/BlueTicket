@@ -24,7 +24,7 @@ if (isset($_POST['registrar'])) {
 function activarCuenta($idProveedor, $correoProveedor)
 {
 
-    $datosEmpresa = require_once (__DIR__ . '/../../../config/datosEmpresa.php');
+    $datosEmpresa = require_once(__DIR__ . '/../../../config/datosEmpresa.php');
 
     $enlace = "http://localhost:8000/activacion?ip=$idProveedor";
 
@@ -89,47 +89,10 @@ function activarCuenta($idProveedor, $correoProveedor)
     .extra-links a:hover {
         text-decoration: underline;
     }
-
-    /* Estilo para el enlace */
-    .text-center a {
-        color: #007BFF;
-        text-decoration: none;
-    }
-
-    .text-center a:hover {
-        text-decoration: underline;
-    }
-
-    /* Tamaño del contenedor */
-    .container {
-        max-width: 600px;
-    }
-
-    /* Alineación del formulario */
-    .form-control {
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .form-control:focus {
-        border-color: #007BFF;
-        box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
-    }
-
-    .btn-primary {
-        border-radius: 8px;
-    }
-
-    /* Ajustes de tamaño en pantallas pequeñas */
-    @media (max-width: 768px) {
-        .container {
-            width: 90%;
-        }
-    }
 </style>
 
 <div class="container vh-100 d-flex justify-content-center align-items-center">
-    <div class="row">
+    <div class="row w-50">
         <div class="col-md-12">
             <div class="card border-primary">
                 <div class="card-header bg-primary text-white">
@@ -150,8 +113,10 @@ function activarCuenta($idProveedor, $correoProveedor)
                             <input type="password" name="clave" class="form-control" placeholder="Clave" required>
                         </div>
                         <button type="submit" name="registrar" class="btn btn-primary w-100">Registrarse</button>
-                        <a href="/registro" class="d-block text-center mt-3">Registrarse como cliente</a>
                     </form>
+                    <div class="extra-links">
+                        <a href="/registro" class="d-block text-center mt-3">Registrarse como cliente</a>
+                    </div>
                 </div>
             </div>
         </div>
