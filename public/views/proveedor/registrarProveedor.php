@@ -11,7 +11,7 @@ if (isset($_POST['registrar'])) {
 
     if ($proveedor->registrar($nombre, $apellido, $correo, $clave)) {
         $proveedor->autenticar();
-        activarCuenta($proveedor->getIdProveedor());
+        activarCuenta($proveedor->getIdProveedor(), $correo);
         echo "  <div class='alert alert-success' role='alert'>
                 Registro completado. Se ha enviado un correo de activación a $correo
                 </div>";
@@ -21,8 +21,10 @@ if (isset($_POST['registrar'])) {
     }
 }
 
-function activarCuenta($idProveedor)
+function activarCuenta($idProveedor, $correoProveedor)
 {
+
+    $datosEmpresa = require_once (__DIR__ . '/../../../config/datosEmpresa.php');
 
     $enlace = "http://localhost:8000/activacion?ip=$idProveedor";
 
@@ -30,7 +32,10 @@ function activarCuenta($idProveedor)
 
     $archivo = $directorio . "activarCuentaProveedor_$idProveedor.txt";
 
-    $mensaje = "¡Hola!\n\n";
+    $mensaje = "De: $datosEmpresa[correo] \n";
+    $mensaje .= "Para: $correoProveedor \n";
+    $mensaje .= "Asunto: Activación de cuenta en BlueTicket/Proveedor \n\n";
+    $mensaje .= "¡Hola!\n\n";
     $mensaje .= "Para activar tu cuenta y trabajar con nosotros, por favor haz clic en el siguiente enlace:\n";
     $mensaje .= "$enlace\n\n";
     $mensaje .= "Si no has solicitado este registro, por favor ignora este mensaje.\n\n";
@@ -41,12 +46,94 @@ function activarCuenta($idProveedor)
 
 ?>
 
+<style>
+    body {
+        background-color: #F8F9FA;
+        /* Fondo gris claro */
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .card {
+        border-radius: 12px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background-color: #007BFF;
+        border: none;
+        font-weight: bold;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056B3;
+    }
+
+    .extra-links {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .extra-links a {
+        color: #007BFF;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .extra-links a:hover {
+        text-decoration: underline;
+    }
+
+    /* Estilo para el enlace */
+    .text-center a {
+        color: #007BFF;
+        text-decoration: none;
+    }
+
+    .text-center a:hover {
+        text-decoration: underline;
+    }
+
+    /* Tamaño del contenedor */
+    .container {
+        max-width: 600px;
+    }
+
+    /* Alineación del formulario */
+    .form-control {
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control:focus {
+        border-color: #007BFF;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
+    }
+
+    .btn-primary {
+        border-radius: 8px;
+    }
+
+    /* Ajustes de tamaño en pantallas pequeñas */
+    @media (max-width: 768px) {
+        .container {
+            width: 90%;
+        }
+    }
+</style>
+
 <div class="container vh-100 d-flex justify-content-center align-items-center">
     <div class="row">
         <div class="col-md-12">
             <div class="card border-primary">
                 <div class="card-header bg-primary text-white">
-                    <h4>Registro</h4>
+                    <h4>Registro Proveedor</h4>
                 </div>
                 <div class="card-body">
                     <form method="post" action="/registroProveedor">

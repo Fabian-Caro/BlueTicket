@@ -34,6 +34,90 @@ if ($idDetalle && $nombres) {
 $carros = $carro->consultarTodos($idCliente);
 ?>
 
+<style>
+    body {
+        background-color: #F8F9FA;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 30px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+        color: #007BFF;
+        font-weight: bold;
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    .form-check {
+        padding: 12px;
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        margin-bottom: 15px;
+        background-color: #fafafa;
+    }
+
+    .form-check-input {
+        margin-right: 12px;
+        width: 18px;
+        height: 18px;
+    }
+
+    .form-check-label {
+        font-size: 16px;
+        color: #495057;
+    }
+
+    .form-check:hover {
+        background-color: #f1f1f1;
+        cursor: pointer;
+    }
+
+    #total {
+        font-size: 20px;
+        color: #333;
+    }
+
+    .btn-primary {
+        background-color: #007BFF;
+        color: white;
+        padding: 12px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 6px;
+        transition: background 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056B3;
+    }
+
+    .btn-primary:disabled {
+        background-color: #6c757d;
+        cursor: not-allowed;
+    }
+
+    .mt-3 {
+        margin-top: 20px;
+    }
+
+    .mt-4 {
+        margin-top: 30px;
+    }
+
+    .fw-bold {
+        font-weight: bold;
+    }
+</style>
+
 <form id="formulario" action="/facturaCarro" method="POST" class="mt-4">
     <div class="container">
         <h3 class="mb-3">Carrito de Compras</h3>
@@ -71,6 +155,7 @@ $carros = $carro->consultarTodos($idCliente);
         <button type="submit" id="btnCancelar" class="btn btn-primary mt-3" disabled onclick="cambiarDireccion('/carro')">Eliminar Seleccionados</button>
     </div>
 </form>
+
 
 <script>
     function cambiarDireccion(url) {

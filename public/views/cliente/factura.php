@@ -210,6 +210,87 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 
 ?>
+<style>
+    body {
+        background-color: #F8F9FA;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 30px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .invoice-header {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #007BFF;
+    }
+
+    .invoice-header h1 {
+        font-weight: bold;
+        font-size: 36px;
+    }
+
+    .invoice-header p {
+        font-size: 18px;
+    }
+
+    .invoice-details table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+    }
+
+    .invoice-details th,
+    .invoice-details td {
+        padding: 12px;
+        text-align: center;
+    }
+
+    .invoice-details thead {
+        background-color: #f2f2f2;
+    }
+
+    .invoice-details tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .invoice-details tfoot td {
+        font-weight: bold;
+    }
+
+    .total {
+        background-color: #f8f9fa;
+    }
+
+    .invoice-details .text-right {
+        text-align: right;
+    }
+
+    form {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    form button {
+        background-color: #007BFF;
+        color: white;
+        padding: 12px 24px;
+        font-size: 16px;
+        border: none;
+        border-radius: 6px;
+        transition: background 0.3s ease;
+    }
+
+    form button:hover {
+        background-color: #0056B3;
+    }
+</style>
 <div class="container mt-5">
     <div class="invoice-header">
         <h1>Factura</h1>
@@ -236,13 +317,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     <td>$<?php echo $detallesData->getCostoEvento() ?></td>
                     <td>$<?php echo $subTotal ?></td>
                 </tr>
-
             </tbody>
             <tfoot>
                 <tr>
                     <td colspan="3" class="text-right">IVA (19%):</td>
-                    <td>$<?php echo $ivaAgregado
-                            ?></td>
+                    <td>$<?php echo $ivaAgregado ?></td>
                 </tr>
                 <tr class="total">
                     <td colspan="3" class="text-right">Total:</td>
@@ -251,6 +330,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             </tfoot>
         </table>
     </div>
+
     <form action="/generarFactura.php" method="POST" target="_blank">
         <input type="hidden" name="idCliente" value="<?php echo $_SESSION['idCliente']; ?>">
         <input type="hidden" name="idFactura" value="<?php echo $idFactura; ?>">
@@ -258,6 +338,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <input type="hidden" name="idEvento" value="<?php echo $idEvento; ?>">
         <input type="hidden" name="cantidadEntradas" value="<?php echo $cantidadEntradas; ?>">
         <input type="hidden" name="tipoFactura" value="individual">
-        <button type="submit">Factura</button>
+        <button type="submit">Generar Factura</button>
     </form>
 </div>

@@ -1,5 +1,5 @@
 <?php
-require_once (__DIR__ . '/../../../config/routes.php');
+require_once(__DIR__ . '/../../../config/routes.php');
 require_once(__DIR__ . '/../../../src/Logic/Lugar.php');
 require_once(__DIR__ . '/../../../src/Logic/Evento.php');
 require_once(__DIR__ . '/../../../src/Logic/DetallesEvento.php');
@@ -8,7 +8,7 @@ $idEvento = isset($_GET['idEvento']) ? intval($_GET['idEvento']) : 0;
 $idDetalle = isset($_GET['idDetalle']) ? intval($_GET['idDetalle']) : 0;
 
 $evento = new Evento($idEvento);
-$evento -> consultar();
+$evento->consultar();
 $eventoData = $evento->consultarIdEvento($idEvento);
 $detallesEvento = new DetallesEvento();
 $detallesData = $detallesEvento->consultarIdDetalles($idDetalle);
@@ -18,11 +18,69 @@ if (!$eventoData) {
     exit;
 }
 ?>
-<div class="container mt-4">
+
+<style>
+    body {
+        background-color: #F8F9FA;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .ticket-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .event-header {
+        color: #007BFF;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .event-image {
+        max-width: 180px;
+        height: auto;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+
+    .event-details {
+        font-size: 1rem;
+        color: #6C757D;
+        text-align: center;
+    }
+
+    .ticket-input {
+        width: 100px;
+        text-align: center;
+    }
+
+    .btn-primary {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background-color: #007BFF;
+        border: none;
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+        text-align: center;
+        border-radius: 6px;
+        transition: background 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056B3;
+    }
+</style>
+<div class="container ticket-container">
     <div class="row">
         <!-- Información del evento -->
         <div class="col-lg-8 col-md-7">
-            <h2 class="text-center"><?php echo $eventoData->getNombreEvento(); ?></h2>
+            <h2 class="event-header"><?php echo $eventoData->getNombreEvento(); ?></h2>
             <ul class="list-unstyled text-center">
                 <li><strong>Capacidad:</strong> <?php echo $detallesData->getAforoEvento(); ?></li>
                 <li><strong>Valor por entrada:</strong> $<?php echo $detallesData->getCostoEvento(); ?></li>
@@ -33,25 +91,23 @@ if (!$eventoData) {
                     <input type="hidden" name="idEvento" value="<?php echo $eventoData->getIdEvento(); ?>">
                     <input type="hidden" name="idDetalle" value="<?php echo $detallesData->getIdDetallesEvento(); ?>">
                     <input type="hidden" name="aforo" value="<?php echo $detallesData->getAforoEvento(); ?>">
+
                     <div class="d-flex justify-content-center align-items-center mb-3">
                         <label for="contador" class="me-2">Cantidad de entradas:</label>
-                        <input type="number" name="cantidad" id="contador" class="form-control" value="" min="1" max="<?php echo $detallesData->getAforoEvento(); ?>" style="width: 100px;" required>
+                        <input type="number" name="cantidad" id="contador" class="form-control ticket-input" value="1" min="1" max="<?php echo $detallesData->getAforoEvento(); ?>" required>
                     </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Continuar</button>
-                    </div>
+
+                    <button type="submit" class="btn btn-primary">Continuar</button>
                 </form>
             </div>
         </div>
 
         <!-- Detalles del evento -->
         <div class="col-lg-4 col-md-5 text-center">
-        <img 
-            src="<?php echo 'assets/images/' . $evento->getImagen(); ?>" 
-            alt="Descripción de la imagen" 
-            class="img-fluid event-image" 
-            style="max-width: 100px; ">
-
+            <img
+                src="<?php echo 'assets/images/' . $evento->getImagen(); ?>"
+                alt="Imagen del evento"
+                class="img-fluid event-image">
 
             <h4 class="text-primary"><?php echo $eventoData->getArtista()->getNombre(); ?></h4>
             <p class="text-muted">Presenta:</p>

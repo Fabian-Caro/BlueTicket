@@ -10,8 +10,8 @@ if (isset($_POST['registrar'])) {
     $cliente = new Cliente(null, $nombre, $apellido, $correo, $clave, null);
 
     if ($cliente->registrar($nombre, $apellido, $correo, $clave)) {
-        $cliente -> autenticar();
-        activarCuenta($cliente->getIdCliente());
+        $cliente->autenticar();
+        activarCuenta($cliente->getIdCliente(), $correo);
         echo "  <div class='alert alert-success' role='alert'>
                 Registro completado. Se ha enviado un correo de activación a $correo
                 </div>";
@@ -21,8 +21,9 @@ if (isset($_POST['registrar'])) {
     }
 }
 
-function activarCuenta($idCliente)
+function activarCuenta($idCliente, $correoCliente)
 {
+    $datosEmpresa = require_once(__DIR__ . '/../../../config/datosEmpresa.php');
 
     $enlace = "http://localhost:8000/activacion?ic=$idCliente";
 
@@ -30,17 +31,64 @@ function activarCuenta($idCliente)
 
     $archivo = $directorio . "activarCuentaCliente_$idCliente.txt";
 
-    $mensaje = "¡Hola!\n\n";
+    $mensaje = "De: $datosEmpresa[correo] \n";
+    $mensaje .= "Para: $correoCliente \n";
+    $mensaje .= "Asunto: Activación de cuenta en BlueTicket \n\n";
+    $mensaje .= "¡Hola!\n\n";
     $mensaje .= "Para activar tu cuenta en nuestro sitio, por favor haz clic en el siguiente enlace:\n";
     $mensaje .= "$enlace\n\n";
     $mensaje .= "Si no has solicitado este registro, por favor ignora este mensaje.\n\n";
     $mensaje .= "Gracias,\nEl equipo de BlueTicket.";
 
     file_put_contents($archivo, $mensaje);
-} 
+}
 
 ?>
 
+<style>
+    body {
+        background-color: #F8F9FA;
+        /* Fondo gris claro */
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .card {
+        border-radius: 12px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background-color: #007BFF;
+        border: none;
+        font-weight: bold;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056B3;
+    }
+
+    .extra-links {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .extra-links a {
+        color: #007BFF;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .extra-links a:hover {
+        text-decoration: underline;
+    }
+</style>
 
 <div class="container vh-100 d-flex justify-content-center align-items-center">
     <div class="row">
@@ -65,7 +113,10 @@ function activarCuenta($idCliente)
                         </div>
                         <button type="submit" name="registrar" class="btn btn-primary w-100">Registrarse</button>
                     </form>
-                    <a href="/registroProveedor" class="d-block text-center mt-3">Registrarse como proveedor</a>
+
+                    <div class="extra-links">
+                        <a href="/registroProveedor">Registrarse como proveedor</a>
+                    </div>
                 </div>
             </div>
         </div>
