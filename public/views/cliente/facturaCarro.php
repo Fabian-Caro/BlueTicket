@@ -107,6 +107,7 @@ if (isset($_POST['items']) && isset($_POST['data'])) {
             </tfoot>
         </table>
     </div>
+
     <form action="/generarFactura.php" method="POST" target="_blank">
         <input type="hidden" name="idCliente" value="<?php echo $_SESSION['idCliente']; ?>">
         <input type="hidden" name="idFactura" value="<?php echo $idFactura; ?>">
@@ -121,6 +122,6 @@ if (isset($_POST['items']) && isset($_POST['data'])) {
         <input type="hidden" name="ivaAgregado" value="<?php echo $ivaAgregado; ?>">
         <input type="hidden" name="valor_total" value="<?php echo $valor_total; ?>">
         <input type="hidden" name="tipoFactura" value="carrito">
-        <button type="submit">Factura</button>
+        <button type="submit" class="btn btn-primary">Generar Factura</button>
     </form>
 </div>

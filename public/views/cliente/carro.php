@@ -72,6 +72,7 @@ $carros = $carro->consultarTodos($idCliente);
     </div>
 </form>
 
+
 <script>
     function cambiarDireccion(url) {
         const form = document.getElementById('formulario');

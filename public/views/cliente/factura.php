@@ -210,6 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 
 ?>
+
 <div class="container mt-5">
     <div class="invoice-header">
         <h1>Factura</h1>
@@ -236,13 +237,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     <td>$<?php echo $detallesData->getCostoEvento() ?></td>
                     <td>$<?php echo $subTotal ?></td>
                 </tr>
-
             </tbody>
             <tfoot>
                 <tr>
                     <td colspan="3" class="text-right">IVA (19%):</td>
-                    <td>$<?php echo $ivaAgregado
-                            ?></td>
+                    <td>$<?php echo $ivaAgregado ?></td>
                 </tr>
                 <tr class="total">
                     <td colspan="3" class="text-right">Total:</td>
@@ -251,6 +250,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             </tfoot>
         </table>
     </div>
+
     <form action="/generarFactura.php" method="POST" target="_blank">
         <input type="hidden" name="idCliente" value="<?php echo $_SESSION['idCliente']; ?>">
         <input type="hidden" name="idFactura" value="<?php echo $idFactura; ?>">
@@ -258,6 +258,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <input type="hidden" name="idEvento" value="<?php echo $idEvento; ?>">
         <input type="hidden" name="cantidadEntradas" value="<?php echo $cantidadEntradas; ?>">
         <input type="hidden" name="tipoFactura" value="individual">
-        <button type="submit">Factura</button>
+        <button type="submit">Generar Factura</button>
     </form>
 </div>

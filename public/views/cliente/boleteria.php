@@ -7,7 +7,7 @@ $nombreCliente = $cliente->getNombre();
 ?>
 
 <div class="container mt-5">
-    <h2 class="text-center">Boletas compradas</h2>
+    <h2 class="text-center">Boletas Compradas</h2>
     <div class="table-responsive">
         <table class="table table-bordered table-striped">
             <thead>
@@ -39,7 +39,6 @@ $nombreCliente = $cliente->getNombre();
                         <input type='hidden' name='fecha' value='<?php echo $temp->getFecha(); ?>'>
                         <button type='submit' class='btn btn-primary'>Generar QR</button>
                     </form>
-
                 <?php
                     echo "</td>";
                     echo "</tr>";

@@ -11,7 +11,7 @@ if (isset($_POST['registrar'])) {
 
     if ($proveedor->registrar($nombre, $apellido, $correo, $clave)) {
         $proveedor->autenticar();
-        activarCuenta($proveedor->getIdProveedor());
+        activarCuenta($proveedor->getIdProveedor(), $correo);
         echo "  <div class='alert alert-success' role='alert'>
                 Registro completado. Se ha enviado un correo de activación a $correo
                 </div>";
@@ -21,8 +21,10 @@ if (isset($_POST['registrar'])) {
     }
 }
 
-function activarCuenta($idProveedor)
+function activarCuenta($idProveedor, $correoProveedor)
 {
+
+    $datosEmpresa = require_once(__DIR__ . '/../../../config/datosEmpresa.php');
 
     $enlace = "http://localhost:8000/activacion?ip=$idProveedor";
 
@@ -30,7 +32,10 @@ function activarCuenta($idProveedor)
 
     $archivo = $directorio . "activarCuentaProveedor_$idProveedor.txt";
 
-    $mensaje = "¡Hola!\n\n";
+    $mensaje = "De: $datosEmpresa[correo] \n";
+    $mensaje .= "Para: $correoProveedor \n";
+    $mensaje .= "Asunto: Activación de cuenta en BlueTicket/Proveedor \n\n";
+    $mensaje .= "¡Hola!\n\n";
     $mensaje .= "Para activar tu cuenta y trabajar con nosotros, por favor haz clic en el siguiente enlace:\n";
     $mensaje .= "$enlace\n\n";
     $mensaje .= "Si no has solicitado este registro, por favor ignora este mensaje.\n\n";
@@ -42,11 +47,11 @@ function activarCuenta($idProveedor)
 ?>
 
 <div class="container vh-100 d-flex justify-content-center align-items-center">
-    <div class="row">
+    <div class="row w-50">
         <div class="col-md-12">
             <div class="card border-primary">
                 <div class="card-header bg-primary text-white">
-                    <h4>Registro</h4>
+                    <h4>Registro Proveedor</h4>
                 </div>
                 <div class="card-body">
                     <form method="post" action="/registroProveedor">
@@ -63,8 +68,10 @@ function activarCuenta($idProveedor)
                             <input type="password" name="clave" class="form-control" placeholder="Clave" required>
                         </div>
                         <button type="submit" name="registrar" class="btn btn-primary w-100">Registrarse</button>
-                        <a href="/registro" class="d-block text-center mt-3">Registrarse como cliente</a>
                     </form>
+                    <div class="extra-links">
+                        <a href="/registro" class="d-block text-center mt-3">Registrarse como cliente</a>
+                    </div>
                 </div>
             </div>
         </div>

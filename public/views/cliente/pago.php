@@ -43,6 +43,7 @@ if (isset($_GET['cantidad'])) {
     exit();
 }
 ?>
+
 <div id="successMessage" class="alert alert-success mt-3" style="display:none;">
     Producto agregado al carrito con éxito.
 </div>
@@ -88,40 +89,42 @@ if (isset($_GET['cantidad'])) {
                     <h4 class="text-center mb-4">Detalles de las Entradas</h4>
                     <?php
                     for ($i = 1; $i <= $cantidadEntradas; $i++) {
-                        echo    '<div class="row g-3 mb-3">
-                                    <div class="col-md-8 offset-md-2">
-                                        <div class="input-group">
-                                            <span class="input-group-text">Nombre ' . $i . '</span>
-                                            <input type="text" class="form-control" name="nombres[]" placeholder="Nombre" required>
-                                        </div>
+                        echo sprintf(
+                            '<div class="row g-3 mb-3">
+                                <div class="col-md-8 offset-md-2">
+                                    <div class="input-group">
+                                        <span class="input-group-text">Nombre %d</span>
+                                        <input type="text" class="form-control" name="nombres[]" placeholder="Nombre" required>
                                     </div>
-                                </div>';
+                                </div>
+                            </div>',
+                            $i
+                        );
                     }
                     ?>
                     <!-- Campos ocultos para datos adicionales -->
                     <input type="hidden" name="idEvento" value="<?php echo $eventoData->getIdEvento(); ?>">
                     <input type="hidden" name="idDetalle" value="<?php echo $detallesData->getIdDetallesEvento(); ?>">
                     <input type="hidden" name="cantidad" value="<?php echo $cantidadEntradas; ?>">
-                    <!-- <input type="hidden" name="aforo" value="<?php echo $aforo; ?>"> -->
 
                     <!-- Botones -->
                     <div class="row mt-4">
-                        <!-- Botón para pagar -->
-                        <div class="col-md-8 offset-md-2">
-                            <button type="button" class="btn btn-primary btn-lg w-100" onclick="cambiarDireccion('/factura')">
-                                Pagar
+                        <!-- Contenedor para los botones -->
+                        <div class="col-md-8 offset-md-2 d-flex justify-content-center gap-3">
+                            <!-- Botón para pagar -->
+                            <button type="button" class="btn btn-primary btn-lg w-auto" onclick="cambiarDireccion('/factura')">
+                                Pagar ahora
                             </button>
-                        </div>
-                        <!-- funcionalidad ajax -->
 
-                        <!-- Botón para Carro -->
-                        <div class="col-md-8 offset-md-2">
-                            <button type="submit" class="btn btn-secondary btn-lg w-100" onclick="cambiarDireccion('/carro')">
-                            Agregar al Carrito
+                            <!-- Botón para agregar al carrito -->
+                            <button type="submit" class="btn btn-secondary btn-lg w-auto" onclick="cambiarDireccion('/carro')">
+                                Agregar al Carrito
                             </button>
                         </div>
                     </div>
                 </form>
+
+
 
                 <script>
                     function cambiarDireccion(url) {
@@ -164,41 +167,26 @@ if (isset($_GET['cantidad'])) {
             </div>
         </div>
 
-        <!-- Columna para la tarjeta de información del evento -->
+        <!-- Tarjeta con información del evento -->
         <div class="col-md-6">
-            <!-- Cambié a col-md-6 -->
-            <div class="card card-white p-3 text-black mb-3 text-center">
-                <div class="d-flex justify-content-center">
-                    <img 
-                        src="<?php echo 'assets/images/' . $evento->getImagen(); ?>" 
-                        alt="Descripción de la imagen" 
-                        class="img-fluid event-image" 
-                        style="max-width: 100px; ">
-                </div>
-                <h2 class="fs-5">
-                    <?php echo $eventoData->getNombreEvento() . " - " . $detallesData->getLugar()->getNombreLugar(); ?>
-                </h2>
-                <h4 class='yellow mb-0'><?php echo number_format($costoTotal, 2); ?></h4>
-                <?php
-                $fecha = $detallesData->getFechaEvento();
-                if ($fecha) {
-                    $date = new DateTime($fecha);
-                    $dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
-                    $meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+            <div class="card p-3 text-center">
+                <img
+                    src="<?php echo 'assets/images/' . $evento->getImagen(); ?>"
+                    alt="Imagen del evento"
+                    class="img-fluid event-image" style="display: block; margin: 0 auto;">
 
-                    $diaNombre = $dias[$date->format('w')]; // Día de la semana
-                    $dia = $date->format('d'); // Día del mes
-                    $mesNombre = $meses[$date->format('n') - 1]; // Nombre del mes
-                    $anio = $date->format('Y'); // Año
+                <h5><?php echo $eventoData->getNombreEvento(); ?></h5>
+                <p class="text-muted"><?php echo $detallesData->getLugar()->getNombreLugar(); ?></p>
 
-                    $fechaFormateada = "{$diaNombre}, {$dia} de {$mesNombre} de {$anio}";
+                <h4 class="text-success">$<?php echo number_format($costoTotal, 2); ?></h4>
 
-                    echo "<div class='text-center fs-6'>" . $fechaFormateada . "</div>"; // Muestra la fecha en español
-                } else {
-                    echo "<div class='text-center'>Fecha no disponible.</div>";
-                }
-                ?>
+                <p>
+                    <?php echo $detallesData->getLugar()->getCiudad()->getNombreCiudad(); ?>
+                    <br>
+                    <?php echo $fechaFormateada ?? "Fecha no disponible"; ?>
+                </p>
             </div>
         </div>
+
     </div>
 </div>
