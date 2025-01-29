@@ -51,7 +51,6 @@ if (is_array($resultado)) {
 		</div>
 		<div class="card-body">
 			<form method="post" action="/login">
-				<?php echo $paginaAnterior ?>
 				<div class="mb-3">
 					<label for="correo" class="form-label">Correo</label>
 					<input type="email" name="correo" class="form-control" placeholder="Correo" required>

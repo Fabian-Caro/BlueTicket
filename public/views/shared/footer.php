@@ -34,6 +34,6 @@
     </div>
     <div class="text-center p-3" style="background-color: #e9ecef;">
         © 2024 || Donghee Jo & Caro Fabian || BlueTicket:
-        <a class="text-dark" href="index.php">http://localhost:8000/</a>
+        <a class="text-dark" href="/">http://localhost:8000/</a>
     </div>
 </footer>

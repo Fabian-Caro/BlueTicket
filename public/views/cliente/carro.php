@@ -1,13 +1,9 @@
 <?php
 require_once(__DIR__ . '/../../../src/Logic/Carro.php');
 
-echo "pagina carro.php<br>";
 $idDetalle = isset($_POST['idDetalle']) ? intval($_POST['idDetalle']) : 0;
 $nombres = isset($_POST['nombres']) ? $_POST['nombres'] : [];
 
-echo "idDetalle" . $idDetalle . "<br>";
-
-echo "idCliente" . $idCliente . "<br>";
 $carro = new Carro();
 
 if (isset($_POST['items']) && isset($_POST['data'])) {
@@ -30,9 +26,7 @@ if (isset($_POST['items']) && isset($_POST['data'])) {
 }
 
 if ($idDetalle && $nombres) {
-    echo "idDetalle  " . $idDetalle . "<br>";
     foreach ($nombres as $nombre) {
-        echo $nombre . "<br>";
         $carro->insertar('"' . $nombre . '"', $idCliente, $idDetalle);
     }
 }

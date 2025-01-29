@@ -19,7 +19,7 @@ $proveedor->consultar();
 						aria-expanded="false">Evento</a>
 					<ul class="dropdown-menu">
 						<li><a class='dropdown-item' href='/nuevoEvento'>Nuevo Evento</a></li>
-						<li><a class='dropdown-item' href='/nuevoArtista'>Nuevo Artista</a></li>
+						<li><a class='dropdown-item' href='/nuevoArtista'>Nuevo Artista o Responsable</a></li>
 						<li><a class='dropdown-item' href='/nuevoLugar'>Nuevo Lugar</a></li>
 					</ul>
 				</li>

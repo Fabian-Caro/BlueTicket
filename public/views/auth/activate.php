@@ -1,6 +1,6 @@
 <?php
-require_once (__DIR__ . '/../../../src/Database/Conexion.php');
 require_once (__DIR__ . '/../../../src/Logic/Cliente.php');
+require_once (__DIR__ . '/../../../src/Logic/Proveedor.php');
 
 if (isset($_GET['ic'])) {
     $idCliente = $_GET['ic'];
@@ -16,5 +16,22 @@ if (isset($_GET['ic'])) {
                 </div>";
     }
     
+} else if (isset($_GET['ip'])) {
+    $idProveedor = $_GET['ip'];
+
+    $proveedor = new Proveedor();
+    if ($proveedor->activarCuenta($idProveedor)) {
+        echo "  <div class='alert alert-success' role='alert'>
+                Cuenta activada
+                </div>";
+    } else {
+        echo "  <div class='alert alert-danger' role='alert'>
+                Algo malo a ocurrido
+                </div>";
+    }
+} else {
+    echo "  <div class='alert alert-danger' role='alert'>
+            Algo malo a ocurrido
+            </div>";
 }
 ?>

@@ -7,43 +7,37 @@ if (isset($_POST['registrar'])) {
     $correo = $_POST['correo'];
     $clave = md5($_POST['clave']);
 
-    $cliente = new Cliente(null, $nombre, $apellido, $correo, $clave);
+    $cliente = new Cliente(null, $nombre, $apellido, $correo, $clave, null);
 
     if ($cliente->registrar($nombre, $apellido, $correo, $clave)) {
-        echo $correo;
-        echo $clave;
         $cliente -> autenticar();
-        //$_SESSION['idCliente'] = $cliente->getIdCliente();
-        activarCuenta($cliente->getIdCliente(), $correo);
+        activarCuenta($cliente->getIdCliente());
         echo "  <div class='alert alert-success' role='alert'>
-                Registro completado
+                Registro completado. Se ha enviado un correo de activación a $correo
                 </div>";
-        echo "idCliente: " . $cliente->getIdCliente();
-
-        //header("Location: ../index.php");
         exit();
     } else {
         echo "error al registrar al cliente.";
     }
 }
 
-function activarCuenta($idCliente, $correo)
+function activarCuenta($idCliente)
 {
-    echo $idCliente;
 
     $enlace = "http://localhost:8000/activacion?ic=$idCliente";
-    
+
     $directorio = __DIR__ . '/../auth/activaciones/';
 
-    $archivo = $directorio . "activarCuenta_$idCliente.txt";
+    $archivo = $directorio . "activarCuentaCliente_$idCliente.txt";
 
-    if (file_put_contents($archivo, "Enlace de activacion: $enlace")) {
-        echo "Archivo de activación creado: activacion_$idCliente.txt";
-    } else {
-        echo "Error al crear archivo de activación";
-    }
-   
-}
+    $mensaje = "¡Hola!\n\n";
+    $mensaje .= "Para activar tu cuenta en nuestro sitio, por favor haz clic en el siguiente enlace:\n";
+    $mensaje .= "$enlace\n\n";
+    $mensaje .= "Si no has solicitado este registro, por favor ignora este mensaje.\n\n";
+    $mensaje .= "Gracias,\nEl equipo de BlueTicket.";
+
+    file_put_contents($archivo, $mensaje);
+} 
 
 ?>
 

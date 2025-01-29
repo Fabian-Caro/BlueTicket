@@ -4,11 +4,12 @@ require '../libraries/fpdf/fpdf.php';
 
 // Recibir datos del formulario
 $nombreCliente = $_POST['nombreCliente'] ?? '';
+$nombreUsuario = $_POST['nombreUsuario'] ?? '';
 $nombreEvento = $_POST['nombreEvento'] ?? '';
 $fecha = $_POST['fecha'] ?? '';
 
 // Contenido para el QR
-$contenidoQR = "Cliente: $nombreCliente\nEvento: $nombreEvento\nFecha: $fecha";
+$contenidoQR = "Usuario: $nombreUsuario\nEvento: $nombreEvento\nFecha: $fecha";
 
 // Generar el QR y obtener su ruta
 $qrcode = generarQR($contenidoQR);
@@ -16,7 +17,7 @@ $qrcode = generarQR($contenidoQR);
 // Crear un PDF de tamaño personalizado
 $anchoPDF = 70; // Ancho del PDF en mm
 $altoPDF = 140;  // Alto del PDF en mm
-$pdf = new FPDF('P', 'mm', [$anchoPDF, $altoPDF]); // 'P' para orientación vertical
+$pdf = new FPDF('P', 'mm', 'letter'); // 'P' para orientación vertical
 $pdf->AddPage();
 
 // Agregar un logotipo o encabezado
@@ -28,8 +29,9 @@ $pdf->Ln(5);
 
 // Añadir el QR al centro del PDF
 if (file_exists($qrcode)) {
-    $margenX = ($anchoPDF - 32.5) / 2; // Centrar el QR horizontalmente
-    $pdf->Image($qrcode, $margenX, $pdf->GetY(), 32.5, 32.5); // Tamaño del QR en mm
+    $margenX = ($pdf->GetPageWidth() - 32.5) / 2; // Centrar el QR horizontalmente
+    $margenY = $pdf->GetY();
+    $pdf->Image($qrcode, $margenX, $margenY, 32.5, 32.5); // Tamaño del QR en mm
     $pdf->Ln(30); // Espacio después del QR
 } else {
     $pdf->Cell(0, 10, 'Error: no se pudo generar el código QR.', 0, 1);

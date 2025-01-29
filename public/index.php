@@ -40,8 +40,6 @@ if ($requiresSession && !$usuario) {
 
 $allowedRoles = $routes[$currentPath]['allowed_roles'] ?? [];
 
-
-//debo usar esta?
 if ($allowedRoles && (!$usuario || !in_array($usuario['rol'], $allowedRoles))) {
     http_response_code(403);
     include 'views/shared/errors/error403.php';
@@ -71,8 +69,6 @@ if (!$viewPath || !file_exists(__DIR__ . '/../' . $viewPath)) {
 </head>
 
 <body>
-    <?php echo $viewPath; ?>
-
     <header>
         <?php
         if (!empty($_SESSION['idProveedor'])) {

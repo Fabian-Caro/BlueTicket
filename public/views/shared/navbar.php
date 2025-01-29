@@ -89,7 +89,7 @@ if (isset($_GET["cerrarSesion"])) {
                             <?php echo $cliente->getNombre() . " " . $cliente->getApellido(); ?>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class='dropdown-item' href='/boleteria'>Historial</a></li>
+                            <li><a class='dropdown-item' href='/boleteria'>Boleteria</a></li>
                             <li><a class='dropdown-item' href='/carro'>Carro</a></li>
                             <li><a class='dropdown-item' href='/../?cerrarSesion=true'>Cerrar Sesion</a></li>
                         </ul>
