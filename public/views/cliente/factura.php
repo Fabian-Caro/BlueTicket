@@ -258,6 +258,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <input type="hidden" name="idEvento" value="<?php echo $idEvento; ?>">
         <input type="hidden" name="cantidadEntradas" value="<?php echo $cantidadEntradas; ?>">
         <input type="hidden" name="tipoFactura" value="individual">
-        <button type="submit">Factura <?php echo $idCliente . "," . $idFactura ?></button>
+        <button type="submit">Factura</button>
     </form>
 </div>

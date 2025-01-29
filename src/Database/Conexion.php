@@ -5,7 +5,7 @@ class Conexion{
     private $resultado;
     
     public function abrirConexion(){
-        $this -> mysqlConexion = new mysqli("localhost", "root", "1234", "blueticketv2");
+        $this -> mysqlConexion = new mysqli("localhost", "root", "1234", "blueticketv3");
     }
     
     public function ejecutarConsulta($sentenciaSQL){

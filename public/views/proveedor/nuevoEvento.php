@@ -38,7 +38,7 @@ if (isset($_POST["submit"])) {
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Artista</label><br>
+            <label class="form-label">Artista o Responsable</label><br>
             <?php
             $artista = new Artista();
             $artistas = $artista->consultarTodos();

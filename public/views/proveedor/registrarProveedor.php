@@ -7,20 +7,36 @@ if (isset($_POST['registrar'])) {
     $correo = $_POST['correo'];
     $clave = md5($_POST['clave']);
 
-    $proveedor = new Proveedor(null, $nombre, $apellido, $correo, $clave);
+    $proveedor = new Proveedor(null, $nombre, $apellido, $correo, $clave, null);
 
     if ($proveedor->registrar($nombre, $apellido, $correo, $clave)) {
-        session_start();
-        $_SESSION['idProveedor'] = $proveedor->getIdProveedor();
+        $proveedor->autenticar();
+        activarCuenta($proveedor->getIdProveedor());
         echo "  <div class='alert alert-success' role='alert'>
-                Registro completado
+                Registro completado. Se ha enviado un correo de activación a $correo
                 </div>";
-
-        header("Location: /");
         exit();
     } else {
         echo "error al registrar al proveedor.";
     }
+}
+
+function activarCuenta($idProveedor)
+{
+
+    $enlace = "http://localhost:8000/activacion?ip=$idProveedor";
+
+    $directorio = __DIR__ . '/../auth/activaciones/';
+
+    $archivo = $directorio . "activarCuentaProveedor_$idProveedor.txt";
+
+    $mensaje = "¡Hola!\n\n";
+    $mensaje .= "Para activar tu cuenta y trabajar con nosotros, por favor haz clic en el siguiente enlace:\n";
+    $mensaje .= "$enlace\n\n";
+    $mensaje .= "Si no has solicitado este registro, por favor ignora este mensaje.\n\n";
+    $mensaje .= "Gracias,\nEl equipo de BlueTicket.";
+
+    file_put_contents($archivo, $mensaje);
 }
 
 ?>

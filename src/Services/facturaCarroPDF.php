@@ -155,11 +155,12 @@ if (isset($_POST['idCliente']) && isset($_POST['idFactura']) && isset($_POST['ev
     $pdf->Cell(5, $textypos, "El cliente se compromete a pagar la factura.");
     $pdf->setY($yposdinamic + 20);
     $pdf->setX(10);
-    $pdf->Cell(5, $textypos, "Powered by Evilnapsis");
+    //$pdf->Cell(5, $textypos, "Powered by Evilnapsis");
 
     $pdf->output();
 } else {
-    echo "Datos incompletos para generar la factura.";
+    // Redirigir si no se recibieron los datos correctamente
+    header("Location: /views/shared/errors/error404.php");
     exit;
 }
 ?>

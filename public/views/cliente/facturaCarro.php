@@ -69,7 +69,7 @@ if (isset($_POST['items']) && isset($_POST['data'])) {
 <div class="container mt-5">
     <div class="invoice-header">
         <h1>Factura</h1>
-        <p>Fecha: <strong id="invoice-date"><?php echo $fechaFactura; ?></strong></p>
+        <p>Fecha: <strong id="invoice-date"><?php echo $fechaHoraActual; ?></strong></p>
         <p>Nombre del Comprador: <strong id="buyer-name"><?php echo $cliente->getNombre() . " " . $cliente->getApellido(); ?></strong></p>
     </div>
 
@@ -121,6 +121,6 @@ if (isset($_POST['items']) && isset($_POST['data'])) {
         <input type="hidden" name="ivaAgregado" value="<?php echo $ivaAgregado; ?>">
         <input type="hidden" name="valor_total" value="<?php echo $valor_total; ?>">
         <input type="hidden" name="tipoFactura" value="carrito">
-        <button type="submit">Factura <?php echo $idCliente . "," . $idFactura ?></button>
+        <button type="submit">Factura</button>
     </form>
 </div>

@@ -105,7 +105,6 @@ class Cliente
         $conexion->abrirConexion();
         $clienteDAO = new ClienteDAO(null, null, null, $this->correo, $this->clave, null);
         $conexion->ejecutarConsulta($clienteDAO->autenticar());
-        echo $clienteDAO->autenticar();
         if ($conexion->numeroFilas() == 0) {
             $conexion->cerrarConexion();
             return false;

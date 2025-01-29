@@ -174,4 +174,13 @@ class Proveedor
         $conexion->cerrarConexion();
         return $eventos;
     }
+
+    public function activarCuenta($idProveedor)
+    {
+        $conexion = new Conexion();
+        $conexion->abrirConexion();
+        $proveedorDAO = new ProveedorDAO();
+        $conexion->ejecutarConsulta($proveedorDAO->activarCuenta($idProveedor));
+        return true;
+    }
 }
