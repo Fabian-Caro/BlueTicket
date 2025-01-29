@@ -15,7 +15,7 @@ class ProveedorDAO{
         $this -> clave = $clave;
     }
     public function autenticar(){
-        return "select idProveedor
+        return "select idProveedor, estado
                 from Proveedor 
                 where correo = '" . $this -> correo . "' and clave = '" . $this -> clave . "'";
     }
@@ -26,7 +26,7 @@ class ProveedorDAO{
     }
     
     public function consultar(){
-        return "select nombre, apellido, correo
+        return "select nombre, apellido, correo, clave, estado
                 from Proveedor
                 where idProveedor = '" . $this -> idProveedor . "'";
     }

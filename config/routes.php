@@ -19,6 +19,12 @@ return [
         'allowed_roles' => [],
     ],
 
+    '/activacion' => [
+        'view' => '/public/views/auth/activate.php',
+        'requires_session' => false,
+        'allowed_roles' => [],
+    ],
+
     '/' => [
         'view' => '/public/views/cliente/inicioCliente.php',
         'requires_session' => false,
@@ -88,13 +94,13 @@ return [
     '/evento' => [
         'view' => '/public/views/cliente/evento.php',
         'requires_session' => false,
-        'allowed_roles' => ['cliente', 'proveedor'],
+        'allowed_roles' => [],
     ],
     
     '/compra' => [
         'view' => '/public/views/cliente/compra.php',
         'requires_session' => false,
-        'allowed_roles' => ['cliente', 'proveedor'],
+        'allowed_roles' => [],
     ],
 
     '/pago' => [

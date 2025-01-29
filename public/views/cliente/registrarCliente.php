@@ -10,16 +10,39 @@ if (isset($_POST['registrar'])) {
     $cliente = new Cliente(null, $nombre, $apellido, $correo, $clave);
 
     if ($cliente->registrar($nombre, $apellido, $correo, $clave)) {
-        $_SESSION['idCliente'] = $cliente->getIdCliente();
+        echo $correo;
+        echo $clave;
+        $cliente -> autenticar();
+        //$_SESSION['idCliente'] = $cliente->getIdCliente();
+        activarCuenta($cliente->getIdCliente(), $correo);
         echo "  <div class='alert alert-success' role='alert'>
                 Registro completado
                 </div>";
+        echo "idCliente: " . $cliente->getIdCliente();
 
         //header("Location: ../index.php");
         exit();
     } else {
         echo "error al registrar al cliente.";
     }
+}
+
+function activarCuenta($idCliente, $correo)
+{
+    echo $idCliente;
+
+    $enlace = "http://localhost:8000/activacion?ic=$idCliente";
+    
+    $directorio = __DIR__ . '/../auth/activaciones/';
+
+    $archivo = $directorio . "activarCuenta_$idCliente.txt";
+
+    if (file_put_contents($archivo, "Enlace de activacion: $enlace")) {
+        echo "Archivo de activación creado: activacion_$idCliente.txt";
+    } else {
+        echo "Error al crear archivo de activación";
+    }
+   
 }
 
 ?>
