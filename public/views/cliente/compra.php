@@ -19,63 +19,6 @@ if (!$eventoData) {
 }
 ?>
 
-<style>
-    body {
-        background-color: #F8F9FA;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    .ticket-container {
-        max-width: 900px;
-        margin: 40px auto;
-        padding: 20px;
-        background: #ffffff;
-        border-radius: 12px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .event-header {
-        color: #007BFF;
-        font-weight: bold;
-        text-align: center;
-    }
-
-    .event-image {
-        max-width: 180px;
-        height: auto;
-        border-radius: 10px;
-        margin-bottom: 15px;
-    }
-
-    .event-details {
-        font-size: 1rem;
-        color: #6C757D;
-        text-align: center;
-    }
-
-    .ticket-input {
-        width: 100px;
-        text-align: center;
-    }
-
-    .btn-primary {
-        display: block;
-        width: 100%;
-        padding: 12px;
-        background-color: #007BFF;
-        border: none;
-        color: white;
-        font-weight: bold;
-        font-size: 16px;
-        text-align: center;
-        border-radius: 6px;
-        transition: background 0.3s ease;
-    }
-
-    .btn-primary:hover {
-        background-color: #0056B3;
-    }
-</style>
 <div class="container ticket-container">
     <div class="row">
         <!-- Información del evento -->

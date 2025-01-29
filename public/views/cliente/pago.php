@@ -44,68 +44,6 @@ if (isset($_GET['cantidad'])) {
 }
 ?>
 
-<style>
-    body {
-        background-color: #F8F9FA;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    .ticket-container {
-        max-width: 900px;
-        margin: 40px auto;
-        padding: 20px;
-        background: #ffffff;
-        border-radius: 12px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .event-header {
-        color: #007BFF;
-        font-weight: bold;
-        text-align: center;
-    }
-
-    .event-image {
-        max-width: 180px;
-        height: auto;
-        border-radius: 10px;
-        margin-bottom: 15px;
-    }
-
-    .ticket-input {
-        width: 100px;
-        text-align: center;
-    }
-
-    .btn-primary,
-    .btn-secondary {
-        display: block;
-        width: 100%;
-        padding: 12px;
-        font-weight: bold;
-        font-size: 16px;
-        border-radius: 6px;
-        transition: background 0.3s ease;
-    }
-
-    .btn-primary:hover {
-        background-color: #0056B3;
-    }
-
-    .btn-secondary:hover {
-        background-color: #6C757D;
-    }
-
-    .success-message {
-        display: none;
-        padding: 10px;
-        background-color: #28A745;
-        color: white;
-        text-align: center;
-        border-radius: 5px;
-        margin-top: 10px;
-    }
-</style>
 <div id="successMessage" class="alert alert-success mt-3" style="display:none;">
     Producto agregado al carrito con éxito.
 </div>

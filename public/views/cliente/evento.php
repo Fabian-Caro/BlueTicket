@@ -20,59 +20,6 @@ if (!$eventoData) {
 
 ?>
 
-<style>
-    body {
-        background-color: #F8F9FA;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    .event-container {
-        max-width: 900px;
-        margin: 40px auto;
-        padding: 20px;
-        background: #ffffff;
-        border-radius: 12px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .event-header {
-        color: #007BFF;
-        font-weight: bold;
-        text-align: center;
-    }
-
-    .event-image {
-        max-width: 150px;
-        height: auto;
-        border-radius: 10px;
-        margin-bottom: 15px;
-    }
-
-    .event-details {
-        font-size: 1rem;
-        color: #6C757D;
-        text-align: center;
-    }
-
-    .event-btn {
-        display: block;
-        width: 100%;
-        padding: 12px;
-        background-color: #007BFF;
-        border: none;
-        color: white;
-        font-weight: bold;
-        font-size: 16px;
-        text-align: center;
-        border-radius: 6px;
-        transition: background 0.3s ease;
-    }
-
-    .event-btn:hover {
-        background-color: #0056B3;
-    }
-</style>
-
 <div class="container event-container">
     <?php foreach ($detallesData as $detalle) { ?>
         <div class="row align-items-center mb-4">

@@ -41,50 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 ?>
-<style>
-	body {
-		background-color: #F8F9FA;
-		/* Fondo gris claro */
-		font-family: 'Poppins', sans-serif;
-	}
 
-	.card {
-		border-radius: 12px;
-		box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-	}
-
-	.card-header {
-		border-top-left-radius: 12px;
-		border-top-right-radius: 12px;
-		text-align: center;
-		font-weight: bold;
-	}
-
-	.btn-primary {
-		background-color: #007BFF;
-		border: none;
-		font-weight: bold;
-	}
-
-	.btn-primary:hover {
-		background-color: #0056B3;
-	}
-
-	.extra-links {
-		text-align: center;
-		margin-top: 15px;
-	}
-
-	.extra-links a {
-		color: #007BFF;
-		text-decoration: none;
-		font-size: 14px;
-	}
-
-	.extra-links a:hover {
-		text-decoration: underline;
-	}
-</style>
 <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
     <div class="card w-50 border-primary">
         <div class="card-header bg-primary text-white">

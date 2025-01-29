@@ -5,6 +5,7 @@ html, body {
     background-color: #f8f9fa; /* Fondo del body */
     display: flex;
     flex-direction: column;
+    font-family: 'Poppins', sans-serif;
 }
 
 .container {
@@ -43,51 +44,86 @@ ul {
 
 /* Tarjetas */
 .card {
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s; /* Añadir transición */
 }
 
 .card:hover {
-    transform: scale(1.05); /* Aumentar el tamaño al pasar el ratón */
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Contenedores de formularios */
-.form-container {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.card img {
+    height: 250px;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
 }
 
-.form-container h2 {
-    margin-bottom: 20px;
-    color: #343a40;
+.card-body {
+    background-color: #ffffff;
+    padding: 15px;
 }
 
-.form-label {
-    font-weight: 500;
-    color: #495057;
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #007BFF;
 }
 
-.form-check-label {
-    margin-left: 10px;
+.card-text {
+    font-size: 0.9rem;
+    color: #6C757D;
+}
+
+.event-link {
+    text-decoration: none;
 }
 
 /* Botones */
 .submit-btn,
-.event-btn {
-    background-color: #007bff;
+.event-btn, 
+.btn-primary, 
+.btn-secondary {
+    background-color: #007BFF;
     border: none;
     color: white;
     padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+    display: block;
+    width: 100%;
 }
 
 .submit-btn:hover,
-.event-btn:hover {
-    background-color: #0056b3; /* Color al pasar el ratón */
+.event-btn:hover,
+.btn-primary:hover,
+.btn-secondary:hover {
+    background-color: #0056B3;
+}
+
+.btn-secondary:hover {
+    background-color: #6C757D;
+}
+
+/* Contenedores de formularios */
+.form-container, .ticket-container, .event-container, .invoice-header, .invoice-details {
+    margin: 40px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2, 
+.event-header, 
+.invoice-header h1 {
+    text-align: center;
+    color: #007BFF;
+    font-weight: bold;
 }
 
 /* Contenedores de eventos */
@@ -111,23 +147,41 @@ ul {
 }
 
 .event-image {
-    max-width: 100px;
+    max-width: 180px;
     height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
 }
 
 /* Facturas */
-.invoice-header {
-    text-align: center;
-    margin-bottom: 2rem;
+.invoice-details table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
 }
 
-.invoice-details {
-    margin-top: 2rem;
+.invoice-details th, .invoice-details td {
+    padding: 12px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.invoice-details thead {
+    background-color: #f2f2f2;
+}
+
+.invoice-details tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.invoice-details tfoot td {
+    font-weight: bold;
 }
 
 .total {
-    font-weight: bold;
-    font-size: 1.2rem;
+    background-color: #f8f9fa;
+    font-size: 22px;
+    color: #333;
 }
 
 /* Colores adicionales */
@@ -138,6 +192,31 @@ ul {
 .card-blue {
     background-color: #007BFF; /* Color de fondo azul */
     color: white; /* Texto blanco */
+}
+
+/* Estilos de formularios */
+.form-check {
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    background-color: #fafafa;
+}
+
+.form-check-input {
+    margin-right: 12px;
+    width: 18px;
+    height: 18px;
+}
+
+.form-check-label {
+    font-size: 16px;
+    color: #495057;
+}
+
+.form-check:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
 }
 
 /* Responsividad */
