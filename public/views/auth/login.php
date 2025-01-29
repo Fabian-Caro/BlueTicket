@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	$resultado = Autentificacion::autentificar($correo, $clave);
 
-	if ($resultado) {
+if (is_array($resultado)) {
 
 		if ($resultado['rol'] === 'proveedor') {
 
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		exit;
 	} else {
 
-		$error = "Error de correo o clave";
+		$error = $resultado;
 	}
 }
 
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			<h4>Iniciar Sesión</h4>
 		</div>
 		<div class="card-body">
-			<form method="post" action="/views/auth/login.php">
+			<form method="post" action="/login">
 				<?php echo $paginaAnterior ?>
 				<div class="mb-3">
 					<label for="correo" class="form-label">Correo</label>
